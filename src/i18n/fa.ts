@@ -65,6 +65,75 @@ const fa = {
     before: "قبل",
     after: "با CyrefJS",
   },
+
+  utilities: {
+    eyebrow: "ابزارها",
+    title: "ابزارهای کوچک، تأثیر بزرگ",
+    description:
+      "مجموعه‌ای متمرکز از ابزارهای سبک برای ساده‌تر کردن توسعه روزمره با JavaScript و TypeScript.",
+
+    categories: {
+      array: {
+        title: "Array",
+        description: "ابزارهای کاربردی برای کار با آرایه‌ها و مجموعه داده‌ها.",
+      },
+      string: {
+        title: "String",
+        description: "ابزارهای ساده برای تبدیل، قالب‌بندی و کار با رشته‌ها.",
+      },
+      object: {
+        title: "Object",
+        description: "ابزارهای کاربردی برای خواندن، تبدیل و مدیریت آبجکت‌ها.",
+      },
+      number: {
+        title: "Number",
+        description: "ابزارهای کوچک برای محاسبات، محدوده‌ها و عملیات عددی.",
+      },
+      date: {
+        title: "Date",
+        description: "ابزارهای کاربردی برای کار با تاریخ و زمان.",
+      },
+      function: {
+        title: "Function",
+        description: "ابزارهایی برای کنترل اجرای توابع و بهبود عملکرد.",
+      },
+      type: {
+        title: "Type",
+        description:
+          "ابزارهای ساده و قابل استفاده مجدد برای بررسی typeهای رایج JavaScript.",
+      },
+      url: {
+        title: "URL",
+        description: "ابزارهایی برای تجزیه، ساخت و کار با URLها.",
+      },
+      validation: {
+        title: "Validation",
+        description: "ابزارهای کاربردی برای اعتبارسنجی مقادیر و فرمت‌های رایج.",
+      },
+    },
+
+    bottomNote: "ابزارهایی متمرکز با API ساده و بدون وابستگی runtime.",
+  },
+
+  quickStart: {
+    eyebrow: "شروع سریع",
+    title: "در چند ثانیه شروع کنید.",
+    description:
+      "CyrefJS را نصب کنید، ابزار مورد نیازتان را import کنید و کدهای تمیزتر برای JavaScript و TypeScript بنویسید.",
+
+    install: {
+      title: "نصب CyrefJS",
+      description: "پکیج را با یک دستور ساده به پروژه خود اضافه کنید.",
+    },
+
+    usage: {
+      title: "اولین utility خود را استفاده کنید",
+      description:
+        "یک utility را import کنید و هر جا که نیاز دارید از آن استفاده کنید.",
+    },
+
+    copy: "کپی کد",
+  },
 } as const;
 
 export default fa;

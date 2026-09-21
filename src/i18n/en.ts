@@ -66,6 +66,81 @@ const en = {
     before: "Before",
     after: "With CyrefJS",
   },
+
+  utilities: {
+    eyebrow: "Utilities",
+    title: "Small tools. Big impact.",
+    description:
+      "A focused collection of lightweight utilities designed to make everyday JavaScript and TypeScript development simpler.",
+
+    categories: {
+      array: {
+        title: "Array",
+        description:
+          "Practical utilities for working with arrays and collections.",
+      },
+      string: {
+        title: "String",
+        description:
+          "Simple tools for transforming, formatting, and working with strings.",
+      },
+      object: {
+        title: "Object",
+        description:
+          "Useful helpers for reading, transforming, and managing objects.",
+      },
+      number: {
+        title: "Number",
+        description:
+          "Small utilities for calculations, ranges, and numeric operations.",
+      },
+      date: {
+        title: "Date",
+        description: "Convenient helpers for working with dates and time.",
+      },
+      function: {
+        title: "Function",
+        description:
+          "Performance-focused utilities for controlling function execution.",
+      },
+      type: {
+        title: "Type",
+        description:
+          "Clear and reusable helpers for common JavaScript type checks.",
+      },
+      url: {
+        title: "URL",
+        description: "Utilities for parsing, building, and working with URLs.",
+      },
+      validation: {
+        title: "Validation",
+        description:
+          "Practical helpers for validating common values and formats.",
+      },
+    },
+
+    bottomNote:
+      "Focused utilities with a simple API and zero runtime dependencies.",
+  },
+
+  quickStart: {
+    eyebrow: "Quick Start",
+    title: "Start building in seconds.",
+    description:
+      "Install CyrefJS, import the utilities you need, and start writing cleaner JavaScript and TypeScript.",
+
+    install: {
+      title: "Install CyrefJS",
+      description: "Add the package to your project with a single command.",
+    },
+
+    usage: {
+      title: "Use your first utility",
+      description: "Import a utility and use it wherever you need it.",
+    },
+
+    copy: "Copy code",
+  },
 } as const;
 
 export default en;
