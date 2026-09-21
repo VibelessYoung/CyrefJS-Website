@@ -6,10 +6,10 @@ const en = {
   },
 
   nav: {
-    home: "installation",
+    install: "Installation",
     docs: "Documentation",
     utilities: "Utilities",
-    about: "Components",
+    components: "Components",
   },
 
   header: {
@@ -173,6 +173,26 @@ const en = {
       about: "About",
       quickStart: "Quick Start",
     },
+  },
+
+  installation: {
+    eyebrow: "Installation",
+    title: "Install CyrefJS.",
+    description:
+      "Add CyrefJS to your project with your preferred package manager and start using lightweight utilities in seconds.",
+
+    terminal: "Terminal",
+
+    copy: "Copy",
+    copied: "Copied",
+
+    packageManagers: {
+      title: "Choose your package manager.",
+      description: "CyrefJS works with the package manager you already use.",
+    },
+
+    nextStep:
+      "CyrefJS is now installed. Continue to the Quick Start guide to import your first utility.",
   },
 } as const;
 

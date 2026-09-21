@@ -6,10 +6,10 @@ const fa = {
   },
 
   nav: {
-    home: "نصب",
+    install: "نصب",
     docs: "مستندات",
     utilities: "ابزارها",
-    about: "کامپوننت ها",
+    components: "کامپوننت ها",
   },
 
   header: {
@@ -166,6 +166,27 @@ const fa = {
       about: "درباره",
       quickStart: "شروع سریع",
     },
+  },
+
+  installation: {
+    eyebrow: "نصب",
+    title: "CyrefJS را نصب کنید.",
+    description:
+      "CyrefJS را با package manager مورد علاقه خود به پروژه اضافه کنید و در چند ثانیه شروع به استفاده از ابزارهای سبک آن کنید.",
+
+    terminal: "ترمینال",
+
+    copy: "کپی",
+    copied: "کپی شد",
+
+    packageManagers: {
+      title: "Package Manager خود را انتخاب کنید.",
+      description:
+        "CyrefJS با package managerای که همین حالا استفاده می‌کنید سازگار است.",
+    },
+
+    nextStep:
+      "CyrefJS با موفقیت نصب شد. برای import کردن اولین utility خود، راهنمای شروع سریع را دنبال کنید.",
   },
 } as const;
 

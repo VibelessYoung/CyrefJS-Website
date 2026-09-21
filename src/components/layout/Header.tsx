@@ -13,20 +13,20 @@ import type { Locale } from "@/types/i18n";
 
 const navigation = [
   {
-    key: "home",
-    href: "#home",
+    key: "install",
+    href: "/installation",
   },
   {
     key: "docs",
-    href: "#documentation",
+    href: "/documentation",
   },
   {
     key: "utilities",
-    href: "#utilities",
+    href: "/utilities",
   },
   {
-    key: "about",
-    href: "#about",
+    key: "components",
+    href: "/components",
   },
 ] as const;
 
