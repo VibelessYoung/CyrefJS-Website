@@ -29,6 +29,32 @@ const fa = {
     copy: "کپی",
     version: "آخرین نسخه",
   },
+
+  about: {
+    eyebrow: "درباره",
+    title: "CyrefJS چیست؟",
+    description:
+      "CyrefJS یک کتابخانه مدرن و سبک برای JavaScript و TypeScript است که برای ساده‌تر، تمیزتر و سریع‌تر کردن توسعه روزمره ساخته شده است.",
+
+    features: {
+      simple: {
+        title: "ساده",
+        description:
+          "ابزارهایی تمیز و قابل فهم برای نوشتن کدی ساده‌تر و خواناتر.",
+      },
+
+      fast: {
+        title: "سریع",
+        description: "ابزارهای سبک با سربار کم، مناسب برای اپلیکیشن‌های مدرن.",
+      },
+
+      flexible: {
+        title: "انعطاف‌پذیر",
+        description:
+          "ابزارهای کاربردی که به‌راحتی با پروژه‌ها و workflowهای مختلف هماهنگ می‌شوند.",
+      },
+    },
+  },
 } as const;
 
 export default fa;
