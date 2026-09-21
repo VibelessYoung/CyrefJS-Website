@@ -56,6 +56,16 @@ const en = {
       },
     },
   },
+
+  codeComparison: {
+    eyebrow: "The difference",
+    title: "Write less. Build more.",
+    description:
+      "CyrefJS provides small, focused utilities that help you replace repetitive code with clean and readable solutions.",
+
+    before: "Before",
+    after: "With CyrefJS",
+  },
 } as const;
 
 export default en;

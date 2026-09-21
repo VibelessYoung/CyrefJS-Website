@@ -55,6 +55,16 @@ const fa = {
       },
     },
   },
+
+  codeComparison: {
+    eyebrow: "تفاوت را ببینید",
+    title: "کمتر بنویسید. بیشتر بسازید.",
+    description:
+      "CyrefJS مجموعه‌ای از ابزارهای کوچک و کاربردی ارائه می‌دهد تا کدهای تکراری را با راهکارهایی تمیز و خوانا جایگزین کنید.",
+
+    before: "قبل",
+    after: "با CyrefJS",
+  },
 } as const;
 
 export default fa;
