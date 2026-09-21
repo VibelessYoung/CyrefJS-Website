@@ -94,66 +94,86 @@ export default function Utilities() {
       "
     >
       {/* Background atmosphere */}
+      {/* Main atmosphere */}
       <div
-        aria-hidden="true"
         className="
-          pointer-events-none
-          absolute
-          inset-0
-          -z-10
-          overflow-hidden
-        "
-      >
-        <div
-          className="
-            absolute
-            left-[-15%]
-            top-[15%]
-            h-[420px]
-            w-[420px]
-            rounded-full
-            bg-blue-500/5
-            blur-[140px]
-            dark:bg-blue-500/10
-          "
-        />
+    absolute
+    inset-0
+    bg-[radial-gradient(
+      ellipse_75%_80%_at_50%_40%,
+      rgba(37,99,235,0.10)_0%,
+      rgba(37,99,235,0.05)_30%,
+      rgba(37,99,235,0.02)_55%,
+      transparent_80%
+    )]
+    dark:bg-[radial-gradient(
+      ellipse_75%_80%_at_50%_40%,
+      rgba(37,99,235,0.18)_0%,
+      rgba(37,99,235,0.10)_28%,
+      rgba(37,99,235,0.04)_52%,
+      transparent_80%
+    )]
+  "
+      />
 
-        <div
-          className="
-            absolute
-            right-[-15%]
-            top-[35%]
-            h-[420px]
-            w-[420px]
-            rounded-full
-            bg-violet-500/5
-            blur-[140px]
-            dark:bg-violet-500/10
-          "
-        />
-      </div>
+      {/* Blue */}
+      <div
+        className="
+    absolute
+    -left-[15%]
+    bottom-[10%]
+    h-[600px]
+    w-[600px]
+    rounded-full
+    bg-blue-500/[0.05]
+    blur-[150px]
+    dark:bg-blue-600/[0.13]
+  "
+      />
+
+      {/* Violet */}
+      <div
+        className="
+    absolute
+    -right-[15%]
+    top-[10%]
+    h-[600px]
+    w-[600px]
+    rounded-full
+    bg-violet-500/[0.045]
+    blur-[150px]
+    dark:bg-violet-600/[0.12]
+  "
+      />
+
+      {/* Center */}
+      <div
+        className="
+    absolute
+    left-1/2
+    top-[50%]
+    h-[600px]
+    w-[1000px]
+    -translate-x-1/2
+    -translate-y-1/2
+    rounded-full
+    bg-blue-500/[0.025]
+    blur-[180px]
+    dark:bg-blue-500/[0.065]
+  "
+      />
 
       <div className="mx-auto w-full max-w-7xl px-5 sm:px-8 lg:px-10">
         {/* Heading */}
         <div className="mx-auto max-w-3xl text-center">
           <span
             className="
-              inline-flex
-              items-center
-              rounded-full
-              border
-              border-black/10
-              bg-black/[0.03]
-              px-3.5
-              py-1.5
-              text-xs
-              font-medium
-              tracking-wide
-              text-black/60
-              dark:border-white/10
-              dark:bg-white/[0.04]
-              dark:text-white/60
-            "
+    text-xs
+    font-medium
+    tracking-[0.12em]
+    text-black/35
+    dark:text-white/35
+  "
           >
             {t.utilities.eyebrow}
           </span>
