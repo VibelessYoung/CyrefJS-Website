@@ -263,6 +263,8 @@ const en = {
         },
       },
     },
+    searchHint: "Search pages, utilities, and guides...",
+    noResults: "No documentation found.",
   },
 } as const;
 
