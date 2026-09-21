@@ -1,5 +1,6 @@
 import About from "../home/About";
 import CodeComparison from "../home/CodeComparison";
+import CTA from "../home/CTA";
 import Hero from "../home/Hero";
 import QuickStart from "../home/QuickStart";
 import Utilities from "../home/Utilities";
@@ -12,6 +13,7 @@ function Main() {
       <CodeComparison />
       <Utilities />
       <QuickStart />
+      <CTA />
     </>
   );
 }

@@ -134,6 +134,16 @@ const fa = {
 
     copy: "کپی کد",
   },
+
+  cta: {
+    eyebrow: "آماده ساختن هستید؟",
+    title: "JavaScript تمیزتری بسازید.",
+    description:
+      "با ابزارهای سبک و متمرکز CyrefJS، توسعه روزمره را ساده‌تر و لذت‌بخش‌تر کنید.",
+
+    getStarted: "شروع کنید",
+    github: "مشاهده در GitHub",
+  },
 } as const;
 
 export default fa;

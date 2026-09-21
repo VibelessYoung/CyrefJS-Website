@@ -141,6 +141,16 @@ const en = {
 
     copy: "Copy code",
   },
+
+  cta: {
+    eyebrow: "Ready to build?",
+    title: "Build cleaner JavaScript.",
+    description:
+      "Start using focused, lightweight utilities designed to make everyday development simpler and more enjoyable.",
+
+    getStarted: "Get Started",
+    github: "View on GitHub",
+  },
 } as const;
 
 export default en;
