@@ -46,27 +46,41 @@ export default function About() {
   "
     >
       {/* ==================================================
-      Background atmosphere
-  ================================================== */}
+    Background atmosphere
+================================================== */}
       <div
         aria-hidden="true"
         className="
     pointer-events-none
     absolute
     inset-0
-    -z-0
+    z-0
     overflow-hidden
   "
       >
-        {/* Black base */}
-        <div className="absolute inset-0 bg-[#030507]" />
+        {/* Base */}
+        <div
+          className="
+      absolute
+      inset-0
+      bg-white
+      dark:bg-[#030507]
+    "
+        />
 
-        {/* Center blue atmosphere */}
+        {/* Main centered atmosphere */}
         <div
           className="
       absolute
       inset-0
       bg-[radial-gradient(
+        ellipse_75%_80%_at_50%_45%,
+        rgba(37,99,235,0.075)_0%,
+        rgba(37,99,235,0.035)_30%,
+        rgba(37,99,235,0.012)_55%,
+        transparent_80%
+      )]
+      dark:bg-[radial-gradient(
         ellipse_75%_85%_at_50%_45%,
         rgba(30,64,175,0.18)_0%,
         rgba(30,64,175,0.10)_28%,
@@ -77,19 +91,67 @@ export default function About() {
     "
         />
 
-        {/* Soft central glow */}
+        {/* Blue glow */}
+        <div
+          className="
+      absolute
+      -left-[18%]
+      top-[20%]
+      h-[550px]
+      w-[550px]
+      rounded-full
+      bg-blue-500/[0.035]
+      blur-[150px]
+      dark:bg-blue-600/[0.10]
+    "
+        />
+
+        {/* Violet glow */}
+        <div
+          className="
+      absolute
+      -right-[18%]
+      top-[20%]
+      h-[550px]
+      w-[550px]
+      rounded-full
+      bg-violet-500/[0.025]
+      blur-[150px]
+      dark:bg-violet-600/[0.075]
+    "
+        />
+
+        {/* Central glow */}
         <div
           className="
       absolute
       left-1/2
       top-1/2
-      h-[500px]
-      w-[900px]
+      h-[650px]
+      w-[950px]
       -translate-x-1/2
       -translate-y-1/2
       rounded-full
-      bg-blue-600/[0.055]
-      blur-[150px]
+      bg-blue-500/[0.018]
+      blur-[170px]
+      dark:bg-blue-600/[0.055]
+    "
+        />
+
+        {/* Bottom fade */}
+        <div
+          className="
+      absolute
+      inset-x-0
+      bottom-0
+      h-[20%]
+      bg-gradient-to-t
+      from-white
+      via-white/70
+      to-transparent
+      dark:from-[#030507]
+      dark:via-[#030507]/70
+      dark:to-transparent
     "
         />
       </div>

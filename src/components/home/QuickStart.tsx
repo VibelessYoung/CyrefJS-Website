@@ -61,40 +61,122 @@ export default function QuickStart() {
       <div
         aria-hidden="true"
         className="
-          pointer-events-none
-          absolute
-          inset-0
-          -z-10
-          overflow-hidden
-        "
+    pointer-events-none
+    absolute
+    inset-0
+    -z-10
+    overflow-hidden
+  "
       >
+        {/* Base */}
         <div
           className="
-            absolute
-            left-1/2
-            top-[10%]
-            h-[420px]
-            w-[700px]
-            -translate-x-1/2
-            rounded-full
-            bg-blue-500/[0.04]
-            blur-[150px]
-            dark:bg-violet-500/[0.08]
-          "
+      absolute
+      inset-0
+      bg-white
+      dark:bg-[#030507]
+    "
         />
 
+        {/* Main blue atmosphere */}
         <div
           className="
-            absolute
-            bottom-[-15%]
-            left-[-10%]
-            h-[320px]
-            w-[320px]
-            rounded-full
-            bg-cyan-400/[0.04]
-            blur-[130px]
-            dark:bg-cyan-500/[0.05]
-          "
+      absolute
+      inset-0
+      bg-[radial-gradient(
+        ellipse_75%_75%_at_50%_35%,
+        rgba(37,99,235,0.08)_0%,
+        rgba(37,99,235,0.04)_30%,
+        rgba(37,99,235,0.015)_55%,
+        transparent_80%
+      )]
+      dark:bg-[radial-gradient(
+        ellipse_75%_75%_at_50%_35%,
+        rgba(37,99,235,0.17)_0%,
+        rgba(37,99,235,0.085)_28%,
+        rgba(37,99,235,0.035)_52%,
+        transparent_80%
+      )]
+    "
+        />
+
+        {/* Blue glow — upper left */}
+        <div
+          className="
+      absolute
+      -left-[18%]
+      -top-[12%]
+      h-[600px]
+      w-[600px]
+      rounded-full
+      bg-blue-500/[0.045]
+      blur-[160px]
+      dark:bg-blue-600/[0.12]
+    "
+        />
+
+        {/* Violet glow — upper right */}
+        <div
+          className="
+      absolute
+      -right-[18%]
+      top-[5%]
+      h-[600px]
+      w-[600px]
+      rounded-full
+      bg-violet-500/[0.035]
+      blur-[160px]
+      dark:bg-violet-600/[0.11]
+    "
+        />
+
+        {/* Cyan glow — bottom left */}
+        <div
+          className="
+      absolute
+      -bottom-[18%]
+      -left-[10%]
+      h-[500px]
+      w-[500px]
+      rounded-full
+      bg-cyan-400/[0.035]
+      blur-[150px]
+      dark:bg-cyan-500/[0.07]
+    "
+        />
+
+        {/* Center glow behind code */}
+        <div
+          className="
+      absolute
+      left-1/2
+      top-[55%]
+      h-[500px]
+      w-[950px]
+      -translate-x-1/2
+      -translate-y-1/2
+      rounded-full
+      bg-blue-500/[0.018]
+      blur-[180px]
+      dark:bg-blue-500/[0.055]
+    "
+        />
+
+        {/* Bottom fade */}
+        <div
+          className="
+      absolute
+      inset-x-0
+      bottom-0
+      h-[24%]
+      bg-gradient-to-t
+      from-white
+      via-white/75
+      to-transparent
+      dark:from-[#030507]
+      dark:via-[#030507]/70
+      dark:to-transparent
+    "
         />
       </div>
 
