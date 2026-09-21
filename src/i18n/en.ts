@@ -6,10 +6,10 @@ const en = {
   },
 
   nav: {
-    home: "Home",
+    home: "installation",
     docs: "Documentation",
     utilities: "Utilities",
-    about: "About",
+    about: "Components",
   },
 
   header: {

@@ -6,10 +6,10 @@ const fa = {
   },
 
   nav: {
-    home: "خانه",
+    home: "نصب",
     docs: "مستندات",
     utilities: "ابزارها",
-    about: "درباره",
+    about: "کامپوننت ها",
   },
 
   header: {

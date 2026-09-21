@@ -15,24 +15,21 @@ export default function ThemeButton() {
         theme === "light" ? "Switch to dark mode" : "Switch to light mode"
       }
       className="
+      cursor-pointer
         flex
         h-10
         w-10
         items-center
         justify-center
         rounded-full
-        border
-        border-black/10
-        bg-black/5
-        text-black
-        transition-all
+        text-black/60
+        transition-colors
         duration-300
-        hover:scale-105
-        hover:bg-black/10
-        dark:border-white/10
-        dark:bg-white/5
-        dark:text-white
+        hover:bg-black/5
+        hover:text-black
+        dark:text-white/60
         dark:hover:bg-white/10
+        dark:hover:text-white
       "
     >
       {theme === "light" ? (

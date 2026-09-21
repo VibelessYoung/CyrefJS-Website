@@ -16,7 +16,6 @@ export default function LanguageSwitcher() {
   const params = useParams();
 
   const currentLocale = params.locale as Locale;
-
   const nextLocale: Locale = currentLocale === "en" ? "fa" : "en";
 
   const switchLanguage = () => {
@@ -33,26 +32,23 @@ export default function LanguageSwitcher() {
       onClick={switchLanguage}
       aria-label={`Switch language to ${nextLocale}`}
       className="
+      cursor-pointer
         flex
         h-10
         items-center
         gap-2
         rounded-full
-        border
-        border-black/10
-        bg-black/5
         px-3
         text-sm
         font-medium
-        text-black
+        text-black/60
         transition-all
         duration-300
-        hover:scale-105
-        hover:bg-black/10
-        dark:border-white/10
-        dark:bg-white/5
-        dark:text-white
+        hover:bg-black/5
+        hover:text-black
+        dark:text-white/60
         dark:hover:bg-white/10
+        dark:hover:text-white
       "
     >
       <Languages size={17} strokeWidth={1.8} />
