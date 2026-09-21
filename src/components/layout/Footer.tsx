@@ -12,24 +12,16 @@ const GITHUB_URL = "https://github.com/VibelessYoung/CyrefJS";
 
 const navigation = [
   {
-    key: "home",
-    href: "#home",
+    key: "install",
+    href: "/install",
   },
   {
     key: "documentation",
-    href: "#documentation",
+    href: "/docs",
   },
   {
-    key: "utilities",
-    href: "#utilities",
-  },
-  {
-    key: "about",
-    href: "#about",
-  },
-  {
-    key: "quickStart",
-    href: "#quick-start",
+    key: "components",
+    href: "/components",
   },
 ] as const;
 
@@ -223,38 +215,6 @@ export default function Footer({ locale }: FooterProps) {
             </h3>
 
             <div className="mt-6 space-y-4">
-              <div
-                className="
-                  rounded-2xl
-                  border border-black/8
-                  bg-black/[0.025]
-                  p-4
-                  dark:border-white/8
-                  dark:bg-white/[0.035]
-                "
-              >
-                <p
-                  className="
-                    font-mono text-xs
-                    text-zinc-500
-                    dark:text-zinc-400
-                  "
-                >
-                  npm install
-                </p>
-
-                <p
-                  className="
-                    mt-1.5
-                    font-mono text-sm font-medium
-                    text-zinc-900
-                    dark:text-zinc-100
-                  "
-                >
-                  @cyref/js
-                </p>
-              </div>
-
               <p
                 className="
                   text-xs leading-6

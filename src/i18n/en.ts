@@ -166,11 +166,9 @@ const en = {
     copyright: "© 2026 CyrefJS. Built for modern JavaScript.",
 
     links: {
-      home: "Home",
+      install: "Install",
       documentation: "Documentation",
-      utilities: "Utilities",
-      about: "About",
-      quickStart: "Quick Start",
+      components: "Components"
     },
   },
 
