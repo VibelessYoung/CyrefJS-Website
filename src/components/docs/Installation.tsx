@@ -158,6 +158,7 @@ export default function Installation({ locale }: InstallationProps) {
                 dark:bg-white/[0.04]
                 dark:text-zinc-300
                 dark:hover:bg-white/[0.08]
+                cursor-pointer
               "
             >
               {copied ? (

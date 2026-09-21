@@ -21,10 +21,6 @@ const navigation = [
     href: "/documentation",
   },
   {
-    key: "utilities",
-    href: "/utilities",
-  },
-  {
     key: "components",
     href: "/components",
   },

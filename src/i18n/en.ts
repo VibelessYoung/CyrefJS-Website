@@ -8,7 +8,6 @@ const en = {
   nav: {
     install: "Installation",
     docs: "Documentation",
-    utilities: "Utilities",
     components: "Components",
   },
 

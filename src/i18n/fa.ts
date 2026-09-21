@@ -8,7 +8,6 @@ const fa = {
   nav: {
     install: "نصب",
     docs: "مستندات",
-    utilities: "ابزارها",
     components: "کامپوننت ها",
   },
 
