@@ -41,13 +41,13 @@ const utilities = [
     key: "number",
     icon: Hash,
     gradient: "from-orange-500 to-amber-400",
-    utilities: ["clamp()", "random()", "round()", "sum()"],
+    utilities: ["clamp()", "randomInt()", "roundTo()", "lerp()"],
   },
   {
     key: "date",
     icon: CalendarDays,
     gradient: "from-pink-500 to-rose-400",
-    utilities: ["format()", "isToday()", "isValid()", "add()"],
+    utilities: ["isDate()", "addDays()", "isBefore()", "isAfter()"],
   },
   {
     key: "function",
@@ -65,13 +65,13 @@ const utilities = [
     key: "url",
     icon: Link2,
     gradient: "from-cyan-500 to-blue-500",
-    utilities: ["parse()", "build()", "query()", "isValid()"],
+    utilities: ["parseQuery()", "buildQuery()", "getQueryParam()", "setQueryParam()"],
   },
   {
     key: "validation",
     icon: ShieldCheck,
     gradient: "from-red-500 to-pink-500",
-    utilities: ["isEmail()", "isURL()", "isUUID()", "isJSON()"],
+    utilities: ["isEmail()", "isURL()", "isInteger()", "isPositive()"],
   },
 ] as const;
 

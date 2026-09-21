@@ -1,27 +1,36 @@
 @import "tailwindcss";
-
+@import "@fontsource/vazirmatn/400.css";
+@import "@fontsource/vazirmatn/500.css";
+@import "@fontsource/vazirmatn/600.css";
+@import "@fontsource/vazirmatn/700.css";
 @custom-variant dark (&:where(.dark, .dark *));
 
 :root {
   color-scheme: light;
+  font-family: Arial, Helvetica, sans-serif;
 }
-
 html {
   scroll-behavior: smooth;
 }
-
+html[lang="fa"] {
+  font-family: "Vazirmatn", Arial, sans-serif;
+}
+html[lang="en"] {
+  font-family: Arial, Helvetica, sans-serif;
+}
 body {
   margin: 0;
   min-height: 100vh;
   background: #ffffff;
   color: #0a0a0a;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: inherit;
 }
-
+.dark {
+  color-scheme: dark;
+}
 * {
   box-sizing: border-box;
 }
-
 button,
 a {
   -webkit-tap-highlight-color: transparent;
