@@ -1,32 +1,36 @@
 "use client";
 
 import { Braces, Sparkles, Zap } from "lucide-react";
+
 import { useParams } from "next/navigation";
 
 import { translations } from "@/i18n";
+
 import type { Locale } from "@/types/i18n";
 
 const features = [
   {
     key: "simple",
     icon: Braces,
-    gradient: "from-blue-500 to-cyan-400",
+    gradient: "from-blue-700 to-cyan-600",
+    border: "border-blue-950",
   },
   {
     key: "fast",
     icon: Zap,
-    gradient: "from-red-500 to-orange-400",
+    gradient: "from-red-700 to-orange-600",
+    border: "border-red-950",
   },
   {
     key: "flexible",
     icon: Sparkles,
-    gradient: "from-yellow-400 to-amber-500",
+    gradient: "from-yellow-600 to-amber-700",
+    border: "border-amber-950",
   },
 ] as const;
 
 export default function About() {
   const params = useParams();
-
   const locale = params.locale as Locale;
   const t = translations[locale];
 
@@ -34,60 +38,65 @@ export default function About() {
     <section
       id="about"
       className="
-        relative
-        overflow-hidden
-        bg-white
-        py-28
-        dark:bg-[#050505]
-        sm:py-36
-      "
+    relative
+    overflow-hidden
+    bg-[#030507]
+    py-28
+    sm:py-36
+  "
     >
       {/* ==================================================
-          Background atmosphere
-      ================================================== */}
-
+      Background atmosphere
+  ================================================== */}
       <div
         aria-hidden="true"
         className="
-          pointer-events-none
-          absolute
-          inset-0
-          -z-0
-        "
+    pointer-events-none
+    absolute
+    inset-0
+    -z-0
+    overflow-hidden
+  "
       >
+        {/* Black base */}
+        <div className="absolute inset-0 bg-[#030507]" />
+
+        {/* Center blue atmosphere */}
         <div
           className="
-            absolute
-            left-[-15%]
-            top-[15%]
-            h-[420px]
-            w-[420px]
-            rounded-full
-            bg-blue-500/[0.035]
-            blur-[120px]
-            dark:bg-blue-500/[0.06]
-          "
+      absolute
+      inset-0
+      bg-[radial-gradient(
+        ellipse_75%_85%_at_50%_45%,
+        rgba(30,64,175,0.18)_0%,
+        rgba(30,64,175,0.10)_28%,
+        rgba(30,64,175,0.045)_52%,
+        rgba(30,64,175,0.015)_68%,
+        transparent_82%
+      )]
+    "
         />
 
+        {/* Soft central glow */}
         <div
           className="
-            absolute
-            right-[-15%]
-            bottom-[10%]
-            h-[420px]
-            w-[420px]
-            rounded-full
-            bg-purple-500/[0.035]
-            blur-[120px]
-            dark:bg-purple-500/[0.06]
-          "
+      absolute
+      left-1/2
+      top-1/2
+      h-[500px]
+      w-[900px]
+      -translate-x-1/2
+      -translate-y-1/2
+      rounded-full
+      bg-blue-600/[0.055]
+      blur-[150px]
+    "
         />
       </div>
 
       {/* ==================================================
           Content
       ================================================== */}
-
       <div
         className="
           relative
@@ -100,7 +109,6 @@ export default function About() {
         "
       >
         {/* Heading */}
-
         <div className="max-w-3xl">
           <span
             className="
@@ -109,7 +117,7 @@ export default function About() {
               uppercase
               tracking-[0.2em]
               text-black/35
-              dark:text-white/35
+              dark:text-white/40
             "
           >
             {t.about.eyebrow}
@@ -147,7 +155,6 @@ export default function About() {
         </div>
 
         {/* Features */}
-
         <div
           className="
             mt-20
@@ -157,7 +164,7 @@ export default function About() {
             border-t
             border-black/[0.08]
             pt-14
-            dark:border-white/[0.08]
+            dark:border-white/[0.10]
             sm:grid-cols-3
             sm:gap-8
           "
@@ -169,7 +176,6 @@ export default function About() {
               <div
                 key={feature.key}
                 className="
-                  group
                   flex
                   flex-col
                   items-center
@@ -177,45 +183,24 @@ export default function About() {
                 "
               >
                 {/* Icon */}
-
                 <div
                   className={`
-                    relative
                     flex
                     h-16
                     w-16
                     items-center
                     justify-center
                     rounded-full
+                    border-[5px]
+                    ${feature.border}
                     bg-gradient-to-br
                     ${feature.gradient}
-                    shadow-[0_12px_35px_rgba(0,0,0,0.12)]
-                    transition-all
-                    duration-500
-                    group-hover:scale-110
-                    group-hover:shadow-[0_18px_45px_rgba(0,0,0,0.18)]
                   `}
                 >
                   <Icon size={25} strokeWidth={1.8} className="text-white" />
-
-                  <div
-                    aria-hidden="true"
-                    className="
-                      absolute
-                      inset-0
-                      rounded-full
-                      bg-white/20
-                      opacity-0
-                      blur-md
-                      transition-opacity
-                      duration-500
-                      group-hover:opacity-100
-                    "
-                  />
                 </div>
 
                 {/* Title */}
-
                 <h3
                   className="
                     mt-6
@@ -230,7 +215,6 @@ export default function About() {
                 </h3>
 
                 {/* Description */}
-
                 <p
                   className="
                     mt-3
