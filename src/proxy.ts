@@ -6,18 +6,22 @@ import { defaultLocale, isLocale } from "@/i18n/config";
 export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
+  // / → /en
+  if (pathname === "/") {
+    return NextResponse.redirect(new URL(`/${defaultLocale}`, request.url));
+  }
+
+  // Already has a valid locale
   const firstSegment = pathname.split("/").filter(Boolean)[0];
 
   if (firstSegment && isLocale(firstSegment)) {
     return NextResponse.next();
   }
 
-  const url = request.nextUrl.clone();
-
-  url.pathname =
-    pathname === "/" ? `/${defaultLocale}` : `/${defaultLocale}${pathname}`;
-
-  return NextResponse.redirect(url);
+  // /anything → /en/anything
+  return NextResponse.redirect(
+    new URL(`/${defaultLocale}${pathname}`, request.url),
+  );
 }
 
 export const config = {
