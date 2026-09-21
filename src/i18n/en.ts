@@ -8,18 +8,26 @@ const en = {
   nav: {
     home: "Home",
     docs: "Documentation",
+    utilities: "Utilities",
+    about: "About",
+  },
+
+  header: {
     github: "GitHub",
-    npm: "npm",
+    switchTo: "Switch to",
+    lightMode: "Light mode",
+    darkMode: "Dark mode",
   },
 
   hero: {
     eyebrow: "Modern JavaScript & TypeScript Utilities",
-    title: "Small utilities.",
-    titleAccent: "Predictable code.",
+    title: "CyrefJS",
     description:
-      "A modern, lightweight utility library built for JavaScript and TypeScript.",
-    getStarted: "Get Started",
-    viewGithub: "View on GitHub",
+      "A modern, lightweight utility library for JavaScript and TypeScript.",
+    installLabel: "Install",
+    copied: "Copied!",
+    copy: "Copy",
+    version: "Latest version",
   },
 } as const;
 

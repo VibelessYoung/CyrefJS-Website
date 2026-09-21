@@ -6,6 +6,7 @@ import "../globals.css";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
 import { isLocale, locales } from "@/i18n/config";
 import { localeDirections } from "@/types/i18n";
+import Header from "@/components/layout/Header";
 
 export const metadata: Metadata = {
   title: {
@@ -42,7 +43,10 @@ export default async function LocaleLayout({
   return (
     <html lang={locale} dir={localeDirections[locale]} suppressHydrationWarning>
       <body>
-        <ThemeProvider>{children}</ThemeProvider>
+        <ThemeProvider>
+          <Header />
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );

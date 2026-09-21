@@ -8,18 +8,26 @@ const fa = {
   nav: {
     home: "خانه",
     docs: "مستندات",
+    utilities: "ابزارها",
+    about: "درباره",
+  },
+
+  header: {
     github: "گیت‌هاب",
-    npm: "npm",
+    switchTo: "تغییر به",
+    lightMode: "حالت روشن",
+    darkMode: "حالت تاریک",
   },
 
   hero: {
     eyebrow: "ابزارهای مدرن JavaScript و TypeScript",
-    title: "ابزارهای کوچک.",
-    titleAccent: "کد قابل پیش‌بینی.",
+    title: "CyrefJS",
     description:
-      "یک کتابخانه مدرن و سبک برای ساخت کدهای ساده، قابل استفاده مجدد و قابل پیش‌بینی.",
-    getStarted: "شروع کنید",
-    viewGithub: "مشاهده در GitHub",
+      "یک کتابخانه مدرن و سبک از ابزارهای کاربردی برای JavaScript و TypeScript.",
+    installLabel: "نصب",
+    copied: "کپی شد!",
+    copy: "کپی",
+    version: "آخرین نسخه",
   },
 } as const;
 
