@@ -262,8 +262,8 @@ function CodeWindow({
             font-medium
             ${
               highlighted
-                ? "text-violet-500"
-                : "text-black/35 dark:text-white/35"
+                ? "text-green-500"
+                : "text-red-700 dark:text-red-500/50"
             }
           `}
         >
@@ -284,8 +284,8 @@ function CodeWindow({
           duration-500
           ${
             highlighted
-              ? "border-violet-500/25 shadow-[0_25px_80px_rgba(124,58,237,0.10)]"
-              : "border-black/10 dark:border-white/10"
+              ? "border-green-500/25"
+              : "border-red-600 dark:border-red-500/50"
           }
         `}
       >
@@ -374,7 +374,7 @@ function CodeWindow({
             w-full
             ${
               highlighted
-                ? "bg-gradient-to-r from-transparent via-violet-500/40 to-transparent"
+                ? "bg-gradient-to-r from-transparent via-green-500/40 to-transparent"
                 : "bg-gradient-to-r from-transparent via-white/[0.08] to-transparent"
             }
           `}
