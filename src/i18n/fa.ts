@@ -187,6 +187,76 @@ const fa = {
     nextStep:
       "CyrefJS با موفقیت نصب شد. برای import کردن اولین utility خود، راهنمای شروع سریع را دنبال کنید.",
   },
+
+  docs: {
+    header: "مستندات",
+    search: "جستجو در مستندات",
+
+    sidebar: {
+      gettingStarted: "شروع کار",
+      utilities: "ابزارها",
+      resources: "منابع",
+
+      introduction: "معرفی",
+      installation: "نصب",
+      quickStart: "شروع سریع",
+
+      array: "آرایه",
+      string: "رشته",
+      object: "آبجکت",
+      number: "عدد",
+      date: "تاریخ",
+      function: "تابع",
+      type: "نوع",
+
+      github: "گیت‌هاب",
+      contact: "تماس",
+    },
+
+    dashboard: {
+      eyebrow: "مستندات",
+      title: "با CyrefJS جاوااسکریپت بهتری بسازید.",
+      description:
+        "همه چیزهایی که برای نصب، شناخت و استفاده از CyrefJS در پروژه‌های JavaScript و TypeScript نیاز دارید.",
+
+      install: "نصب CyrefJS",
+      quickStart: "شروع سریع",
+      readMore: "مشاهده بیشتر",
+
+      cards: {
+        installation: {
+          title: "نصب",
+          description:
+            "CyrefJS را با npm، pnpm، yarn یا bun نصب کنید و پروژه خود را در چند ثانیه آماده کنید.",
+        },
+
+        quickStart: {
+          title: "شروع سریع",
+          description:
+            "مفاهیم پایه را یاد بگیرید و اولین utility خود را با یک مثال ساده استفاده کنید.",
+        },
+      },
+
+      features: {
+        typescript: {
+          title: "آماده برای TypeScript",
+          description:
+            "برای کار طبیعی و راحت با JavaScript و TypeScript مدرن طراحی شده است.",
+        },
+
+        lightweight: {
+          title: "سبک",
+          description: "ابزارهایی متمرکز با کمترین سربار برای توسعه روزمره.",
+        },
+
+        simple: {
+          title: "API ساده",
+          description:
+            "ابزارهایی کوچک و قابل پیش‌بینی که استفاده و درک آن‌ها ساده است.",
+        },
+      },
+    },
+  },
 } as const;
 
 export default fa;

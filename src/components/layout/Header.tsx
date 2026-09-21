@@ -18,7 +18,7 @@ const navigation = [
   },
   {
     key: "docs",
-    href: "/documentation",
+    href: "/docs",
   },
   {
     key: "components",

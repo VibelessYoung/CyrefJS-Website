@@ -193,6 +193,77 @@ const en = {
     nextStep:
       "CyrefJS is now installed. Continue to the Quick Start guide to import your first utility.",
   },
+
+  docs: {
+    header: "Documentation",
+    search: "Search documentation",
+
+    sidebar: {
+      gettingStarted: "Getting Started",
+      utilities: "Utilities",
+      resources: "Resources",
+
+      introduction: "Introduction",
+      installation: "Installation",
+      quickStart: "Quick Start",
+
+      array: "Array",
+      string: "String",
+      object: "Object",
+      number: "Number",
+      date: "Date",
+      function: "Function",
+      type: "Type",
+
+      github: "GitHub",
+      contact: "Contact",
+    },
+
+    dashboard: {
+      eyebrow: "Documentation",
+      title: "Build better JavaScript with CyrefJS.",
+      description:
+        "Everything you need to install, understand, and use CyrefJS in your JavaScript and TypeScript projects.",
+
+      install: "Install CyrefJS",
+      quickStart: "Quick Start",
+      readMore: "Read more",
+
+      cards: {
+        installation: {
+          title: "Installation",
+          description:
+            "Install CyrefJS using npm, pnpm, yarn, or bun and get your project ready in seconds.",
+        },
+
+        quickStart: {
+          title: "Quick Start",
+          description:
+            "Learn the basics and use your first CyrefJS utility with a simple example.",
+        },
+      },
+
+      features: {
+        typescript: {
+          title: "TypeScript Ready",
+          description:
+            "Designed to work naturally with modern JavaScript and TypeScript.",
+        },
+
+        lightweight: {
+          title: "Lightweight",
+          description:
+            "Focused utilities with minimal overhead for everyday development.",
+        },
+
+        simple: {
+          title: "Simple API",
+          description:
+            "Small, predictable utilities that are easy to understand and use.",
+        },
+      },
+    },
+  },
 } as const;
 
 export default en;
