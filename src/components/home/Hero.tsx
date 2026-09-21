@@ -58,91 +58,105 @@ export default function Hero() {
   "
       >
         {/* Main full-height gradient */}
-
         <div
           className="
       absolute
       inset-0
       bg-[linear-gradient(180deg,
-        rgba(96,165,250,0.22)_0%,
-        rgba(99,102,241,0.18)_28%,
-        rgba(168,85,247,0.14)_52%,
-        rgba(168,85,247,0.06)_72%,
-        rgba(255,255,255,0)_100%
+        rgba(59,130,246,0.28)_0%,
+        rgba(79,70,229,0.25)_22%,
+        rgba(124,58,237,0.22)_45%,
+        rgba(139,92,246,0.16)_65%,
+        rgba(124,58,237,0.10)_82%,
+        rgba(255,255,255,0.025)_100%
       )]
+
       dark:bg-[linear-gradient(180deg,
-        rgba(37,99,235,0.30)_0%,
-        rgba(79,70,229,0.26)_28%,
-        rgba(124,58,237,0.24)_52%,
-        rgba(147,51,234,0.10)_72%,
-        rgba(5,5,5,0)_100%
+        rgba(29,78,216,0.40)_0%,
+        rgba(67,56,202,0.34)_22%,
+        rgba(109,40,217,0.30)_45%,
+        rgba(126,34,206,0.22)_65%,
+        rgba(107,33,168,0.14)_82%,
+        rgba(5,5,5,0.02)_100%
       )]
     "
         />
 
         {/* Blue glow — left */}
-
         <div
           className="
       absolute
-      left-[-15%]
-      top-[5%]
-      h-[70%]
-      w-[65%]
+      left-[-18%]
+      top-[0%]
+      h-[78%]
+      w-[72%]
       rounded-full
-      bg-blue-400/20
-      blur-[160px]
-      dark:bg-blue-500/25
+      bg-blue-500/25
+      blur-[155px]
+      dark:bg-blue-600/30
     "
         />
 
         {/* Purple glow — right */}
-
         <div
           className="
       absolute
-      right-[-15%]
-      top-[5%]
-      h-[70%]
-      w-[65%]
+      right-[-18%]
+      top-[0%]
+      h-[78%]
+      w-[72%]
       rounded-full
-      bg-purple-400/20
-      blur-[160px]
-      dark:bg-purple-500/25
+      bg-purple-500/25
+      blur-[155px]
+      dark:bg-purple-600/30
     "
         />
 
-        {/* Center purple/indigo atmosphere */}
+        {/* Center purple / indigo atmosphere */}
+        <div
+          className="
+      absolute
+      left-1/2
+      top-[5%]
+      h-[65%]
+      w-[78%]
+      -translate-x-1/2
+      rounded-full
+      bg-violet-500/15
+      blur-[135px]
+      dark:bg-violet-600/20
+    "
+        />
 
+        {/* Soft center light */}
         <div
           className="
       absolute
       left-1/2
       top-[8%]
       h-[55%]
-      w-[70%]
+      w-[45%]
       -translate-x-1/2
       rounded-full
-      bg-violet-400/10
-      blur-[140px]
-      dark:bg-violet-500/15
+      bg-indigo-400/10
+      blur-[125px]
+      dark:bg-indigo-500/14
     "
         />
 
-        {/* Bottom fade */}
-
+        {/* Bottom fade — late and subtle */}
         <div
           className="
       absolute
       inset-x-0
       bottom-0
-      h-[42%]
+      h-[20%]
       bg-gradient-to-t
-      from-white
-      via-white/80
+      from-white/95
+      via-white/40
       to-transparent
-      dark:from-[#050505]
-      dark:via-[#050505]/80
+      dark:from-[#050505]/95
+      dark:via-[#050505]/40
       dark:to-transparent
     "
         />
@@ -193,7 +207,7 @@ export default function Hero() {
             text-sm
             leading-7
             text-black/45
-            dark:text-white/45
+            dark:text-white/75
             sm:text-[15px]
           "
         >
@@ -202,79 +216,85 @@ export default function Hero() {
 
         {/* Install command */}
 
-        <div className="mt-9">
+        <div
+          className="
+          mt-4
+    relative
+    flex
+    justify-center items-center
+    w-fit
+    max-w-full
+    items-center
+    rounded-[8px]
+    bg-black/[0.72]
+    p-2
+    backdrop-blur-[24px]
+    backdrop-saturate-150
+
+    dark:bg-black/[0.58]
+  "
+        >
+          {/* Subtle glass highlight */}
           <div
+            aria-hidden="true"
             className="
-              flex
-              items-center
-              rounded-2xl
-              border
-              border-black/[0.08]
-              bg-white/45
-              p-1.5
-              shadow-[0_15px_50px_rgba(0,0,0,0.08)]
-              backdrop-blur-2xl
-              transition-all
-              duration-300
-              hover:border-black/15
-              hover:bg-white/60
-              dark:border-white/[0.10]
-              dark:bg-white/[0.045]
-              dark:shadow-[0_15px_50px_rgba(0,0,0,0.35)]
-              dark:hover:border-white/15
-              dark:hover:bg-white/[0.07]
-            "
+      pointer-events-none
+      absolute
+      inset-0
+      rounded-[8px]
+      bg-gradient-to-b
+      from-white/[0.06]
+      via-transparent
+      to-transparent
+    "
+          />
+
+          {/* Command */}
+          <code
+            dir="ltr"
+            className="
+      relative
+      px-2.5
+      py-1.5
+      font-mono
+      text-[11px]
+      tracking-[-0.01em]
+      text-white/75
+      sm:px-3
+      sm:py-1.5
+      sm:text-[12px]
+    "
           >
-            {/* Command */}
+            <span className="text-violet-300 text-sm">$</span> {INSTALL_COMMAND}
+          </code>
 
-            <code
-              dir="ltr"
-              className="
-                px-3
-                py-2
-                font-mono
-                text-[12px]
-                text-black/60
-                sm:px-3.5
-                sm:text-[13px]
-                dark:text-white/55
-              "
-            >
-              <span className="text-violet-500">$</span> {INSTALL_COMMAND}
-            </code>
-
-            {/* Copy */}
-
-            <button
-              type="button"
-              onClick={handleCopy}
-              aria-label={copied ? t.hero.copied : t.hero.copy}
-              className="
-                flex
-                h-8
-                w-8
-                shrink-0
-                items-center
-                justify-center
-                rounded-xl
-                text-black/55
-                transition-all
-                duration-200
-                hover:bg-black/[0.06]
-                hover:text-black
-                active:scale-95
-                dark:text-white/55
-                dark:hover:bg-white/[0.08]
-                dark:hover:text-white
-              "
-            >
-              {copied ? (
-                <Check size={15} strokeWidth={1.8} />
-              ) : (
-                <Copy size={15} strokeWidth={1.8} />
-              )}
-            </button>
-          </div>
+          {/* Copy */}
+          <button
+            type="button"
+            onClick={handleCopy}
+            aria-label={copied ? t.hero.copied : t.hero.copy}
+            className="
+      relative
+      flex
+      h-7
+      w-7
+      shrink-0
+      items-center
+      justify-center
+      rounded-[11px]
+      text-white/50
+      transition-colors
+      duration-200
+      active:scale-95
+      cursor-pointer
+    "
+          >
+            {copied ? (
+              <Check size={14} strokeWidth={1.8} />
+            ) : (
+              <Copy size={14} strokeWidth={1.8} />
+            )}
+          </button>
         </div>
       </div>
       {/* ==================================================
