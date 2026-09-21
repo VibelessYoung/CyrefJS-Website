@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowRight, Check, Copy } from "lucide-react";
+import { ArrowLeft, ArrowRight, Check, Copy } from "lucide-react";
 import { useParams } from "next/navigation";
 import { useState } from "react";
 
@@ -22,6 +22,7 @@ export default function CodeComparison() {
 
   const locale = params.locale as Locale;
   const t = translations[locale];
+  const isRTL = locale === "fa";
 
   const [copied, setCopied] = useState<"before" | "after" | null>(null);
 
@@ -188,23 +189,27 @@ export default function CodeComparison() {
 
           <div
             className="
-              hidden
-              h-10
-              w-10
-              items-center
-              justify-center
-              rounded-full
-              border
-              border-black/10
-              bg-black/[0.025]
-              text-black/30
-              lg:flex
-              dark:border-white/10
-              dark:bg-white/[0.025]
-              dark:text-white/30
-            "
+    hidden
+    h-10
+    w-10
+    items-center
+    justify-center
+    rounded-full
+    border
+    border-black/10
+    bg-black/[0.025]
+    text-black/30
+    lg:flex
+    dark:border-white/10
+    dark:bg-white/[0.025]
+    dark:text-white/30
+  "
           >
-            <ArrowRight size={16} strokeWidth={1.7} />
+            {isRTL ? (
+              <ArrowLeft size={16} strokeWidth={1.7} />
+            ) : (
+              <ArrowRight size={16} strokeWidth={1.7} />
+            )}
           </div>
 
           {/* ==================================================
