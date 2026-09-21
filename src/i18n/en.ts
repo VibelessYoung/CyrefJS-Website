@@ -151,6 +151,29 @@ const en = {
     getStarted: "Get Started",
     github: "View on GitHub",
   },
+
+  footer: {
+    description:
+      "A modern, lightweight utility library for JavaScript and TypeScript, built to make everyday development simpler and cleaner.",
+
+    github: "View on GitHub",
+
+    navigation: "Navigation",
+
+    package: "Package",
+
+    version: "CyrefJS v1.38.0",
+
+    copyright: "© 2026 CyrefJS. Built for modern JavaScript.",
+
+    links: {
+      home: "Home",
+      documentation: "Documentation",
+      utilities: "Utilities",
+      about: "About",
+      quickStart: "Quick Start",
+    },
+  },
 } as const;
 
 export default en;

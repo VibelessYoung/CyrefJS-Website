@@ -144,6 +144,29 @@ const fa = {
     getStarted: "شروع کنید",
     github: "مشاهده در GitHub",
   },
+
+  footer: {
+    description:
+      "یک کتابخانه مدرن و سبک برای JavaScript و TypeScript که برای ساده‌تر و تمیزتر کردن توسعه روزمره ساخته شده است.",
+
+    github: "مشاهده در GitHub",
+
+    navigation: "دسترسی سریع",
+
+    package: "پکیج",
+
+    version: "CyrefJS نسخه 1.38.0",
+
+    copyright: "© ۲۰۲۶ CyrefJS. ساخته شده برای JavaScript مدرن.",
+
+    links: {
+      home: "خانه",
+      documentation: "مستندات",
+      utilities: "ابزارها",
+      about: "درباره",
+      quickStart: "شروع سریع",
+    },
+  },
 } as const;
 
 export default fa;
