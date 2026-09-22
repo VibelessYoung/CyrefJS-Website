@@ -18,7 +18,7 @@ import {
   X,
 } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
-
+import { useRouter } from "next/navigation";
 import ThemeButton from "@/components/navigation/ThemeButton";
 import { getTranslations } from "@/lib/i18n";
 import { docs } from "@/data/docs/index";
@@ -107,7 +107,8 @@ export default function DocsLayout({ children, locale }: DocsLayoutProps) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [query, setQuery] = useState("");
-
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  const router = useRouter();
   const items = docs;
 
   const sections = useMemo(() => getCategorySections(locale), [locale]);
@@ -151,6 +152,59 @@ export default function DocsLayout({ children, locale }: DocsLayoutProps) {
 
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, []);
+
+  useEffect(() => {
+    if (!searchOpen) {
+      return;
+    }
+
+    function handleKeyDown(event: KeyboardEvent) {
+      if (event.key === "Escape") {
+        setSearchOpen(false);
+        return;
+      }
+
+      if (!results.length) {
+        return;
+      }
+
+      if (event.key === "ArrowDown") {
+        event.preventDefault();
+
+        setSelectedIndex((current) =>
+          current < results.length - 1 ? current + 1 : 0,
+        );
+      }
+
+      if (event.key === "ArrowUp") {
+        event.preventDefault();
+
+        setSelectedIndex((current) =>
+          current > 0 ? current - 1 : results.length - 1,
+        );
+      }
+
+      if (event.key === "Enter") {
+        event.preventDefault();
+
+        const selectedDoc = results[selectedIndex];
+
+        if (!selectedDoc) {
+          return;
+        }
+
+        router.push(`/${locale}/docs/${selectedDoc.slug}`);
+        setSearchOpen(false);
+        setQuery("");
+      }
+    }
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [searchOpen, results, selectedIndex, locale, router]);
 
   return (
     <div
@@ -435,10 +489,11 @@ export default function DocsLayout({ children, locale }: DocsLayoutProps) {
               <Search size={18} className="text-zinc-400" />
 
               <input
-                autoFocus
                 value={query}
-                onChange={(event) => setQuery(event.target.value)}
-                placeholder={t.docs.search}
+                onChange={(event) => {
+                  setQuery(event.target.value);
+                  setSelectedIndex(0);
+                }}
                 className="
                   h-14 min-w-0 flex-1
                   bg-transparent
@@ -489,8 +544,8 @@ export default function DocsLayout({ children, locale }: DocsLayoutProps) {
                 </div>
               )}
 
-              {results.map((item: DocPage) => {
-                const Icon = getCategoryIcon(item.category);
+              {results.map((item, index) => {
+                const isSelected = index === selectedIndex;
 
                 return (
                   <Link
@@ -500,46 +555,30 @@ export default function DocsLayout({ children, locale }: DocsLayoutProps) {
                       setSearchOpen(false);
                       setQuery("");
                     }}
-                    className="
-                      flex items-center gap-3
-                      rounded-xl
-                      px-3 py-3
-                      transition-colors
-                      hover:bg-black/[0.04]
-                      dark:hover:bg-white/[0.05]
-                    "
+                    className={[
+                      "block rounded-xl px-4 py-3 transition-colors",
+                      isSelected
+                        ? "bg-zinc-100 dark:bg-white/[0.06]"
+                        : "hover:bg-zinc-50 dark:hover:bg-white/[0.03]",
+                    ].join(" ")}
                   >
-                    <span
-                      className="
-                        flex h-9 w-9
-                        shrink-0
-                        items-center justify-center
-                        rounded-lg
-                        bg-black/[0.04]
-                        text-zinc-500
-                        dark:bg-white/[0.06]
-                        dark:text-zinc-400
-                      "
-                    >
-                      <Icon size={16} />
-                    </span>
+                    <div className="flex items-center justify-between gap-4">
+                      <div className="min-w-0">
+                        <p className="truncate text-sm font-medium text-zinc-950 dark:text-white">
+                          {item.title[locale]}
+                        </p>
 
-                    <span className="min-w-0">
-                      <span className="block text-sm font-medium">
-                        {item.title[locale]}
-                      </span>
+                        <p className="mt-1 truncate text-xs text-zinc-500 dark:text-zinc-500">
+                          {item.description[locale]}
+                        </p>
+                      </div>
 
-                      <span
-                        className="
-                          mt-0.5 block
-                          truncate
-                          text-xs
-                          text-zinc-400
-                        "
-                      >
-                        {item.description[locale]}
-                      </span>
-                    </span>
+                      {isSelected && (
+                        <span className="shrink-0 text-xs text-zinc-400">
+                          Enter ↵
+                        </span>
+                      )}
+                    </div>
                   </Link>
                 );
               })}
