@@ -17,6 +17,7 @@ import { keyByDoc } from "./utilities/array/key-by";
 import { lastDoc } from "./utilities/array/last";
 import { partitionDoc } from "./utilities/array/partition";
 import { sampleDoc } from "./utilities/array/sample";
+import { shuffleDoc } from "./utilities/array/shuffle";
 
 export const docs: DocPage[] = [
   introductionDoc,
@@ -36,6 +37,7 @@ export const docs: DocPage[] = [
   lastDoc,
   partitionDoc,
   sampleDoc,
+  shuffleDoc,
 ];
 
 export function getDocBySlug(slug: string): DocPage | undefined {
