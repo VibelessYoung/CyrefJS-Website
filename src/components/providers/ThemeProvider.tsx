@@ -22,27 +22,33 @@ interface ThemeProviderProps {
   children: ReactNode;
 }
 
+function getInitialTheme(): Theme {
+  if (typeof window === "undefined") {
+    return DEFAULT_THEME;
+  }
+
+  const savedTheme = localStorage.getItem(THEME_STORAGE_KEY);
+
+  if (savedTheme === "light" || savedTheme === "dark") {
+    return savedTheme;
+  }
+
+  return DEFAULT_THEME;
+}
+
 export function ThemeProvider({ children }: ThemeProviderProps) {
-  const [theme, setThemeState] = useState<Theme>(DEFAULT_THEME);
-
-  useEffect(() => {
-    const savedTheme = localStorage.getItem(THEME_STORAGE_KEY);
-
-    if (savedTheme === "light" || savedTheme === "dark") {
-      setThemeState(savedTheme);
-    }
-  }, []);
+  const [theme, setThemeState] = useState<Theme>(getInitialTheme);
 
   useEffect(() => {
     const root = document.documentElement;
 
     root.classList.toggle("dark", theme === "dark");
-
     root.style.colorScheme = theme;
   }, [theme]);
 
   const setTheme = (nextTheme: Theme) => {
     setThemeState(nextTheme);
+
     localStorage.setItem(THEME_STORAGE_KEY, nextTheme);
   };
 

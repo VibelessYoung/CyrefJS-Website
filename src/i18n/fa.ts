@@ -158,12 +158,10 @@ const fa = {
 
     copyright: "© ۲۰۲۶ CyrefJS. ساخته شده برای JavaScript مدرن.",
 
-    links: {
-      home: "خانه",
+     links: {
+      install: "نصب",
       documentation: "مستندات",
-      utilities: "ابزارها",
-      about: "درباره",
-      quickStart: "شروع سریع",
+      components: "کامپوننت ها"
     },
   },
 
