@@ -21,6 +21,8 @@ import { shuffleDoc } from "./utilities/array/shuffle";
 import { takeDoc } from "./utilities/array/take";
 import { takeRightDoc } from "./utilities/array/takeRight";
 import { unionDoc } from "./utilities/array/union";
+import { uniqueDoc } from "./utilities/array/unique";
+import { unzipDoc } from "./utilities/array/unzip";
 
 export const docs: DocPage[] = [
   introductionDoc,
@@ -44,6 +46,8 @@ export const docs: DocPage[] = [
   takeDoc,
   takeRightDoc,
   unionDoc,
+  uniqueDoc,
+  unzipDoc,
 ];
 
 export function getDocBySlug(slug: string): DocPage | undefined {
