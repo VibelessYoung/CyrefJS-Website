@@ -1,6 +1,18 @@
 import type { DocPage } from "./types";
 
-export const docs: DocPage[] = [];
+import { introductionDoc } from "./getting-started/introduction";
+import { installationDoc } from "./getting-started/installation";
+import { quickStartDoc } from "./getting-started/quick-start";
+
+import { chunkDoc } from "./utilities/array/chunk";
+
+export const docs: DocPage[] = [
+  introductionDoc,
+  installationDoc,
+  quickStartDoc,
+
+  chunkDoc,
+];
 
 export function getDocBySlug(slug: string): DocPage | undefined {
   return docs.find((doc) => doc.slug === slug);

@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 
 import DocsPage from "@/components/docs/DocsPage";
-import { docsSections, getDocsItem } from "@/data/docs";
+import { docs, getDocBySlug } from "@/data/docs/index";
 import { isLocale } from "@/i18n/config";
 import type { Locale } from "@/types/i18n";
 
@@ -13,13 +13,11 @@ interface DocsRouteProps {
 }
 
 export function generateStaticParams() {
-  return ["en", "fa"].flatMap((locale) =>
-    docsSections
-      .flatMap((section) => section.items)
-      .map((item) => ({
-        locale,
-        slug: item.slug ? item.slug.split("/") : [],
-      })),
+  return docs.flatMap((doc) =>
+    ["en", "fa"].map((locale) => ({
+      locale,
+      slug: doc.slug.split("/"),
+    })),
   );
 }
 
@@ -32,13 +30,23 @@ export default async function DocsRoute({ params }: DocsRouteProps) {
 
   const locale: Locale = localeParam;
 
-  const currentSlug = slug?.join("/") ?? "";
+  const currentSlug = slug?.join("/");
 
-  const item = getDocsItem(currentSlug);
+  /*
+   * /en/docs
+   * /fa/docs
+   *
+   * Root documentation page.
+   */
+  if (!currentSlug) {
+    return <DocsPage locale={locale} doc={undefined} />;
+  }
 
-  if (!item) {
+  const doc = getDocBySlug(currentSlug);
+
+  if (!doc) {
     notFound();
   }
 
-  return <DocsPage locale={locale} item={item} />;
+  return <DocsPage locale={locale} doc={doc} />;
 }

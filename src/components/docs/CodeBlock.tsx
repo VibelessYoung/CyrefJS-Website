@@ -8,10 +8,10 @@ interface CodeBlockProps {
   language?: string;
 }
 
-export default function CodeBlock({ code, language = "tsx" }: CodeBlockProps) {
+export default function CodeBlock({ code, language }: CodeBlockProps) {
   const [copied, setCopied] = useState(false);
 
-  const copyCode = async () => {
+  async function handleCopy() {
     try {
       await navigator.clipboard.writeText(code);
 
@@ -19,68 +19,33 @@ export default function CodeBlock({ code, language = "tsx" }: CodeBlockProps) {
 
       window.setTimeout(() => {
         setCopied(false);
-      }, 1800);
+      }, 2000);
     } catch {
       setCopied(false);
     }
-  };
+  }
 
   return (
-    <div
-      className="
-        group relative
-        my-7 overflow-hidden
-        rounded-2xl
-        border border-black/[0.08]
-        bg-[#fafafa]
-        dark:border-white/[0.08]
-        dark:bg-[#0b0b0b]
-      "
-    >
-      <div
-        className="
-          flex h-11
-          items-center justify-between
-          border-b border-black/[0.07]
-          px-4
-          dark:border-white/[0.07]
-        "
-      >
-        <span
-          className="
-            font-mono text-[11px]
-            uppercase tracking-wider
-            text-zinc-400
-          "
-        >
-          {language}
+    <div className="group relative overflow-hidden rounded-2xl border border-zinc-200 bg-zinc-950 dark:border-white/10">
+      <div className="flex items-center justify-between border-b border-white/10 px-4 py-2.5">
+        <span className="text-xs font-medium uppercase tracking-wider text-zinc-500">
+          {language ?? "code"}
         </span>
 
         <button
           type="button"
-          onClick={copyCode}
-          className="
-            inline-flex items-center gap-1.5
-            rounded-md
-            px-2 py-1.5
-            text-xs
-            text-zinc-500
-            transition-colors
-            hover:bg-black/[0.05]
-            hover:text-zinc-900
-            dark:text-zinc-400
-            dark:hover:bg-white/[0.06]
-            dark:hover:text-white
-          "
+          onClick={handleCopy}
+          className="inline-flex cursor-pointer items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-xs font-medium text-zinc-400 transition-colors hover:bg-white/10 hover:text-white"
+          aria-label={copied ? "Code copied" : "Copy code"}
         >
           {copied ? (
             <>
-              <Check size={13} />
+              <Check className="size-3.5" />
               Copied
             </>
           ) : (
             <>
-              <Copy size={13} />
+              <Copy className="size-3.5" />
               Copy
             </>
           )}
@@ -89,14 +54,7 @@ export default function CodeBlock({ code, language = "tsx" }: CodeBlockProps) {
 
       <pre
         dir="ltr"
-        className="
-          overflow-x-auto
-          p-5
-          font-mono text-[13px]
-          leading-7
-          text-zinc-800
-          dark:text-zinc-300
-        "
+        className="overflow-x-auto p-5 text-sm leading-7 text-zinc-100"
       >
         <code>{code}</code>
       </pre>

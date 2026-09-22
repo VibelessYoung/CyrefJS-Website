@@ -6,7 +6,6 @@ import {
   BookOpen,
   Box,
   CalendarDays,
-  FileCode2,
   Hash,
   Layers3,
   Menu,
@@ -21,9 +20,10 @@ import {
 import { useEffect, useMemo, useState } from "react";
 
 import ThemeButton from "@/components/navigation/ThemeButton";
-import type { Locale } from "@/types/i18n";
 import { getTranslations } from "@/lib/i18n";
-import { docsSections, getAllDocsItems } from "@/data/docs";
+import { docs } from "@/data/docs/index";
+import type { DocCategory, DocPage } from "@/data/docs/types";
+import type { Locale } from "@/types/i18n";
 
 interface DocsLayoutProps {
   children: React.ReactNode;
@@ -31,43 +31,103 @@ interface DocsLayoutProps {
 }
 
 const icons = {
-  book: BookOpen,
-  package: Package,
-  rocket: Rocket,
-  layers: Layers3,
-  type: Type,
-  box: Box,
-  hash: Hash,
-  calendar: CalendarDays,
+  "getting-started": BookOpen,
+  array: Package,
+  string: Type,
+  object: Box,
+  number: Hash,
+  date: CalendarDays,
   function: Workflow,
-  braces: FileCode2,
+  type: Type,
+  url: Rocket,
+  validation: Layers3,
+} as const;
+
+type CategoryIcon = keyof typeof icons;
+
+const categoryLabels: Record<DocCategory, Record<Locale, string>> = {
+  "getting-started": {
+    en: "Getting Started",
+    fa: "شروع کار",
+  },
+  array: {
+    en: "Array",
+    fa: "آرایه",
+  },
+  string: {
+    en: "String",
+    fa: "رشته",
+  },
+  object: {
+    en: "Object",
+    fa: "آبجکت",
+  },
+  number: {
+    en: "Number",
+    fa: "عدد",
+  },
+  date: {
+    en: "Date",
+    fa: "تاریخ",
+  },
+  function: {
+    en: "Function",
+    fa: "تابع",
+  },
+  type: {
+    en: "Type",
+    fa: "نوع",
+  },
+  url: {
+    en: "URL",
+    fa: "URL",
+  },
+  validation: {
+    en: "Validation",
+    fa: "اعتبارسنجی",
+  },
 };
+
+function getCategoryIcon(category: DocCategory) {
+  return icons[category as CategoryIcon];
+}
+
+function getCategorySections(locale: Locale) {
+  const categories = Array.from(new Set(docs.map((doc) => doc.category)));
+
+  return categories.map((category) => ({
+    category,
+    title: categoryLabels[category][locale],
+    items: docs.filter((doc) => doc.category === category),
+  }));
+}
 
 export default function DocsLayout({ children, locale }: DocsLayoutProps) {
   const t = getTranslations(locale);
 
   const [mobileOpen, setMobileOpen] = useState(false);
-
   const [searchOpen, setSearchOpen] = useState(false);
-
   const [query, setQuery] = useState("");
 
-  const items = getAllDocsItems();
+  const items = docs;
+
+  const sections = useMemo(() => getCategorySections(locale), [locale]);
 
   const results = useMemo(() => {
     const value = query.trim().toLowerCase();
 
-    if (!value) return [];
+    if (!value) {
+      return [];
+    }
 
-    return items.filter((item) => {
+    return items.filter((item: DocPage) => {
       const title = item.title[locale].toLowerCase();
-
       const description = item.description[locale].toLowerCase();
 
       return (
         title.includes(value) ||
         description.includes(value) ||
-        item.slug.includes(value)
+        item.slug.toLowerCase().includes(value)
       );
     });
   }, [items, locale, query]);
@@ -136,6 +196,7 @@ export default function DocsLayout({ children, locale }: DocsLayoutProps) {
                 dark:text-zinc-400
                 dark:hover:bg-white/5
               "
+              aria-label={mobileOpen ? "Close navigation" : "Open navigation"}
             >
               {mobileOpen ? <X size={19} /> : <Menu size={19} />}
             </button>
@@ -254,6 +315,7 @@ export default function DocsLayout({ children, locale }: DocsLayoutProps) {
 
             <ThemeButton />
 
+            {/* GitHub */}
             <a
               href="https://github.com/VibelessYoung/CyrefJS"
               target="_blank"
@@ -309,6 +371,7 @@ export default function DocsLayout({ children, locale }: DocsLayoutProps) {
           >
             <SidebarContent
               locale={locale}
+              sections={sections}
               onNavigate={() => setMobileOpen(false)}
             />
           </aside>
@@ -331,7 +394,7 @@ export default function DocsLayout({ children, locale }: DocsLayoutProps) {
             dark:bg-[#050505]
           "
         >
-          <SidebarContent locale={locale} />
+          <SidebarContent locale={locale} sections={sections} />
         </aside>
 
         <main className="min-w-0 flex-1">{children}</main>
@@ -417,24 +480,27 @@ export default function DocsLayout({ children, locale }: DocsLayoutProps) {
               {query && results.length === 0 && (
                 <div
                   className="
-                      px-4 py-12
-                      text-center
-                      text-sm
-                      text-zinc-400
-                    "
+                    px-4 py-12
+                    text-center
+                    text-sm
+                    text-zinc-400
+                  "
                 >
                   {t.docs.noResults}
                 </div>
               )}
 
-              {results.map((item) => {
-                const Icon = icons[item.icon];
+              {results.map((item: DocPage) => {
+                const Icon = getCategoryIcon(item.category);
 
                 return (
                   <Link
                     key={item.slug}
                     href={`/${locale}/docs/${item.slug}`}
-                    onClick={() => setSearchOpen(false)}
+                    onClick={() => {
+                      setSearchOpen(false);
+                      setQuery("");
+                    }}
                     className="
                       flex items-center gap-3
                       rounded-xl
@@ -486,17 +552,68 @@ export default function DocsLayout({ children, locale }: DocsLayoutProps) {
   );
 }
 
-function SidebarContent({
-  locale,
-  onNavigate,
-}: {
+interface SidebarContentProps {
   locale: Locale;
+  sections: ReturnType<typeof getCategorySections>;
   onNavigate?: () => void;
-}) {
+}
+
+function SidebarContent({ locale, sections, onNavigate }: SidebarContentProps) {
   return (
     <nav>
-      {docsSections.map((section) => (
-        <div key={section.title.en} className="mb-8">
+      {/* Overview */}
+      <div className="mb-8">
+        <p
+          className="
+            mb-3 px-3
+            text-[10px]
+            font-semibold
+            uppercase
+            tracking-[0.16em]
+            text-zinc-400
+            dark:text-zinc-500
+          "
+        >
+          {locale === "fa" ? "مستندات" : "Documentation"}
+        </p>
+
+        <div className="space-y-0.5">
+          <Link
+            href={`/${locale}/docs`}
+            onClick={onNavigate}
+            className="
+              group
+              flex items-center gap-3
+              rounded-lg
+              px-3 py-2.5
+              text-sm
+              text-zinc-500
+              transition-colors
+              hover:bg-black/[0.04]
+              hover:text-zinc-900
+              dark:text-zinc-400
+              dark:hover:bg-white/[0.05]
+              dark:hover:text-white
+            "
+          >
+            <BookOpen
+              size={16}
+              strokeWidth={1.7}
+              className="
+                shrink-0
+                text-zinc-400
+                dark:text-zinc-500
+              "
+            />
+
+            <span>{locale === "fa" ? "نمای کلی" : "Overview"}</span>
+          </Link>
+        </div>
+      </div>
+
+      {/* Registry categories */}
+      {sections.map((section) => (
+        <div key={section.category} className="mb-8">
           <p
             className="
               mb-3 px-3
@@ -508,22 +625,17 @@ function SidebarContent({
               dark:text-zinc-500
             "
           >
-            {section.title[locale]}
+            {section.title}
           </p>
 
           <div className="space-y-0.5">
             {section.items.map((item) => {
-              const Icon = icons[item.icon];
-
-              const href =
-                item.slug === ""
-                  ? `/${locale}/docs`
-                  : `/${locale}/docs/${item.slug}`;
+              const Icon = getCategoryIcon(item.category);
 
               return (
                 <Link
                   key={item.slug}
-                  href={href}
+                  href={`/${locale}/docs/${item.slug}`}
                   onClick={onNavigate}
                   className="
                     group
@@ -558,6 +670,7 @@ function SidebarContent({
         </div>
       ))}
 
+      {/* External / contact links */}
       <div className="mt-10">
         <a
           href="https://github.com/VibelessYoung/CyrefJS"
@@ -606,6 +719,7 @@ function SidebarContent({
         </Link>
       </div>
 
+      {/* Version */}
       <div
         className="
           mt-8
