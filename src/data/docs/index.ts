@@ -3,14 +3,14 @@ import type { DocPage } from "./types";
 import { introductionDoc } from "./getting-started/introduction";
 import { installationDoc } from "./getting-started/installation";
 import { quickStartDoc } from "./getting-started/quick-start";
-
+import { compactDoc } from "./utilities/array/compact";
 import { chunkDoc } from "./utilities/array/chunk";
 
 export const docs: DocPage[] = [
   introductionDoc,
   installationDoc,
   quickStartDoc,
-
+  compactDoc,
   chunkDoc,
 ];
 
