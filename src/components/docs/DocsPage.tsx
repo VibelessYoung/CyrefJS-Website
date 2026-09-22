@@ -262,8 +262,11 @@ export default function DocsPage({ locale, doc }: DocsPageProps) {
         {doc.sections && doc.sections.length > 0 && (
           <section className="mb-16 space-y-12">
             {doc.sections.map((section) => (
-              <div key={section.id} id={section.id} className="scroll-mt-28">
-                <h2 className="mb-3 text-xl font-semibold tracking-tight text-zinc-950 dark:text-white sm:text-2xl">
+              <div key={section.id} className="scroll-mt-28">
+                <h2
+                  id={section.id}
+                  className="scroll-mt-24 text-xl font-semibold tracking-tight text-zinc-950 dark:text-white"
+                >
                   {section.title[locale]}
                 </h2>
 
@@ -404,7 +407,11 @@ export default function DocsPage({ locale, doc }: DocsPageProps) {
                     </div>
                   </div>
 
-                  <CodeBlock code={example.code} language={example.language} />
+                  <CodeBlock
+                    code={example.code}
+                    language={example.language}
+                    locale={locale}
+                  />
                 </div>
               ))}
             </div>

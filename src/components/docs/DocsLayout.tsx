@@ -33,6 +33,8 @@ interface DocsLayoutProps {
   locale: Locale;
 }
 
+const GITHUB_URL = "https://github.com/VibelessYoung/CyrefJS";
+
 const icons = {
   "getting-started": BookOpen,
   array: Package,
@@ -113,6 +115,7 @@ function HighlightMatch({ text, query }: { text: string; query: string }) {
   }
 
   const escaped = value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+
   const parts = text.split(new RegExp(`(${escaped})`, "gi"));
 
   return (
@@ -138,13 +141,14 @@ function HighlightMatch({ text, query }: { text: string; query: string }) {
 export default function DocsLayout({ children, locale }: DocsLayoutProps) {
   const t = getTranslations(locale);
   const router = useRouter();
-
   const searchInputRef = useRef<HTMLInputElement>(null);
 
   const [mobileOpen, setMobileOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [query, setQuery] = useState("");
   const [selectedIndex, setSelectedIndex] = useState(0);
+
+  const isFa = locale === "fa";
 
   const items = docs;
 
@@ -161,7 +165,6 @@ export default function DocsLayout({ children, locale }: DocsLayoutProps) {
       const title = item.title[locale].toLowerCase();
       const description = item.description[locale].toLowerCase();
       const slug = item.slug.toLowerCase();
-
       const category = categoryLabels[item.category][locale].toLowerCase();
 
       return (
@@ -174,25 +177,26 @@ export default function DocsLayout({ children, locale }: DocsLayoutProps) {
   }, [items, locale, query]);
 
   useEffect(() => {
-    const handleKeyDown = (event: KeyboardEvent) => {
+    function handleGlobalKeyDown(event: KeyboardEvent) {
       const isShortcut =
         (event.metaKey || event.ctrlKey) && event.key.toLowerCase() === "k";
 
       if (isShortcut) {
         event.preventDefault();
         setSearchOpen(true);
+        return;
       }
 
       if (event.key === "Escape") {
         setSearchOpen(false);
         setMobileOpen(false);
       }
-    };
+    }
 
-    window.addEventListener("keydown", handleKeyDown);
+    window.addEventListener("keydown", handleGlobalKeyDown);
 
     return () => {
-      window.removeEventListener("keydown", handleKeyDown);
+      window.removeEventListener("keydown", handleGlobalKeyDown);
     };
   }, []);
 
@@ -215,8 +219,9 @@ export default function DocsLayout({ children, locale }: DocsLayoutProps) {
       return;
     }
 
-    function handleKeyDown(event: KeyboardEvent) {
+    function handleSearchKeyDown(event: KeyboardEvent) {
       if (event.key === "Escape") {
+        event.preventDefault();
         setSearchOpen(false);
         return;
       }
@@ -258,10 +263,10 @@ export default function DocsLayout({ children, locale }: DocsLayoutProps) {
       }
     }
 
-    window.addEventListener("keydown", handleKeyDown);
+    window.addEventListener("keydown", handleSearchKeyDown);
 
     return () => {
-      window.removeEventListener("keydown", handleKeyDown);
+      window.removeEventListener("keydown", handleSearchKeyDown);
     };
   }, [searchOpen, results, selectedIndex, locale, router]);
 
@@ -271,8 +276,14 @@ export default function DocsLayout({ children, locale }: DocsLayoutProps) {
     setSelectedIndex(0);
   }
 
+  function openSearch() {
+    setSearchOpen(true);
+    setMobileOpen(false);
+  }
+
   return (
     <div
+      dir={isFa ? "rtl" : "ltr"}
       className="
         min-h-screen
         bg-white text-zinc-900
@@ -280,7 +291,6 @@ export default function DocsLayout({ children, locale }: DocsLayoutProps) {
       "
     >
       {/* Header */}
-
       <header
         className="
           sticky top-0 z-50
@@ -310,17 +320,31 @@ export default function DocsLayout({ children, locale }: DocsLayoutProps) {
                 items-center justify-center
                 rounded-lg
                 text-zinc-500
+                transition-colors
                 hover:bg-black/5
                 lg:hidden
                 dark:text-zinc-400
                 dark:hover:bg-white/5
               "
-              aria-label={mobileOpen ? "Close navigation" : "Open navigation"}
+              aria-label={
+                mobileOpen
+                  ? isFa
+                    ? "بستن منو"
+                    : "Close navigation"
+                  : isFa
+                    ? "باز کردن منو"
+                    : "Open navigation"
+              }
+              aria-expanded={mobileOpen}
             >
               {mobileOpen ? <X size={19} /> : <Menu size={19} />}
             </button>
 
-            <Link href={`/${locale}`} className="flex items-center gap-2.5">
+            <Link
+              href={`/${locale}`}
+              className="flex items-center gap-2.5"
+              onClick={() => setMobileOpen(false)}
+            >
               <span
                 className="
                   flex h-8 w-8
@@ -362,10 +386,9 @@ export default function DocsLayout({ children, locale }: DocsLayoutProps) {
 
           <div className="flex items-center gap-1.5">
             {/* Search */}
-
             <button
               type="button"
-              onClick={() => setSearchOpen(true)}
+              onClick={openSearch}
               className="
                 hidden h-9
                 items-center gap-2
@@ -375,14 +398,16 @@ export default function DocsLayout({ children, locale }: DocsLayoutProps) {
                 px-3
                 text-xs
                 text-zinc-500
+                transition-colors
+                hover:bg-black/[0.04]
                 sm:flex
                 dark:border-white/[0.08]
                 dark:bg-white/[0.025]
                 dark:text-zinc-400
+                dark:hover:bg-white/[0.05]
               "
             >
               <Search size={15} />
-
               <span>{t.docs.search}</span>
 
               <kbd
@@ -399,17 +424,19 @@ export default function DocsLayout({ children, locale }: DocsLayoutProps) {
             </button>
 
             {/* Mobile search */}
-
             <button
               type="button"
-              onClick={() => setSearchOpen(true)}
+              onClick={openSearch}
               className="
                 flex h-9 w-9
                 items-center justify-center
                 rounded-lg
                 text-zinc-500
+                transition-colors
+                hover:bg-black/5
                 sm:hidden
                 dark:text-zinc-400
+                dark:hover:bg-white/5
               "
               aria-label={t.docs.search}
             >
@@ -417,7 +444,6 @@ export default function DocsLayout({ children, locale }: DocsLayoutProps) {
             </button>
 
             {/* Language */}
-
             <Link
               href={locale === "en" ? "/fa/docs" : "/en/docs"}
               className="
@@ -427,10 +453,14 @@ export default function DocsLayout({ children, locale }: DocsLayoutProps) {
                 px-2
                 text-xs font-medium
                 text-zinc-500
+                transition-colors
                 hover:bg-black/5
                 dark:text-zinc-400
                 dark:hover:bg-white/5
               "
+              aria-label={
+                locale === "en" ? "Switch to Persian" : "Switch to English"
+              }
             >
               {locale === "en" ? "فا" : "EN"}
             </Link>
@@ -438,9 +468,8 @@ export default function DocsLayout({ children, locale }: DocsLayoutProps) {
             <ThemeButton />
 
             {/* GitHub */}
-
             <a
-              href="https://github.com/VibelessYoung/CyrefJS"
+              href={GITHUB_URL}
               target="_blank"
               rel="noopener noreferrer"
               className="
@@ -448,6 +477,7 @@ export default function DocsLayout({ children, locale }: DocsLayoutProps) {
                 items-center justify-center
                 rounded-lg
                 text-zinc-500
+                transition-colors
                 hover:bg-black/5
                 sm:flex
                 dark:text-zinc-400
@@ -469,7 +499,6 @@ export default function DocsLayout({ children, locale }: DocsLayoutProps) {
       </header>
 
       {/* Mobile sidebar */}
-
       {mobileOpen && (
         <div
           className="
@@ -482,16 +511,10 @@ export default function DocsLayout({ children, locale }: DocsLayoutProps) {
         >
           <aside
             onClick={(event) => event.stopPropagation()}
-            className="
-              absolute bottom-0 left-0 top-16
-              w-[290px]
-              overflow-y-auto
-              border-r border-black/[0.07]
-              bg-white
-              px-4 py-6
-              dark:border-white/[0.07]
-              dark:bg-[#050505]
-            "
+            className={[
+              "absolute bottom-0 top-16 w-[290px] overflow-y-auto border-black/[0.07] bg-white px-4 py-6 dark:border-white/[0.07] dark:bg-[#050505]",
+              isFa ? "right-0 border-l" : "left-0 border-r",
+            ].join(" ")}
           >
             <SidebarContent
               locale={locale}
@@ -504,20 +527,13 @@ export default function DocsLayout({ children, locale }: DocsLayoutProps) {
 
       <div className="mx-auto flex max-w-[1600px]">
         {/* Desktop sidebar */}
-
         <aside
-          className="
-            sticky top-16
-            hidden h-[calc(100vh-4rem)]
-            w-[260px] shrink-0
-            overflow-y-auto
-            border-r border-black/[0.07]
-            bg-white
-            px-4 py-7
-            lg:block
-            dark:border-white/[0.07]
-            dark:bg-[#050505]
-          "
+          className={[
+            "sticky top-16 hidden h-[calc(100vh-4rem)] w-[260px] shrink-0 overflow-y-auto bg-white px-4 py-7 lg:block dark:bg-[#050505]",
+            isFa
+              ? "border-l border-black/[0.07] dark:border-white/[0.07]"
+              : "border-r border-black/[0.07] dark:border-white/[0.07]",
+          ].join(" ")}
         >
           <SidebarContent locale={locale} sections={sections} />
         </aside>
@@ -526,7 +542,6 @@ export default function DocsLayout({ children, locale }: DocsLayoutProps) {
       </div>
 
       {/* Search dialog */}
-
       {searchOpen && (
         <div
           className="
@@ -538,6 +553,7 @@ export default function DocsLayout({ children, locale }: DocsLayoutProps) {
             animate-in fade-in duration-150
           "
           onClick={closeSearch}
+          role="presentation"
         >
           <div
             onClick={(event) => event.stopPropagation()}
@@ -555,9 +571,11 @@ export default function DocsLayout({ children, locale }: DocsLayoutProps) {
               fade-in
               duration-200
             "
+            role="dialog"
+            aria-modal="true"
+            aria-label={t.docs.search}
           >
             {/* Search input */}
-
             <div
               className="
                 flex items-center gap-3
@@ -604,15 +622,9 @@ export default function DocsLayout({ children, locale }: DocsLayoutProps) {
             </div>
 
             {/* Results */}
-
             <div className="max-h-[460px] overflow-y-auto p-2">
               {!query && (
-                <div
-                  className="
-                    px-4 py-10
-                    text-center
-                  "
-                >
+                <div className="px-4 py-10 text-center">
                   <Search
                     size={24}
                     className="
@@ -653,7 +665,9 @@ export default function DocsLayout({ children, locale }: DocsLayoutProps) {
                       ↓
                     </kbd>
 
-                    <span className="text-[10px] text-zinc-400">Navigate</span>
+                    <span className="text-[10px] text-zinc-400">
+                      {isFa ? "انتخاب" : "Navigate"}
+                    </span>
 
                     <kbd
                       className="
@@ -672,12 +686,7 @@ export default function DocsLayout({ children, locale }: DocsLayoutProps) {
               )}
 
               {query && results.length === 0 && (
-                <div
-                  className="
-                    px-4 py-12
-                    text-center
-                  "
-                >
+                <div className="px-4 py-12 text-center">
                   <Search
                     size={24}
                     className="
@@ -692,7 +701,7 @@ export default function DocsLayout({ children, locale }: DocsLayoutProps) {
                   </p>
 
                   <p className="mt-1 text-xs text-zinc-400">
-                    {locale === "fa"
+                    {isFa
                       ? "عبارت دیگری را امتحان کنید."
                       : "Try searching for something else."}
                   </p>
@@ -701,6 +710,8 @@ export default function DocsLayout({ children, locale }: DocsLayoutProps) {
 
               {results.map((item, index) => {
                 const isSelected = index === selectedIndex;
+
+                const Icon = getCategoryIcon(item.category);
 
                 return (
                   <Link
@@ -717,6 +728,7 @@ export default function DocsLayout({ children, locale }: DocsLayoutProps) {
                         ? "bg-zinc-100 dark:bg-white/[0.06]"
                         : "hover:bg-zinc-50 dark:hover:bg-white/[0.03]",
                     ].join(" ")}
+                    aria-current={isSelected ? "page" : undefined}
                   >
                     <div className="flex items-center gap-4">
                       <div
@@ -733,11 +745,7 @@ export default function DocsLayout({ children, locale }: DocsLayoutProps) {
                           dark:text-zinc-400
                         "
                       >
-                        {(() => {
-                          const Icon = getCategoryIcon(item.category);
-
-                          return <Icon size={16} strokeWidth={1.7} />;
-                        })()}
+                        <Icon size={16} strokeWidth={1.7} />
                       </div>
 
                       <div className="min-w-0 flex-1">
@@ -813,7 +821,6 @@ export default function DocsLayout({ children, locale }: DocsLayoutProps) {
             </div>
 
             {/* Footer */}
-
             {query && results.length > 0 && (
               <div
                 className="
@@ -827,21 +834,17 @@ export default function DocsLayout({ children, locale }: DocsLayoutProps) {
               >
                 <span>
                   {results.length}{" "}
-                  {locale === "fa"
-                    ? "نتیجه"
-                    : results.length === 1
-                      ? "result"
-                      : "results"}
+                  {isFa ? "نتیجه" : results.length === 1 ? "result" : "results"}
                 </span>
 
                 <div className="flex items-center gap-2">
                   <span>↑↓</span>
-                  <span>{locale === "fa" ? "انتخاب" : "Navigate"}</span>
+                  <span>{isFa ? "انتخاب" : "Navigate"}</span>
 
                   <span className="mx-1">·</span>
 
                   <span>↵</span>
-                  <span>{locale === "fa" ? "باز کردن" : "Open"}</span>
+                  <span>{isFa ? "باز کردن" : "Open"}</span>
                 </div>
               </div>
             )}
@@ -860,11 +863,11 @@ interface SidebarContentProps {
 
 function SidebarContent({ locale, sections, onNavigate }: SidebarContentProps) {
   const pathname = usePathname();
+  const isFa = locale === "fa";
 
   return (
-    <nav>
+    <nav aria-label={isFa ? "مستندات" : "Documentation"}>
       {/* Overview */}
-
       <div className="mb-8">
         <p
           className="
@@ -877,7 +880,7 @@ function SidebarContent({ locale, sections, onNavigate }: SidebarContentProps) {
             dark:text-zinc-500
           "
         >
-          {locale === "fa" ? "مستندات" : "Documentation"}
+          {isFa ? "مستندات" : "Documentation"}
         </p>
 
         <div className="space-y-0.5">
@@ -892,7 +895,12 @@ function SidebarContent({ locale, sections, onNavigate }: SidebarContentProps) {
             ].join(" ")}
           >
             {pathname === `/${locale}/docs` && (
-              <span className="absolute inset-y-1.5 left-0 w-0.5 rounded-full bg-zinc-950 dark:bg-white" />
+              <span
+                className={[
+                  "absolute inset-y-1.5 w-0.5 rounded-full bg-zinc-950 dark:bg-white",
+                  isFa ? "right-0" : "left-0",
+                ].join(" ")}
+              />
             )}
 
             <BookOpen
@@ -905,13 +913,12 @@ function SidebarContent({ locale, sections, onNavigate }: SidebarContentProps) {
               "
             />
 
-            <span>{locale === "fa" ? "نمای کلی" : "Overview"}</span>
+            <span>{isFa ? "نمای کلی" : "Overview"}</span>
           </Link>
         </div>
       </div>
 
       {/* Registry categories */}
-
       {sections.map((section) => {
         const Icon = getCategoryIcon(section.category);
 
@@ -953,9 +960,15 @@ function SidebarContent({ locale, sections, onNavigate }: SidebarContentProps) {
                         ? "bg-zinc-100 font-medium text-zinc-950 dark:bg-white/[0.06] dark:text-white"
                         : "text-zinc-500 hover:bg-zinc-100 hover:text-zinc-950 dark:text-zinc-400 dark:hover:bg-white/[0.04] dark:hover:text-white",
                     ].join(" ")}
+                    aria-current={isActive ? "page" : undefined}
                   >
                     {isActive && (
-                      <span className="absolute inset-y-1.5 left-0 w-0.5 rounded-full bg-zinc-950 dark:bg-white" />
+                      <span
+                        className={[
+                          "absolute inset-y-1.5 w-0.5 rounded-full bg-zinc-950 dark:bg-white",
+                          isFa ? "right-0" : "left-0",
+                        ].join(" ")}
+                      />
                     )}
 
                     <span className="truncate">{item.title[locale]}</span>
@@ -968,10 +981,9 @@ function SidebarContent({ locale, sections, onNavigate }: SidebarContentProps) {
       })}
 
       {/* External / contact links */}
-
       <div className="mt-10">
         <a
-          href="https://github.com/VibelessYoung/CyrefJS"
+          href={GITHUB_URL}
           target="_blank"
           rel="noopener noreferrer"
           className="
@@ -1011,12 +1023,11 @@ function SidebarContent({ locale, sections, onNavigate }: SidebarContentProps) {
           "
         >
           <UserRound size={16} />
-          <span>{locale === "fa" ? "تماس" : "Contact"}</span>
+          <span>{isFa ? "تماس" : "Contact"}</span>
         </Link>
       </div>
 
       {/* Version */}
-
       <div
         className="
           mt-8
