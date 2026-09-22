@@ -8,6 +8,7 @@ import { chunkDoc } from "./utilities/array/chunk";
 import { differenceDoc } from "./utilities/array/difference";
 import { dropDoc } from "./utilities/array/drop";
 import { dropRightDoc } from "./utilities/array/dropRight";
+import { firstDoc } from "./utilities/array/first";
 
 export const docs: DocPage[] = [
   introductionDoc,
@@ -18,6 +19,7 @@ export const docs: DocPage[] = [
   differenceDoc,
   dropDoc,
   dropRightDoc,
+  firstDoc,
 ];
 
 export function getDocBySlug(slug: string): DocPage | undefined {
