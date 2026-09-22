@@ -1,5 +1,5 @@
 "use client";
-
+import { usePathname } from "next/navigation";
 import Link from "next/link";
 import {
   ArrowUpRight,
@@ -104,7 +104,6 @@ function getCategorySections(locale: Locale) {
 
 export default function DocsLayout({ children, locale }: DocsLayoutProps) {
   const t = getTranslations(locale);
-
   const [mobileOpen, setMobileOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [query, setQuery] = useState("");
@@ -559,6 +558,8 @@ interface SidebarContentProps {
 }
 
 function SidebarContent({ locale, sections, onNavigate }: SidebarContentProps) {
+  const pathname = usePathname();
+
   return (
     <nav>
       {/* Overview */}
@@ -610,65 +611,48 @@ function SidebarContent({ locale, sections, onNavigate }: SidebarContentProps) {
           </Link>
         </div>
       </div>
-
       {/* Registry categories */}
-      {sections.map((section) => (
-        <div key={section.category} className="mb-8">
-          <p
-            className="
-              mb-3 px-3
-              text-[10px]
-              font-semibold
-              uppercase
-              tracking-[0.16em]
-              text-zinc-400
-              dark:text-zinc-500
-            "
-          >
-            {section.title}
-          </p>
 
-          <div className="space-y-0.5">
-            {section.items.map((item) => {
-              const Icon = getCategoryIcon(item.category);
+      {sections.map((section) => {
+        const Icon = getCategoryIcon(section.category);
 
-              return (
-                <Link
-                  key={item.slug}
-                  href={`/${locale}/docs/${item.slug}`}
-                  onClick={onNavigate}
-                  className="
-                    group
-                    flex items-center gap-3
-                    rounded-lg
-                    px-3 py-2.5
-                    text-sm
-                    text-zinc-500
-                    transition-colors
-                    hover:bg-black/[0.04]
-                    hover:text-zinc-900
-                    dark:text-zinc-400
-                    dark:hover:bg-white/[0.05]
-                    dark:hover:text-white
-                  "
-                >
-                  <Icon
-                    size={16}
-                    strokeWidth={1.7}
-                    className="
-                      shrink-0
-                      text-zinc-400
-                      dark:text-zinc-500
-                    "
-                  />
+        return (
+          <div key={section.category} className="space-y-2">
+            <div className="flex items-center gap-2 px-3 text-xs font-semibold uppercase tracking-wider text-zinc-400 dark:text-zinc-500">
+              <Icon className="size-3.5" />
 
-                  <span>{item.title[locale]}</span>
-                </Link>
-              );
-            })}
+              <span>{section.title}</span>
+            </div>
+
+            <div className="space-y-1">
+              {section.items.map((item) => {
+                const href = `/${locale}/docs/${item.slug}`;
+                const isActive = pathname === href;
+
+                return (
+                  <Link
+                    key={item.slug}
+                    href={href}
+                    onClick={onNavigate}
+                    className={[
+                      "group relative flex items-center rounded-lg px-3 py-2 text-sm transition-colors",
+                      isActive
+                        ? "bg-zinc-100 font-medium text-zinc-950 dark:bg-white/[0.06] dark:text-white"
+                        : "text-zinc-500 hover:bg-zinc-100 hover:text-zinc-950 dark:text-zinc-400 dark:hover:bg-white/[0.04] dark:hover:text-white",
+                    ].join(" ")}
+                  >
+                    {isActive && (
+                      <span className="absolute inset-y-1.5 left-0 w-0.5 rounded-full bg-zinc-950 dark:bg-white" />
+                    )}
+
+                    <span className="truncate">{item.title[locale]}</span>
+                  </Link>
+                );
+              })}
+            </div>
           </div>
-        </div>
-      ))}
+        );
+      })}
 
       {/* External / contact links */}
       <div className="mt-10">
@@ -718,7 +702,6 @@ function SidebarContent({ locale, sections, onNavigate }: SidebarContentProps) {
           <span>{locale === "fa" ? "تماس" : "Contact"}</span>
         </Link>
       </div>
-
       {/* Version */}
       <div
         className="
