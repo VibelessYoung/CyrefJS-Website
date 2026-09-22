@@ -13,6 +13,7 @@ import { flattenDoc } from "./utilities/array/flatten";
 import { flattenDeepDoc } from "./utilities/array/flattenDeep";
 import { groupByDoc } from "./utilities/array/groupBy";
 import { intersectionDoc } from "./utilities/array/intersection";
+import { keyByDoc } from "./utilities/array/key-by";
 
 export const docs: DocPage[] = [
   introductionDoc,
@@ -28,6 +29,7 @@ export const docs: DocPage[] = [
   flattenDeepDoc,
   groupByDoc,
   intersectionDoc,
+  keyByDoc,
 ];
 
 export function getDocBySlug(slug: string): DocPage | undefined {
