@@ -16,6 +16,7 @@ import { intersectionDoc } from "./utilities/array/intersection";
 import { keyByDoc } from "./utilities/array/key-by";
 import { lastDoc } from "./utilities/array/last";
 import { partitionDoc } from "./utilities/array/partition";
+import { sampleDoc } from "./utilities/array/sample";
 
 export const docs: DocPage[] = [
   introductionDoc,
@@ -34,6 +35,7 @@ export const docs: DocPage[] = [
   keyByDoc,
   lastDoc,
   partitionDoc,
+  sampleDoc,
 ];
 
 export function getDocBySlug(slug: string): DocPage | undefined {
