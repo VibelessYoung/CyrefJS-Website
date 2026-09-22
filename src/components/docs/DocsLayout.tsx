@@ -1,6 +1,8 @@
 "use client";
-import { usePathname } from "next/navigation";
+
 import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
+
 import {
   ArrowUpRight,
   BookOpen,
@@ -17,12 +19,13 @@ import {
   Workflow,
   X,
 } from "lucide-react";
-import { useEffect, useMemo, useState } from "react";
-import { useRouter } from "next/navigation";
+
+import { useEffect, useMemo, useRef, useState } from "react";
+
 import ThemeButton from "@/components/navigation/ThemeButton";
-import { getTranslations } from "@/lib/i18n";
 import { docs } from "@/data/docs/index";
 import type { DocCategory, DocPage } from "@/data/docs/types";
+import { getTranslations } from "@/lib/i18n";
 import type { Locale } from "@/types/i18n";
 
 interface DocsLayoutProps {
@@ -102,13 +105,47 @@ function getCategorySections(locale: Locale) {
   }));
 }
 
+function HighlightMatch({ text, query }: { text: string; query: string }) {
+  const value = query.trim();
+
+  if (!value) {
+    return <>{text}</>;
+  }
+
+  const escaped = value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  const parts = text.split(new RegExp(`(${escaped})`, "gi"));
+
+  return (
+    <>
+      {parts.map((part, index) => {
+        const isMatch = part.toLowerCase() === value.toLowerCase();
+
+        return isMatch ? (
+          <mark
+            key={`${part}-${index}`}
+            className="rounded bg-zinc-200 px-0.5 text-zinc-950 dark:bg-white/15 dark:text-white"
+          >
+            {part}
+          </mark>
+        ) : (
+          <span key={`${part}-${index}`}>{part}</span>
+        );
+      })}
+    </>
+  );
+}
+
 export default function DocsLayout({ children, locale }: DocsLayoutProps) {
   const t = getTranslations(locale);
+  const router = useRouter();
+
+  const searchInputRef = useRef<HTMLInputElement>(null);
+
   const [mobileOpen, setMobileOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [query, setQuery] = useState("");
   const [selectedIndex, setSelectedIndex] = useState(0);
-  const router = useRouter();
+
   const items = docs;
 
   const sections = useMemo(() => getCategorySections(locale), [locale]);
@@ -123,11 +160,15 @@ export default function DocsLayout({ children, locale }: DocsLayoutProps) {
     return items.filter((item: DocPage) => {
       const title = item.title[locale].toLowerCase();
       const description = item.description[locale].toLowerCase();
+      const slug = item.slug.toLowerCase();
+
+      const category = categoryLabels[item.category][locale].toLowerCase();
 
       return (
         title.includes(value) ||
         description.includes(value) ||
-        item.slug.toLowerCase().includes(value)
+        slug.includes(value) ||
+        category.includes(value)
       );
     });
   }, [items, locale, query]);
@@ -150,8 +191,24 @@ export default function DocsLayout({ children, locale }: DocsLayoutProps) {
 
     window.addEventListener("keydown", handleKeyDown);
 
-    return () => window.removeEventListener("keydown", handleKeyDown);
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
   }, []);
+
+  useEffect(() => {
+    if (!searchOpen) {
+      return;
+    }
+
+    const timeout = window.setTimeout(() => {
+      searchInputRef.current?.focus();
+    }, 50);
+
+    return () => {
+      window.clearTimeout(timeout);
+    };
+  }, [searchOpen]);
 
   useEffect(() => {
     if (!searchOpen) {
@@ -194,8 +251,10 @@ export default function DocsLayout({ children, locale }: DocsLayoutProps) {
         }
 
         router.push(`/${locale}/docs/${selectedDoc.slug}`);
+
         setSearchOpen(false);
         setQuery("");
+        setSelectedIndex(0);
       }
     }
 
@@ -206,6 +265,12 @@ export default function DocsLayout({ children, locale }: DocsLayoutProps) {
     };
   }, [searchOpen, results, selectedIndex, locale, router]);
 
+  function closeSearch() {
+    setSearchOpen(false);
+    setQuery("");
+    setSelectedIndex(0);
+  }
+
   return (
     <div
       className="
@@ -215,6 +280,7 @@ export default function DocsLayout({ children, locale }: DocsLayoutProps) {
       "
     >
       {/* Header */}
+
       <header
         className="
           sticky top-0 z-50
@@ -296,6 +362,7 @@ export default function DocsLayout({ children, locale }: DocsLayoutProps) {
 
           <div className="flex items-center gap-1.5">
             {/* Search */}
+
             <button
               type="button"
               onClick={() => setSearchOpen(true)}
@@ -327,11 +394,12 @@ export default function DocsLayout({ children, locale }: DocsLayoutProps) {
                   dark:border-white/10
                 "
               >
-                ⌘ K
+                Ctrl K
               </kbd>
             </button>
 
             {/* Mobile search */}
+
             <button
               type="button"
               onClick={() => setSearchOpen(true)}
@@ -349,6 +417,7 @@ export default function DocsLayout({ children, locale }: DocsLayoutProps) {
             </button>
 
             {/* Language */}
+
             <Link
               href={locale === "en" ? "/fa/docs" : "/en/docs"}
               className="
@@ -369,6 +438,7 @@ export default function DocsLayout({ children, locale }: DocsLayoutProps) {
             <ThemeButton />
 
             {/* GitHub */}
+
             <a
               href="https://github.com/VibelessYoung/CyrefJS"
               target="_blank"
@@ -399,6 +469,7 @@ export default function DocsLayout({ children, locale }: DocsLayoutProps) {
       </header>
 
       {/* Mobile sidebar */}
+
       {mobileOpen && (
         <div
           className="
@@ -433,6 +504,7 @@ export default function DocsLayout({ children, locale }: DocsLayoutProps) {
 
       <div className="mx-auto flex max-w-[1600px]">
         {/* Desktop sidebar */}
+
         <aside
           className="
             sticky top-16
@@ -454,6 +526,7 @@ export default function DocsLayout({ children, locale }: DocsLayoutProps) {
       </div>
 
       {/* Search dialog */}
+
       {searchOpen && (
         <div
           className="
@@ -462,8 +535,9 @@ export default function DocsLayout({ children, locale }: DocsLayoutProps) {
             bg-black/40
             px-4 pt-[12vh]
             backdrop-blur-md
+            animate-in fade-in duration-150
           "
-          onClick={() => setSearchOpen(false)}
+          onClick={closeSearch}
         >
           <div
             onClick={(event) => event.stopPropagation()}
@@ -476,8 +550,14 @@ export default function DocsLayout({ children, locale }: DocsLayoutProps) {
               shadow-2xl
               dark:border-white/10
               dark:bg-[#0b0b0b]
+              animate-in
+              slide-in-from-top-2
+              fade-in
+              duration-200
             "
           >
+            {/* Search input */}
+
             <div
               className="
                 flex items-center gap-3
@@ -486,14 +566,16 @@ export default function DocsLayout({ children, locale }: DocsLayoutProps) {
                 dark:border-white/[0.07]
               "
             >
-              <Search size={18} className="text-zinc-400" />
+              <Search size={18} className="shrink-0 text-zinc-400" />
 
               <input
+                ref={searchInputRef}
                 value={query}
                 onChange={(event) => {
                   setQuery(event.target.value);
                   setSelectedIndex(0);
                 }}
+                placeholder={t.docs.search}
                 className="
                   h-14 min-w-0 flex-1
                   bg-transparent
@@ -501,10 +583,14 @@ export default function DocsLayout({ children, locale }: DocsLayoutProps) {
                   outline-none
                   placeholder:text-zinc-400
                 "
+                aria-label={t.docs.search}
+                autoComplete="off"
+                spellCheck={false}
               />
 
               <kbd
                 className="
+                  shrink-0
                   rounded-md
                   border border-black/10
                   px-2 py-1
@@ -517,17 +603,71 @@ export default function DocsLayout({ children, locale }: DocsLayoutProps) {
               </kbd>
             </div>
 
-            <div className="max-h-[420px] overflow-y-auto p-2">
+            {/* Results */}
+
+            <div className="max-h-[460px] overflow-y-auto p-2">
               {!query && (
                 <div
                   className="
-                    px-4 py-12
+                    px-4 py-10
                     text-center
-                    text-sm
-                    text-zinc-400
                   "
                 >
-                  {t.docs.searchHint}
+                  <Search
+                    size={24}
+                    className="
+                      mx-auto mb-3
+                      text-zinc-300
+                      dark:text-zinc-700
+                    "
+                  />
+
+                  <p className="text-sm text-zinc-500 dark:text-zinc-400">
+                    {t.docs.searchHint}
+                  </p>
+
+                  <div className="mt-4 flex items-center justify-center gap-2">
+                    <kbd
+                      className="
+                        rounded-md
+                        border border-black/10
+                        px-2 py-1
+                        font-mono text-[10px]
+                        text-zinc-400
+                        dark:border-white/10
+                      "
+                    >
+                      ↑
+                    </kbd>
+
+                    <kbd
+                      className="
+                        rounded-md
+                        border border-black/10
+                        px-2 py-1
+                        font-mono text-[10px]
+                        text-zinc-400
+                        dark:border-white/10
+                      "
+                    >
+                      ↓
+                    </kbd>
+
+                    <span className="text-[10px] text-zinc-400">Navigate</span>
+
+                    <kbd
+                      className="
+                        ml-2 rounded-md
+                        border border-black/10
+                        px-2 py-1
+                        font-mono text-[10px]
+                        text-zinc-400
+                        dark:border-white/10
+                      "
+                    >
+                      Enter
+                    </kbd>
+                  </div>
                 </div>
               )}
 
@@ -536,11 +676,26 @@ export default function DocsLayout({ children, locale }: DocsLayoutProps) {
                   className="
                     px-4 py-12
                     text-center
-                    text-sm
-                    text-zinc-400
                   "
                 >
-                  {t.docs.noResults}
+                  <Search
+                    size={24}
+                    className="
+                      mx-auto mb-3
+                      text-zinc-300
+                      dark:text-zinc-700
+                    "
+                  />
+
+                  <p className="text-sm font-medium text-zinc-600 dark:text-zinc-300">
+                    {t.docs.noResults}
+                  </p>
+
+                  <p className="mt-1 text-xs text-zinc-400">
+                    {locale === "fa"
+                      ? "عبارت دیگری را امتحان کنید."
+                      : "Try searching for something else."}
+                  </p>
                 </div>
               )}
 
@@ -554,35 +709,142 @@ export default function DocsLayout({ children, locale }: DocsLayoutProps) {
                     onClick={() => {
                       setSearchOpen(false);
                       setQuery("");
+                      setSelectedIndex(0);
                     }}
                     className={[
-                      "block rounded-xl px-4 py-3 transition-colors",
+                      "group block rounded-xl px-4 py-3 transition-colors",
                       isSelected
                         ? "bg-zinc-100 dark:bg-white/[0.06]"
                         : "hover:bg-zinc-50 dark:hover:bg-white/[0.03]",
                     ].join(" ")}
                   >
-                    <div className="flex items-center justify-between gap-4">
-                      <div className="min-w-0">
-                        <p className="truncate text-sm font-medium text-zinc-950 dark:text-white">
-                          {item.title[locale]}
-                        </p>
+                    <div className="flex items-center gap-4">
+                      <div
+                        className="
+                          flex h-9 w-9
+                          shrink-0
+                          items-center justify-center
+                          rounded-lg
+                          border border-black/[0.07]
+                          bg-black/[0.025]
+                          text-zinc-500
+                          dark:border-white/[0.08]
+                          dark:bg-white/[0.025]
+                          dark:text-zinc-400
+                        "
+                      >
+                        {(() => {
+                          const Icon = getCategoryIcon(item.category);
 
-                        <p className="mt-1 truncate text-xs text-zinc-500 dark:text-zinc-500">
-                          {item.description[locale]}
+                          return <Icon size={16} strokeWidth={1.7} />;
+                        })()}
+                      </div>
+
+                      <div className="min-w-0 flex-1">
+                        <div className="flex items-center gap-2">
+                          <p className="truncate text-sm font-medium text-zinc-950 dark:text-white">
+                            <HighlightMatch
+                              text={item.title[locale]}
+                              query={query}
+                            />
+                          </p>
+
+                          <span
+                            className="
+                              hidden shrink-0
+                              rounded-md
+                              border border-black/[0.07]
+                              px-1.5 py-0.5
+                              text-[9px]
+                              font-medium
+                              uppercase
+                              tracking-wider
+                              text-zinc-400
+                              sm:inline-flex
+                              dark:border-white/[0.08]
+                              dark:text-zinc-500
+                            "
+                          >
+                            {categoryLabels[item.category][locale]}
+                          </span>
+                        </div>
+
+                        <p
+                          className="
+                            mt-1 truncate
+                            text-xs
+                            text-zinc-500
+                            dark:text-zinc-500
+                          "
+                        >
+                          <HighlightMatch
+                            text={item.description[locale]}
+                            query={query}
+                          />
                         </p>
                       </div>
 
                       {isSelected && (
-                        <span className="shrink-0 text-xs text-zinc-400">
-                          Enter ↵
-                        </span>
+                        <div
+                          className="
+                            hidden shrink-0
+                            items-center gap-1.5
+                            sm:flex
+                          "
+                        >
+                          <kbd
+                            className="
+                              rounded-md
+                              border border-black/10
+                              px-1.5 py-1
+                              font-mono text-[9px]
+                              text-zinc-400
+                              dark:border-white/10
+                            "
+                          >
+                            ↵
+                          </kbd>
+                        </div>
                       )}
                     </div>
                   </Link>
                 );
               })}
             </div>
+
+            {/* Footer */}
+
+            {query && results.length > 0 && (
+              <div
+                className="
+                  flex items-center justify-between
+                  border-t border-black/[0.07]
+                  px-4 py-2.5
+                  text-[10px]
+                  text-zinc-400
+                  dark:border-white/[0.07]
+                "
+              >
+                <span>
+                  {results.length}{" "}
+                  {locale === "fa"
+                    ? "نتیجه"
+                    : results.length === 1
+                      ? "result"
+                      : "results"}
+                </span>
+
+                <div className="flex items-center gap-2">
+                  <span>↑↓</span>
+                  <span>{locale === "fa" ? "انتخاب" : "Navigate"}</span>
+
+                  <span className="mx-1">·</span>
+
+                  <span>↵</span>
+                  <span>{locale === "fa" ? "باز کردن" : "Open"}</span>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       )}
@@ -602,6 +864,7 @@ function SidebarContent({ locale, sections, onNavigate }: SidebarContentProps) {
   return (
     <nav>
       {/* Overview */}
+
       <div className="mb-8">
         <p
           className="
@@ -621,21 +884,17 @@ function SidebarContent({ locale, sections, onNavigate }: SidebarContentProps) {
           <Link
             href={`/${locale}/docs`}
             onClick={onNavigate}
-            className="
-              group
-              flex items-center gap-3
-              rounded-lg
-              px-3 py-2.5
-              text-sm
-              text-zinc-500
-              transition-colors
-              hover:bg-black/[0.04]
-              hover:text-zinc-900
-              dark:text-zinc-400
-              dark:hover:bg-white/[0.05]
-              dark:hover:text-white
-            "
+            className={[
+              "group relative flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm transition-colors",
+              pathname === `/${locale}/docs`
+                ? "bg-zinc-100 font-medium text-zinc-950 dark:bg-white/[0.06] dark:text-white"
+                : "text-zinc-500 hover:bg-black/[0.04] hover:text-zinc-900 dark:text-zinc-400 dark:hover:bg-white/[0.05] dark:hover:text-white",
+            ].join(" ")}
           >
+            {pathname === `/${locale}/docs` && (
+              <span className="absolute inset-y-1.5 left-0 w-0.5 rounded-full bg-zinc-950 dark:bg-white" />
+            )}
+
             <BookOpen
               size={16}
               strokeWidth={1.7}
@@ -650,6 +909,7 @@ function SidebarContent({ locale, sections, onNavigate }: SidebarContentProps) {
           </Link>
         </div>
       </div>
+
       {/* Registry categories */}
 
       {sections.map((section) => {
@@ -657,9 +917,17 @@ function SidebarContent({ locale, sections, onNavigate }: SidebarContentProps) {
 
         return (
           <div key={section.category} className="space-y-2">
-            <div className="flex items-center gap-2 px-3 text-xs font-semibold uppercase tracking-wider text-zinc-400 dark:text-zinc-500">
+            <div
+              className="
+                flex items-center gap-2
+                px-3
+                text-xs font-semibold
+                uppercase tracking-wider
+                text-zinc-400
+                dark:text-zinc-500
+              "
+            >
               <Icon className="size-3.5" />
-
               <span>{section.title}</span>
             </div>
 
@@ -694,6 +962,7 @@ function SidebarContent({ locale, sections, onNavigate }: SidebarContentProps) {
       })}
 
       {/* External / contact links */}
+
       <div className="mt-10">
         <a
           href="https://github.com/VibelessYoung/CyrefJS"
@@ -715,7 +984,6 @@ function SidebarContent({ locale, sections, onNavigate }: SidebarContentProps) {
           "
         >
           <ArrowUpRight size={16} />
-
           <span>GitHub</span>
         </a>
 
@@ -737,11 +1005,12 @@ function SidebarContent({ locale, sections, onNavigate }: SidebarContentProps) {
           "
         >
           <UserRound size={16} />
-
           <span>{locale === "fa" ? "تماس" : "Contact"}</span>
         </Link>
       </div>
+
       {/* Version */}
+
       <div
         className="
           mt-8
