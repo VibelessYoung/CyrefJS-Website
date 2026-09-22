@@ -916,7 +916,13 @@ function SidebarContent({ locale, sections, onNavigate }: SidebarContentProps) {
         const Icon = getCategoryIcon(section.category);
 
         return (
-          <div key={section.category} className="space-y-2">
+          <div
+            key={section.category}
+            className={[
+              "space-y-2",
+              section.category !== "getting-started" ? "mt-8" : "",
+            ].join(" ")}
+          >
             <div
               className="
                 flex items-center gap-2
