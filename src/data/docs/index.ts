@@ -5,6 +5,7 @@ import { installationDoc } from "./getting-started/installation";
 import { quickStartDoc } from "./getting-started/quick-start";
 import { compactDoc } from "./utilities/array/compact";
 import { chunkDoc } from "./utilities/array/chunk";
+import { differenceDoc } from "./utilities/array/difference";
 
 export const docs: DocPage[] = [
   introductionDoc,
@@ -12,6 +13,7 @@ export const docs: DocPage[] = [
   quickStartDoc,
   compactDoc,
   chunkDoc,
+  differenceDoc,
 ];
 
 export function getDocBySlug(slug: string): DocPage | undefined {
