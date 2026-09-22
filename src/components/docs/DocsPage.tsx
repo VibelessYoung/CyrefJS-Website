@@ -2,7 +2,8 @@ import Link from "next/link";
 import CodeBlock from "./CodeBlock";
 import type { DocPage } from "@/data/docs/types";
 import type { Locale } from "@/types/i18n";
-
+import { docs } from "@/data/docs/index";
+import DocsPagination from "./DocsPagination";
 interface DocsPageProps {
   locale: Locale;
   doc?: DocPage;
@@ -181,6 +182,7 @@ export default function DocsPage({ locale, doc }: DocsPageProps) {
           </div>
         </section>
       )}
+      <DocsPagination locale={locale} currentDoc={doc} docs={docs} />
     </article>
   );
 }

@@ -1,63 +1,39 @@
-"use client";
+import { codeToHtml } from "shiki";
 
-import { Check, Copy } from "lucide-react";
-import { useState } from "react";
+import CopyButton from "./CopyButton";
 
 interface CodeBlockProps {
   code: string;
   language?: string;
 }
 
-export default function CodeBlock({ code, language }: CodeBlockProps) {
-  const [copied, setCopied] = useState(false);
-
-  async function handleCopy() {
-    try {
-      await navigator.clipboard.writeText(code);
-
-      setCopied(true);
-
-      window.setTimeout(() => {
-        setCopied(false);
-      }, 2000);
-    } catch {
-      setCopied(false);
-    }
-  }
+export default async function CodeBlock({
+  code,
+  language = "text",
+}: CodeBlockProps) {
+  const html = await codeToHtml(code, {
+    lang: language,
+    themes: {
+      light: "github-light",
+      dark: "github-dark",
+    },
+    defaultColor: false,
+  });
 
   return (
-    <div className="group relative overflow-hidden rounded-2xl border border-zinc-200 bg-zinc-950 dark:border-white/10">
-      <div className="flex items-center justify-between border-b border-white/10 px-4 py-2.5">
-        <span className="text-xs font-medium uppercase tracking-wider text-zinc-500">
-          {language ?? "code"}
+    <div className="overflow-hidden rounded-2xl border border-zinc-200 bg-zinc-50 dark:border-white/10 dark:bg-zinc-950">
+      <div className="flex items-center justify-between border-b border-zinc-200 px-4 py-2.5 dark:border-white/10">
+        <span className="text-xs font-medium uppercase tracking-wider text-zinc-500 dark:text-zinc-500">
+          {language}
         </span>
 
-        <button
-          type="button"
-          onClick={handleCopy}
-          className="inline-flex cursor-pointer items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-xs font-medium text-zinc-400 transition-colors hover:bg-white/10 hover:text-white"
-          aria-label={copied ? "Code copied" : "Copy code"}
-        >
-          {copied ? (
-            <>
-              <Check className="size-3.5" />
-              Copied
-            </>
-          ) : (
-            <>
-              <Copy className="size-3.5" />
-              Copy
-            </>
-          )}
-        </button>
+        <CopyButton code={code} />
       </div>
 
-      <pre
-        dir="ltr"
-        className="overflow-x-auto p-5 text-sm leading-7 text-zinc-100"
-      >
-        <code>{code}</code>
-      </pre>
+      <div
+        className="overflow-x-auto p-5 text-sm leading-7 [&_pre]:m-0 [&_pre]:bg-transparent"
+        dangerouslySetInnerHTML={{ __html: html }}
+      />
     </div>
   );
 }
