@@ -10,6 +10,8 @@ import { dropDoc } from "./utilities/array/drop";
 import { dropRightDoc } from "./utilities/array/dropRight";
 import { firstDoc } from "./utilities/array/first";
 import { flattenDoc } from "./utilities/array/flatten";
+import { flattenDeepDoc } from "./utilities/array/flattenDeep";
+import { groupByDoc } from "./utilities/array/groupBy";
 
 export const docs: DocPage[] = [
   introductionDoc,
@@ -22,6 +24,8 @@ export const docs: DocPage[] = [
   dropRightDoc,
   firstDoc,
   flattenDoc,
+  flattenDeepDoc,
+  groupByDoc,
 ];
 
 export function getDocBySlug(slug: string): DocPage | undefined {
