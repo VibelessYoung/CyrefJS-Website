@@ -20,18 +20,15 @@ export const chunkDoc: DocPage = {
       name: "array",
       type: "T[]",
       required: true,
-
       description: {
         en: "The array to split into smaller chunks.",
         fa: "آرایه‌ای که باید به بخش‌های کوچک‌تر تقسیم شود.",
       },
     },
-
     {
       name: "size",
       type: "number",
       required: true,
-
       description: {
         en: "The maximum number of elements in each chunk.",
         fa: "حداکثر تعداد عناصر در هر بخش.",
@@ -41,7 +38,6 @@ export const chunkDoc: DocPage = {
 
   returns: {
     type: "T[][]",
-
     description: {
       en: "A new array containing the generated chunks.",
       fa: "یک آرایه جدید شامل بخش‌های ایجادشده.",
@@ -64,7 +60,7 @@ export const chunkDoc: DocPage = {
 
       description: {
         en: "Split an array into chunks of three elements.",
-        fa: "تقسیم یک آرایه به بخش‌های سه‌تایی.",
+        fa: "یک آرایه را به بخش‌های سه‌تایی تقسیم می‌کند.",
       },
 
       language: "ts",
@@ -75,7 +71,8 @@ const numbers = [1, 2, 3, 4, 5, 6, 7];
 
 const result = chunk(numbers, 3);
 
-console.log(result);`,
+console.log(result);
+// [[1, 2, 3], [4, 5, 6], [7]]`,
     },
 
     {
@@ -99,6 +96,27 @@ const result = chunk(numbers, 3);
 
 console.log(result);
 // [[1, 2, 3], [4, 5, 6], [7]]`,
+    },
+
+    {
+      title: {
+        en: "Invalid chunk size",
+        fa: "اندازه نامعتبر برای بخش",
+      },
+
+      description: {
+        en: "The function throws an error when the chunk size is 0 or negative.",
+        fa: "اگر اندازه بخش صفر یا منفی باشد، تابع خطا ایجاد می‌کند.",
+      },
+
+      language: "ts",
+
+      code: `import { chunk } from "@cyref/js";
+
+const numbers = [1, 2, 3, 4];
+
+const result = chunk(numbers, 0);
+// Error: Chunk size must be greater than 0`,
     },
   ],
 
