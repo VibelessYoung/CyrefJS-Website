@@ -60,7 +60,6 @@ const fa = {
     title: "کمتر بنویسید. بیشتر بسازید.",
     description:
       "CyrefJS مجموعه‌ای از ابزارهای کوچک و کاربردی ارائه می‌دهد تا کدهای تکراری را با راهکارهایی تمیز و خوانا جایگزین کنید.",
-
     before: "قبل",
     after: "با CyrefJS",
   },
@@ -76,35 +75,43 @@ const fa = {
         title: "Array",
         description: "ابزارهای کاربردی برای کار با آرایه‌ها و مجموعه داده‌ها.",
       },
+
       string: {
         title: "String",
         description: "ابزارهای ساده برای تبدیل، قالب‌بندی و کار با رشته‌ها.",
       },
+
       object: {
         title: "Object",
         description: "ابزارهای کاربردی برای خواندن، تبدیل و مدیریت آبجکت‌ها.",
       },
+
       number: {
         title: "Number",
         description: "ابزارهای کوچک برای محاسبات، محدوده‌ها و عملیات عددی.",
       },
+
       date: {
         title: "Date",
         description: "ابزارهای کاربردی برای کار با تاریخ و زمان.",
       },
+
       function: {
         title: "Function",
         description: "ابزارهایی برای کنترل اجرای توابع و بهبود عملکرد.",
       },
+
       type: {
         title: "Type",
         description:
           "ابزارهای ساده و قابل استفاده مجدد برای بررسی typeهای رایج JavaScript.",
       },
+
       url: {
         title: "URL",
         description: "ابزارهایی برای تجزیه، ساخت و کار با URLها.",
       },
+
       validation: {
         title: "Validation",
         description: "ابزارهای کاربردی برای اعتبارسنجی مقادیر و فرمت‌های رایج.",
@@ -139,7 +146,6 @@ const fa = {
     title: "JavaScript تمیزتری بسازید.",
     description:
       "با ابزارهای سبک و متمرکز CyrefJS، توسعه روزمره را ساده‌تر و لذت‌بخش‌تر کنید.",
-
     getStarted: "شروع کنید",
     github: "مشاهده در GitHub",
   },
@@ -147,21 +153,16 @@ const fa = {
   footer: {
     description:
       "یک کتابخانه مدرن و سبک برای JavaScript و TypeScript که برای ساده‌تر و تمیزتر کردن توسعه روزمره ساخته شده است.",
-
     github: "مشاهده در GitHub",
-
     navigation: "دسترسی سریع",
-
     package: "پکیج",
-
     version: "CyrefJS نسخه 1.38.0",
-
     copyright: "© ۲۰۲۶ CyrefJS. ساخته شده برای JavaScript مدرن.",
 
-     links: {
+    links: {
       install: "نصب",
       documentation: "مستندات",
-      components: "کامپوننت ها"
+      components: "کامپوننت ها",
     },
   },
 
@@ -170,9 +171,7 @@ const fa = {
     title: "CyrefJS را نصب کنید.",
     description:
       "CyrefJS را با package manager مورد علاقه خود به پروژه اضافه کنید و در چند ثانیه شروع به استفاده از ابزارهای سبک آن کنید.",
-
     terminal: "ترمینال",
-
     copy: "کپی",
     copied: "کپی شد",
 
@@ -190,33 +189,11 @@ const fa = {
     header: "مستندات",
     search: "جستجو در مستندات",
 
-    sidebar: {
-      gettingStarted: "شروع کار",
-      utilities: "ابزارها",
-      resources: "منابع",
-
-      introduction: "معرفی",
-      installation: "نصب",
-      quickStart: "شروع سریع",
-
-      array: "آرایه",
-      string: "رشته",
-      object: "آبجکت",
-      number: "عدد",
-      date: "تاریخ",
-      function: "تابع",
-      type: "نوع",
-
-      github: "گیت‌هاب",
-      contact: "تماس",
-    },
-
     dashboard: {
       eyebrow: "مستندات",
       title: "با CyrefJS جاوااسکریپت بهتری بسازید.",
       description:
         "همه چیزهایی که برای نصب، شناخت و استفاده از CyrefJS در پروژه‌های JavaScript و TypeScript نیاز دارید.",
-
       install: "نصب CyrefJS",
       quickStart: "شروع سریع",
       readMore: "مشاهده بیشتر",
@@ -254,6 +231,7 @@ const fa = {
         },
       },
     },
+
     searchHint: "صفحات، ابزارها و راهنماها را جستجو کنید...",
     noResults: "مستندی پیدا نشد.",
   },

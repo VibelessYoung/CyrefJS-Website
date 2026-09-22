@@ -61,7 +61,6 @@ const en = {
     title: "Write less. Build more.",
     description:
       "CyrefJS provides small, focused utilities that help you replace repetitive code with clean and readable solutions.",
-
     before: "Before",
     after: "With CyrefJS",
   },
@@ -78,39 +77,47 @@ const en = {
         description:
           "Practical utilities for working with arrays and collections.",
       },
+
       string: {
         title: "String",
         description:
           "Simple tools for transforming, formatting, and working with strings.",
       },
+
       object: {
         title: "Object",
         description:
           "Useful helpers for reading, transforming, and managing objects.",
       },
+
       number: {
         title: "Number",
         description:
           "Small utilities for calculations, ranges, and numeric operations.",
       },
+
       date: {
         title: "Date",
         description: "Convenient helpers for working with dates and time.",
       },
+
       function: {
         title: "Function",
         description:
           "Performance-focused utilities for controlling function execution.",
       },
+
       type: {
         title: "Type",
         description:
           "Clear and reusable helpers for common JavaScript type checks.",
       },
+
       url: {
         title: "URL",
         description: "Utilities for parsing, building, and working with URLs.",
       },
+
       validation: {
         title: "Validation",
         description:
@@ -146,7 +153,6 @@ const en = {
     title: "Build cleaner JavaScript.",
     description:
       "Start using focused, lightweight utilities designed to make everyday development simpler and more enjoyable.",
-
     getStarted: "Get Started",
     github: "View on GitHub",
   },
@@ -154,21 +160,16 @@ const en = {
   footer: {
     description:
       "A modern, lightweight utility library for JavaScript and TypeScript, built to make everyday development simpler and cleaner.",
-
     github: "View on GitHub",
-
     navigation: "Navigation",
-
     package: "Package",
-
     version: "CyrefJS v1.38.0",
-
     copyright: "© 2026 CyrefJS. Built for modern JavaScript.",
 
     links: {
       install: "Install",
       documentation: "Documentation",
-      components: "Components"
+      components: "Components",
     },
   },
 
@@ -177,9 +178,7 @@ const en = {
     title: "Install CyrefJS.",
     description:
       "Add CyrefJS to your project with your preferred package manager and start using lightweight utilities in seconds.",
-
     terminal: "Terminal",
-
     copy: "Copy",
     copied: "Copied",
 
@@ -196,33 +195,11 @@ const en = {
     header: "Documentation",
     search: "Search documentation",
 
-    sidebar: {
-      gettingStarted: "Getting Started",
-      utilities: "Utilities",
-      resources: "Resources",
-
-      introduction: "Introduction",
-      installation: "Installation",
-      quickStart: "Quick Start",
-
-      array: "Array",
-      string: "String",
-      object: "Object",
-      number: "Number",
-      date: "Date",
-      function: "Function",
-      type: "Type",
-
-      github: "GitHub",
-      contact: "Contact",
-    },
-
     dashboard: {
       eyebrow: "Documentation",
       title: "Build better JavaScript with CyrefJS.",
       description:
         "Everything you need to install, understand, and use CyrefJS in your JavaScript and TypeScript projects.",
-
       install: "Install CyrefJS",
       quickStart: "Quick Start",
       readMore: "Read more",
@@ -261,6 +238,7 @@ const en = {
         },
       },
     },
+
     searchHint: "Search pages, utilities, and guides...",
     noResults: "No documentation found.",
   },
