@@ -984,13 +984,11 @@ function SidebarContent({ locale, sections, onNavigate }: SidebarContentProps) {
                 }
                 className={[
                   "group flex w-full items-center gap-2 rounded-lg px-3 py-2",
-                  "text-left transition-colors",
+                  "text-start transition-colors",
                   isGettingStarted
                     ? "cursor-default"
                     : "cursor-pointer hover:bg-black/[0.035] dark:hover:bg-white/[0.035]",
                 ].join(" ")}
-                aria-expanded={isOpen}
-                aria-controls={`docs-category-${section.category}`}
               >
                 <Icon
                   className="
