@@ -77,6 +77,7 @@ import { truncateDoc } from "./utilities/string/truncate";
 import { tokenizeDoc } from "./utilities/string/tokenize";
 import { isArrayDoc } from "./utilities/type/isArray";
 import { isBooleanDoc } from "./utilities/type/isBoolean";
+import { isDateDoc } from "./utilities/type/isDate";
 
 export const docs: DocPage[] = [
   introductionDoc,
@@ -156,6 +157,7 @@ export const docs: DocPage[] = [
   truncateDoc,
   isArrayDoc,
   isBooleanDoc,
+  isDateDoc,
 ];
 
 export function getDocBySlug(slug: string): DocPage | undefined {
