@@ -63,6 +63,7 @@ import { pickDoc } from "./utilities/object/pick";
 import { setDoc } from "./utilities/object/set";
 import { camelCaseDoc } from "./utilities/string/camelCase";
 import { capitalizeDoc } from "./utilities/string/capitalize";
+import { capitalizeWordsDoc } from "./utilities/string/capitalizeWords";
 
 export const docs: DocPage[] = [
   introductionDoc,
@@ -128,6 +129,7 @@ export const docs: DocPage[] = [
   setDoc,
   camelCaseDoc,
   capitalizeDoc,
+  capitalizeWordsDoc,
 ];
 
 export function getDocBySlug(slug: string): DocPage | undefined {
