@@ -75,6 +75,8 @@ import { slugifyDoc } from "./utilities/string/slugify";
 import { snakeCaseDoc } from "./utilities/string/snakeCase";
 import { truncateDoc } from "./utilities/string/truncate";
 import { tokenizeDoc } from "./utilities/string/tokenize";
+import { isArrayDoc } from "./utilities/type/isArray";
+import { isBooleanDoc } from "./utilities/type/isBoolean";
 
 export const docs: DocPage[] = [
   introductionDoc,
@@ -152,6 +154,8 @@ export const docs: DocPage[] = [
   snakeCaseDoc,
   tokenizeDoc,
   truncateDoc,
+  isArrayDoc,
+  isBooleanDoc,
 ];
 
 export function getDocBySlug(slug: string): DocPage | undefined {
