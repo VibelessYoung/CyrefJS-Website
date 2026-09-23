@@ -45,119 +45,82 @@ export default function Hero() {
       "
     >
       {/* ==================================================
-    Background
+    Premium Blue → Purple Gradient Background
 ================================================== */}
       <div
         aria-hidden="true"
         className="
     pointer-events-none
-    absolute
+    fixed
     inset-0
     -z-10
     overflow-hidden
+    bg-[#1C146C]
   "
       >
-        {/* Main full-height gradient */}
+        {/* Main Gradient */}
         <div
           className="
       absolute
       inset-0
-      bg-[linear-gradient(180deg,
-        rgba(59,130,246,0.34)_0%,
-        rgba(79,70,229,0.31)_22%,
-        rgba(124,58,237,0.28)_45%,
-        rgba(139,92,246,0.21)_65%,
-        rgba(124,58,237,0.13)_82%,
-        rgba(255,255,255,0.025)_100%
-      )]
-
-      dark:bg-[linear-gradient(180deg,
-        rgba(29,78,216,0.48)_0%,
-        rgba(67,56,202,0.42)_22%,
-        rgba(109,40,217,0.38)_45%,
-        rgba(126,34,206,0.29)_65%,
-        rgba(107,33,168,0.18)_82%,
-        rgba(5,5,5,0.02)_100%
-      )]
+      bg-[linear-gradient(135deg,#1C146C_0%,#321477_42%,#6018A4_100%)]
     "
         />
 
-        {/* Blue glow — left */}
+        {/* Soft Blue Glow */}
         <div
           className="
       absolute
-      left-[-18%]
-      top-[0%]
-      h-[78%]
-      w-[72%]
+      left-[-15%]
+      top-[-20%]
+      h-[75%]
+      w-[65%]
       rounded-full
-      bg-blue-500/30
-      blur-[155px]
-      dark:bg-blue-600/38
+      bg-[#1C146C]/70
+      blur-[150px]
     "
         />
 
-        {/* Purple glow — right */}
+        {/* Soft Purple Glow */}
         <div
           className="
       absolute
-      right-[-18%]
-      top-[0%]
-      h-[78%]
-      w-[72%]
+      right-[-15%]
+      top-[-10%]
+      h-[75%]
+      w-[65%]
       rounded-full
-      bg-purple-500/30
-      blur-[155px]
-      dark:bg-purple-600/38
+      bg-[#6018A4]/70
+      blur-[150px]
     "
         />
 
-        {/* Center purple / indigo atmosphere */}
+        {/* Center Atmosphere */}
         <div
           className="
       absolute
       left-1/2
-      top-[5%]
-      h-[65%]
-      w-[78%]
-      -translate-x-1/2
-      rounded-full
-      bg-violet-500/19
-      blur-[135px]
-      dark:bg-violet-600/25
-    "
-        />
-
-        {/* Soft center light */}
-        <div
-          className="
-      absolute
-      left-1/2
-      top-[8%]
+      top-[15%]
       h-[55%]
-      w-[45%]
+      w-[55%]
       -translate-x-1/2
       rounded-full
-      bg-indigo-400/14
-      blur-[125px]
-      dark:bg-indigo-500/18
+      bg-[#48168F]/30
+      blur-[130px]
     "
         />
 
-        {/* Bottom fade — late and subtle */}
+        {/* Bottom Soft Fade */}
         <div
           className="
       absolute
       inset-x-0
       bottom-0
-      h-[20%]
+      h-[30%]
       bg-gradient-to-t
-      from-white/95
-      via-white/40
+      from-black/20
+      via-black/5
       to-transparent
-      dark:from-[#050505]/95
-      dark:via-[#050505]/40
-      dark:to-transparent
     "
         />
       </div>
