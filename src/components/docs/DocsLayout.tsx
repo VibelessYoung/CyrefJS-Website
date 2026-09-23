@@ -8,6 +8,7 @@ import {
   BookOpen,
   Box,
   CalendarDays,
+  ChevronDown,
   Hash,
   Layers3,
   Menu,
@@ -861,13 +862,53 @@ interface SidebarContentProps {
   onNavigate?: () => void;
 }
 
+interface SidebarContentProps {
+  locale: Locale;
+  sections: ReturnType<typeof getCategorySections>;
+  onNavigate?: () => void;
+}
+
 function SidebarContent({ locale, sections, onNavigate }: SidebarContentProps) {
   const pathname = usePathname();
   const isFa = locale === "fa";
 
+  const activeCategory = sections.find((section) =>
+    section.items.some((item) => pathname === `/${locale}/docs/${item.slug}`),
+  )?.category;
+
+  const [openCategories, setOpenCategories] = useState<Set<DocCategory>>(
+    () => new Set(activeCategory ? [activeCategory] : []),
+  );
+
+  useEffect(() => {
+    if (activeCategory) {
+      setOpenCategories((current) => {
+        const next = new Set(current);
+        next.add(activeCategory);
+        return next;
+      });
+    }
+  }, [activeCategory]);
+
+  function toggleCategory(category: DocCategory) {
+    setOpenCategories((current) => {
+      const next = new Set(current);
+
+      if (next.has(category)) {
+        next.delete(category);
+      } else {
+        next.add(category);
+      }
+
+      return next;
+    });
+  }
+
   return (
     <nav aria-label={isFa ? "مستندات" : "Documentation"}>
-      {/* Overview */}
+      {/* ==================================================
+          Overview
+      ================================================== */}
       <div className="mb-8">
         <p
           className="
@@ -918,69 +959,126 @@ function SidebarContent({ locale, sections, onNavigate }: SidebarContentProps) {
         </div>
       </div>
 
-      {/* Registry categories */}
-      {sections.map((section) => {
-        const Icon = getCategoryIcon(section.category);
+      {/* ==================================================
+          Categories
+      ================================================== */}
+      <div className="space-y-2">
+        {sections.map((section) => {
+          const Icon = getCategoryIcon(section.category);
 
-        return (
-          <div
-            key={section.category}
-            className={[
-              "space-y-2",
-              section.category !== "getting-started" ? "mt-8" : "",
-            ].join(" ")}
-          >
+          const isGettingStarted = section.category === "getting-started";
+
+          const isOpen =
+            isGettingStarted || openCategories.has(section.category);
+
+          return (
             <div
-              className="
-                flex items-center gap-2
-                px-3
-                text-xs font-semibold
-                uppercase tracking-wider
-                text-zinc-400
-                dark:text-zinc-500
-              "
+              key={section.category}
+              className={section.category !== "getting-started" ? "pt-3" : ""}
             >
-              <Icon className="size-3.5" />
-              <span>{section.title}</span>
-            </div>
+              {/* Category Header */}
+              <button
+                type="button"
+                onClick={() =>
+                  !isGettingStarted && toggleCategory(section.category)
+                }
+                className={[
+                  "group flex w-full items-center gap-2 rounded-lg px-3 py-2",
+                  "text-left transition-colors",
+                  isGettingStarted
+                    ? "cursor-default"
+                    : "cursor-pointer hover:bg-black/[0.035] dark:hover:bg-white/[0.035]",
+                ].join(" ")}
+                aria-expanded={isOpen}
+                aria-controls={`docs-category-${section.category}`}
+              >
+                <Icon
+                  className="
+                    size-3.5
+                    shrink-0
+                    text-zinc-400
+                    dark:text-zinc-500
+                  "
+                />
 
-            <div className="space-y-1">
-              {section.items.map((item) => {
-                const href = `/${locale}/docs/${item.slug}`;
-                const isActive = pathname === href;
+                <span
+                  className="
+                    flex-1
+                    text-xs
+                    font-semibold
+                    uppercase
+                    tracking-wider
+                    text-zinc-400
+                    dark:text-zinc-500
+                  "
+                >
+                  {section.title}
+                </span>
 
-                return (
-                  <Link
-                    key={item.slug}
-                    href={href}
-                    onClick={onNavigate}
+                {!isGettingStarted && (
+                  <ChevronDown
+                    size={14}
+                    strokeWidth={1.8}
                     className={[
-                      "group relative flex items-center rounded-lg px-3 py-2 text-sm transition-colors",
-                      isActive
-                        ? "bg-zinc-100 font-medium text-zinc-950 dark:bg-white/[0.06] dark:text-white"
-                        : "text-zinc-500 hover:bg-zinc-100 hover:text-zinc-950 dark:text-zinc-400 dark:hover:bg-white/[0.04] dark:hover:text-white",
+                      "shrink-0 text-zinc-400 transition-transform duration-200",
+                      "dark:text-zinc-500",
+                      isOpen ? "rotate-180" : "",
                     ].join(" ")}
-                    aria-current={isActive ? "page" : undefined}
-                  >
-                    {isActive && (
-                      <span
-                        className={[
-                          "absolute inset-y-1.5 w-0.5 rounded-full bg-zinc-950 dark:bg-white",
-                          isFa ? "right-0" : "left-0",
-                        ].join(" ")}
-                      />
-                    )}
+                  />
+                )}
+              </button>
 
-                    <span className="truncate">{item.title[locale]}</span>
-                  </Link>
-                );
-              })}
+              {/* Category Items */}
+              <div
+                id={`docs-category-${section.category}`}
+                className={[
+                  "grid transition-[grid-template-rows] duration-200 ease-out",
+                  isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]",
+                ].join(" ")}
+              >
+                <div className="min-h-0 overflow-hidden">
+                  <div className="mt-1 space-y-1">
+                    {section.items.map((item) => {
+                      const href = `/${locale}/docs/${item.slug}`;
+                      const isActive = pathname === href;
+
+                      return (
+                        <Link
+                          key={item.slug}
+                          href={href}
+                          onClick={onNavigate}
+                          className={[
+                            "group relative flex items-center rounded-lg px-3 py-2 text-sm transition-colors",
+                            isActive
+                              ? "bg-zinc-100 font-medium text-zinc-950 dark:bg-white/[0.06] dark:text-white"
+                              : "text-zinc-500 hover:bg-zinc-100 hover:text-zinc-950 dark:text-zinc-400 dark:hover:bg-white/[0.04] dark:hover:text-white",
+                          ].join(" ")}
+                          aria-current={isActive ? "page" : undefined}
+                        >
+                          {isActive && (
+                            <span
+                              className={[
+                                "absolute inset-y-1.5 w-0.5 rounded-full bg-zinc-950 dark:bg-white",
+                                isFa ? "right-0" : "left-0",
+                              ].join(" ")}
+                            />
+                          )}
+
+                          <span className="truncate">{item.title[locale]}</span>
+                        </Link>
+                      );
+                    })}
+                  </div>
+                </div>
+              </div>
             </div>
-          </div>
-        );
-      })}
+          );
+        })}
+      </div>
 
-      {/* External / contact links */}
+      {/* ==================================================
+          External / Contact
+      ================================================== */}
       <div className="mt-10">
         <a
           href={GITHUB_URL}
@@ -1027,7 +1125,9 @@ function SidebarContent({ locale, sections, onNavigate }: SidebarContentProps) {
         </Link>
       </div>
 
-      {/* Version */}
+      {/* ==================================================
+          Version
+      ================================================== */}
       <div
         className="
           mt-8
