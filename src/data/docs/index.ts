@@ -67,6 +67,7 @@ import { capitalizeWordsDoc } from "./utilities/string/capitalizeWords";
 import { constantCaseDoc } from "./utilities/string/constantCase";
 import { kebabCaseDoc } from "./utilities/string/kebabCase";
 import { normalizeWhitespaceDoc } from "./utilities/string/normalizeWhitespace";
+import { padDoc } from "./utilities/string/pad";
 
 export const docs: DocPage[] = [
   introductionDoc,
@@ -136,6 +137,7 @@ export const docs: DocPage[] = [
   constantCaseDoc,
   kebabCaseDoc,
   normalizeWhitespaceDoc,
+  padDoc,
 ];
 
 export function getDocBySlug(slug: string): DocPage | undefined {
