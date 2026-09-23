@@ -80,6 +80,7 @@ import { isBooleanDoc } from "./utilities/type/isBoolean";
 import { isDateDoc } from "./utilities/type/isDate";
 import { isFunctionDoc } from "./utilities/type/isFunction";
 import { isNilDoc } from "./utilities/type/isNil";
+import { isNullDoc } from "./utilities/type/isNull";
 
 export const docs: DocPage[] = [
   introductionDoc,
@@ -162,6 +163,7 @@ export const docs: DocPage[] = [
   isDateDoc,
   isFunctionDoc,
   isNilDoc,
+  isNullDoc,
 ];
 
 export function getDocBySlug(slug: string): DocPage | undefined {
