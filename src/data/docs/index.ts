@@ -32,6 +32,7 @@ import { isBeforeDoc } from "./utilities/date/isBefore";
 import { isValidDateDoc } from "./utilities/date/isValidDate";
 import { startOfDayDoc } from "./utilities/date/startOfDay";
 import { composeDoc } from "./utilities/function/compose";
+import { curryDoc } from "./utilities/function/curry";
 
 export const docs: DocPage[] = [
   introductionDoc,
@@ -66,6 +67,7 @@ export const docs: DocPage[] = [
   isValidDateDoc,
   startOfDayDoc,
   composeDoc,
+  curryDoc,
 ];
 
 export function getDocBySlug(slug: string): DocPage | undefined {
