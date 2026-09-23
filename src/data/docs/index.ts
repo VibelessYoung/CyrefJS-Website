@@ -49,6 +49,7 @@ import { percentageDoc } from "./utilities/number/percentage";
 import { randomIntDoc } from "./utilities/number/randomInt";
 import { roundToDoc } from "./utilities/number/roundTo";
 import { deepCloneDoc } from "./utilities/object/deepClone";
+import { defaultsDoc } from "./utilities/object/defaults";
 
 export const docs: DocPage[] = [
   introductionDoc,
@@ -100,6 +101,7 @@ export const docs: DocPage[] = [
   randomIntDoc,
   roundToDoc,
   deepCloneDoc,
+  defaultsDoc,
 ];
 
 export function getDocBySlug(slug: string): DocPage | undefined {
