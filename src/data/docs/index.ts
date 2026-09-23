@@ -52,6 +52,7 @@ import { deepCloneDoc } from "./utilities/object/deepClone";
 import { defaultsDoc } from "./utilities/object/defaults";
 import { filterObjectDoc } from "./utilities/object/filterObject";
 import { getDoc } from "./utilities/object/get";
+import { hasDoc } from "./utilities/object/has";
 
 export const docs: DocPage[] = [
   introductionDoc,
@@ -106,6 +107,7 @@ export const docs: DocPage[] = [
   defaultsDoc,
   filterObjectDoc,
   getDoc,
+  hasDoc,
 ];
 
 export function getDocBySlug(slug: string): DocPage | undefined {
