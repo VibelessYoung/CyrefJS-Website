@@ -39,6 +39,7 @@ import { memoizeDoc } from "./utilities/function/memoize";
 import { negateDoc } from "./utilities/function/negate";
 import { noopDoc } from "./utilities/function/noop";
 import { onceDoc } from "./utilities/function/once";
+import { pipeDoc } from "./utilities/function/pipe";
 
 export const docs: DocPage[] = [
   introductionDoc,
@@ -80,6 +81,7 @@ export const docs: DocPage[] = [
   negateDoc,
   noopDoc,
   onceDoc,
+  pipeDoc,
 ];
 
 export function getDocBySlug(slug: string): DocPage | undefined {
