@@ -96,6 +96,7 @@ import { isEmailDoc } from "./utilities/validation/isEmail";
 import { isIntegerDoc } from "./utilities/validation/isInteger";
 import { isPositiveDoc } from "./utilities/validation/isPositive";
 import { isStrongPasswordDoc } from "./utilities/validation/isStrongPassword";
+import { isURLDoc } from "./utilities/validation/isURL";
 
 export const docs: DocPage[] = [
   introductionDoc,
@@ -194,6 +195,7 @@ export const docs: DocPage[] = [
   isIntegerDoc,
   isPositiveDoc,
   isStrongPasswordDoc,
+  isURLDoc,
 ];
 
 export function getDocBySlug(slug: string): DocPage | undefined {
