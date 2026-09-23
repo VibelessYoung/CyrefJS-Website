@@ -86,6 +86,7 @@ import { isObjectDoc } from "./utilities/type/isObject";
 import { isPlainObjectDoc } from "./utilities/type/isPlainObject";
 import { isRegExpDoc } from "./utilities/type/isRegExp";
 import { isStringDoc } from "./utilities/type/isString";
+import { isUndefinedDoc } from "./utilities/type/isUndefined";
 
 export const docs: DocPage[] = [
   introductionDoc,
@@ -174,6 +175,7 @@ export const docs: DocPage[] = [
   isPlainObjectDoc,
   isRegExpDoc,
   isStringDoc,
+  isUndefinedDoc,
 ];
 
 export function getDocBySlug(slug: string): DocPage | undefined {
