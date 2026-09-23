@@ -2,190 +2,135 @@ import type { DocPage } from "../../types";
 
 export const snakeCaseDoc: DocPage = {
   slug: "utilities/string/snake-case",
-
   category: "string",
-
   title: {
     en: "snakeCase",
     fa: "snakeCase",
   },
-
   description: {
-    en: "Converts a string into snake_case by tokenizing its words, converting them to lowercase, and joining them with underscores.",
-    fa: "یک رشته را با تقسیم آن به کلمات، تبدیل کلمات به حروف کوچک و اتصال آن‌ها با آندرلاین به فرمت snake_case تبدیل می‌کند.",
+    en: "Converts a string into snake_case by tokenizing it, lowercasing each word, and joining the words with underscores.",
+    fa: "یک رشته را با تبدیل کلمات آن به حروف کوچک و اتصال آن‌ها با آندرلاین به قالب snake_case تبدیل می‌کند.",
   },
-
   icon: "CaseSensitive",
-
   parameters: [
     {
       name: "value",
       type: "string",
       required: true,
       description: {
-        en: "The string to convert into snake_case.",
-        fa: "رشته‌ای که باید به فرمت snake_case تبدیل شود.",
+        en: "The string to convert to snake_case.",
+        fa: "رشته‌ای که باید به قالب snake_case تبدیل شود.",
       },
     },
   ],
-
   returns: {
     type: "string",
     description: {
-      en: "A snake_case string containing lowercase tokens joined with underscores.",
-      fa: "یک رشته با فرمت snake_case که از توکن‌های حروف کوچک تشکیل شده و با آندرلاین به یکدیگر متصل شده‌اند.",
+      en: "A snake_case string created by lowercasing the tokenized words and joining them with underscores.",
+      fa: "یک رشته با فرمت snake_case که از تبدیل کلمات tokenize‌شده به حروف کوچک و اتصال آن‌ها با آندرلاین ساخته می‌شود.",
     },
   },
-
   examples: [
     {
       title: {
         en: "Basic usage",
         fa: "استفاده پایه",
       },
-
       description: {
         en: "Convert a phrase into snake_case.",
-        fa: "تبدیل یک عبارت به فرمت snake_case.",
+        fa: "تبدیل یک عبارت به snake_case.",
       },
-
       language: "ts",
-
       code: `snakeCase("Hello World");
-
 // "hello_world"`,
     },
-
-    {
-      title: {
-        en: "Lowercase conversion",
-        fa: "تبدیل به حروف کوچک",
-      },
-
-      description: {
-        en: "All tokens are converted to lowercase before being joined.",
-        fa: "تمام توکن‌ها قبل از اتصال به حروف کوچک تبدیل می‌شوند.",
-      },
-
-      language: "ts",
-
-      code: `snakeCase("Hello WORLD");
-
-// "hello_world"`,
-    },
-
     {
       title: {
         en: "Multiple words",
         fa: "چند کلمه",
       },
-
       description: {
-        en: "Multiple tokens are joined together using underscores.",
-        fa: "چندین توکن با استفاده از آندرلاین به یکدیگر متصل می‌شوند.",
+        en: "Each token is lowercased and joined with an underscore.",
+        fa: "هر token به حروف کوچک تبدیل شده و با آندرلاین به token بعدی متصل می‌شود.",
       },
-
       language: "ts",
-
-      code: `snakeCase("User Profile Card");
-
-// "user_profile_card"`,
+      code: `snakeCase("User Profile Settings");
+// "user_profile_settings"`,
     },
-
     {
       title: {
-        en: "CamelCase input",
-        fa: "ورودی CamelCase",
+        en: "Mixed casing",
+        fa: "ترکیب حروف بزرگ و کوچک",
       },
-
       description: {
-        en: "Tokenized input can be converted into snake_case when the tokenizer separates the individual words.",
-        fa: "اگر tokenizer کلمات تشکیل‌دهنده را از یکدیگر جدا کند، ورودی CamelCase نیز می‌تواند به snake_case تبدیل شود.",
+        en: "All tokenized words are converted to lowercase.",
+        fa: "تمام کلمات tokenize‌شده به حروف کوچک تبدیل می‌شوند.",
       },
-
       language: "ts",
-
-      code: `snakeCase("userProfile");
-
-// "user_profile"`,
+      code: `snakeCase("HelloWorld");
+// "hello_world"`,
     },
-
     {
       title: {
-        en: "Single word",
-        fa: "یک کلمه",
+        en: "Empty input",
+        fa: "ورودی خالی",
       },
-
       description: {
-        en: "A single token is simply converted to lowercase without adding an underscore.",
-        fa: "یک توکن تنها فقط به حروف کوچک تبدیل می‌شود و آندرلاین اضافی به آن اضافه نمی‌شود.",
+        en: "An input that produces no tokens returns an empty string.",
+        fa: "اگر ورودی هیچ tokenای تولید نکند، یک رشته خالی برگردانده می‌شود.",
       },
-
       language: "ts",
-
-      code: `snakeCase("HELLO");
-
-// "hello"`,
+      code: `snakeCase("");
+// ""`,
+    },
+    {
+      title: {
+        en: "Underscore-separated output",
+        fa: "خروجی با آندرلاین",
+      },
+      description: {
+        en: "The resulting tokens are always joined using an underscore.",
+        fa: "tokenهای نهایی همیشه با آندرلاین به یکدیگر متصل می‌شوند.",
+      },
+      language: "ts",
+      code: `snakeCase("first second third");
+// "first_second_third"`,
     },
   ],
-
   sections: [
     {
       id: "tokenization",
-
       title: {
         en: "Tokenization",
-        fa: "توکن‌سازی",
+        fa: "Tokenization",
       },
-
       content: {
-        en: "The input is first passed to the internal tokenize function. This step is responsible for splitting the input into individual word tokens.",
-        fa: "ابتدا ورودی به تابع داخلی tokenize ارسال می‌شود. این مرحله مسئول تقسیم ورودی به توکن‌های جداگانه کلمات است.",
+        en: "The input is first passed to the internal tokenize function. The exact token boundaries therefore depend on the behavior of tokenize.",
+        fa: "ابتدا ورودی به تابع داخلی tokenize داده می‌شود. بنابراین مرز دقیق tokenها به رفتار تابع tokenize بستگی دارد.",
       },
     },
-
     {
       id: "lowercase",
-
       title: {
         en: "Lowercase conversion",
         fa: "تبدیل به حروف کوچک",
       },
-
       content: {
-        en: "Each token is converted to lowercase using JavaScript's toLowerCase method.",
-        fa: "هر توکن با استفاده از متد toLowerCase جاوااسکریپت به حروف کوچک تبدیل می‌شود.",
+        en: "Each token returned by tokenize is converted to lowercase using toLowerCase().",
+        fa: "هر token که توسط tokenize برگردانده می‌شود، با استفاده از toLowerCase() به حروف کوچک تبدیل می‌شود.",
       },
     },
-
     {
       id: "joining",
-
       title: {
         en: "Joining tokens",
-        fa: "اتصال توکن‌ها",
+        fa: "اتصال tokenها",
       },
-
       content: {
-        en: "The lowercase tokens are joined into a single string using an underscore as the separator.",
-        fa: "توکن‌های حروف کوچک با استفاده از آندرلاین به عنوان جداکننده، به یک رشته واحد متصل می‌شوند.",
-      },
-    },
-
-    {
-      id: "pipeline",
-
-      title: {
-        en: "Transformation pipeline",
-        fa: "فرآیند تبدیل",
-      },
-
-      content: {
-        en: "The function follows a simple transformation pipeline: tokenize the input, convert each token to lowercase, and join the tokens with underscores.",
-        fa: "این تابع یک فرآیند تبدیل ساده را دنبال می‌کند: ابتدا ورودی را tokenize می‌کند، سپس هر توکن را به حروف کوچک تبدیل می‌کند و در نهایت توکن‌ها را با آندرلاین به هم متصل می‌کند.",
+        en: "The lowercase tokens are joined together using an underscore (_) as the separator.",
+        fa: "tokenهای تبدیل‌شده به حروف کوچک با استفاده از آندرلاین (_) به یکدیگر متصل می‌شوند.",
       },
     },
   ],
-
   since: "1.38.0",
 };

@@ -2,19 +2,16 @@ import type { DocPage } from "../../types";
 
 export const truncateDoc: DocPage = {
   slug: "utilities/string/truncate",
-
   category: "string",
-
   title: {
     en: "truncate",
     fa: "truncate",
   },
-
   description: {
-    en: "Truncates a string to a maximum character length and appends an omission string when the input exceeds that length.",
-    fa: "یک رشته را تا حداکثر طول مشخص کوتاه می‌کند و در صورتی که رشته از آن طول بیشتر باشد، یک رشته حذف‌کننده به انتهای آن اضافه می‌کند.",
+    en: "Shortens a string to a maximum length and appends an omission string when truncation is required.",
+    fa: "یک رشته را به حداکثر طول مشخص کوتاه می‌کند و در صورت نیاز یک رشته حذف‌کننده به انتهای آن اضافه می‌کند.",
   },
-
+  icon: "Text",
   parameters: [
     {
       name: "value",
@@ -25,229 +22,177 @@ export const truncateDoc: DocPage = {
         fa: "رشته‌ای که باید کوتاه شود.",
       },
     },
-
     {
       name: "length",
       type: "number",
       required: true,
       description: {
-        en: "The maximum number of characters allowed in the resulting string. Must be a non-negative integer.",
-        fa: "حداکثر تعداد کاراکترهای مجاز در رشته نهایی. باید یک عدد صحیح نامنفی باشد.",
+        en: "The maximum number of Unicode code points allowed in the result.",
+        fa: "حداکثر تعداد code pointهای Unicode مجاز در نتیجه.",
       },
     },
-
     {
       name: "omission",
       type: "string",
       required: false,
+      defaultValue: '"..."',
       description: {
-        en: "The string appended to the truncated result. Defaults to three dots.",
-        fa: "رشته‌ای که پس از کوتاه شدن به انتهای نتیجه اضافه می‌شود. مقدار پیش‌فرض آن سه نقطه است.",
+        en: "The string appended when the value needs to be truncated.",
+        fa: "رشته‌ای که هنگام کوتاه شدن مقدار به انتهای نتیجه اضافه می‌شود.",
       },
     },
   ],
-
   returns: {
     type: "string",
     description: {
-      en: "The original string when it fits within the specified length, otherwise a truncated string ending with the omission string or its allowed prefix.",
-      fa: "اگر رشته در طول مشخص‌شده قرار بگیرد، همان رشته اصلی برگردانده می‌شود؛ در غیر این صورت، رشته کوتاه‌شده‌ای که با رشته حذف‌کننده یا بخش مجاز آن پایان می‌یابد.",
+      en: "The original string when it fits within the requested length, or a truncated string with the omission appended.",
+      fa: "اگر رشته در طول تعیین‌شده جا شود، همان رشته اصلی را برمی‌گرداند؛ در غیر این صورت، رشته کوتاه‌شده به همراه omission برگردانده می‌شود.",
     },
   },
-
+  throws: [
+    {
+      en: "Throws a RangeError if length is not a non-negative integer.",
+      fa: "اگر length یک عدد صحیح نامنفی نباشد، یک RangeError ایجاد می‌کند.",
+    },
+  ],
   examples: [
     {
       title: {
         en: "Basic usage",
         fa: "استفاده پایه",
       },
-
       description: {
-        en: "A string longer than the requested length is shortened and the default omission string is appended.",
-        fa: "رشته‌ای که از طول تعیین‌شده بیشتر باشد کوتاه می‌شود و رشته حذف‌کننده پیش‌فرض به انتهای آن اضافه می‌شود.",
+        en: "Long text is shortened and the default omission is appended.",
+        fa: "متن طولانی کوتاه می‌شود و omission پیش‌فرض به انتهای آن اضافه می‌شود.",
       },
-
       language: "ts",
-
       code: `truncate("Hello World", 8);
-
 // "Hello..."`,
     },
-
     {
       title: {
         en: "Custom omission",
-        fa: "حذف‌کننده سفارشی",
+        fa: "omission سفارشی",
       },
-
       description: {
-        en: "A custom omission string can be provided instead of the default three dots.",
-        fa: "می‌توان به جای سه نقطه پیش‌فرض، یک رشته حذف‌کننده سفارشی مشخص کرد.",
+        en: "A custom omission string can be provided.",
+        fa: "می‌توان یک رشته سفارشی برای omission مشخص کرد.",
       },
-
       language: "ts",
-
-      code: `truncate("Hello World", 9, "…");
-
-// "Hello Wo…"`,
+      code: `truncate("Hello World", 8, "…");
+// "Hello W…"`,
     },
-
     {
       title: {
-        en: "String already within the limit",
-        fa: "رشته در محدوده مجاز",
+        en: "Value already fits",
+        fa: "رشته در طول تعیین‌شده جا می‌شود",
       },
-
       description: {
-        en: "When the string length does not exceed the requested length, the original string is returned unchanged.",
-        fa: "اگر طول رشته از طول تعیین‌شده بیشتر نباشد، همان رشته اصلی بدون تغییر برگردانده می‌شود.",
+        en: "If the string length is already within the requested limit, the original value is returned unchanged.",
+        fa: "اگر طول رشته از حد تعیین‌شده بیشتر نباشد، مقدار اصلی بدون تغییر برگردانده می‌شود.",
       },
-
       language: "ts",
-
       code: `truncate("Hello", 10);
-
 // "Hello"`,
     },
-
     {
       title: {
-        en: "Empty string",
-        fa: "رشته خالی",
+        en: "Length shorter than omission",
+        fa: "طول کمتر از omission",
       },
-
       description: {
-        en: "An empty input string always produces an empty result.",
-        fa: "ورودی خالی همیشه یک رشته خالی تولید می‌کند.",
+        en: "When the omission itself is at least as long as the requested length, only the beginning of the omission is returned.",
+        fa: "وقتی طول omission برابر یا بیشتر از طول تعیین‌شده باشد، فقط ابتدای omission تا طول موردنظر برگردانده می‌شود.",
       },
-
       language: "ts",
-
-      code: `truncate("", 5);
-
-// ""`,
-    },
-
-    {
-      title: {
-        en: "Omission longer than the limit",
-        fa: "حذف‌کننده بزرگ‌تر از طول مجاز",
-      },
-
-      description: {
-        en: "When the omission itself is at least as long as the requested length, only the allowed prefix of the omission is returned.",
-        fa: "اگر طول رشته حذف‌کننده حداقل به اندازه طول تعیین‌شده باشد، فقط بخش ابتدایی حذف‌کننده تا طول مجاز برگردانده می‌شود.",
-      },
-
-      language: "ts",
-
       code: `truncate("Hello World", 2, "...");
-
 // ".."`,
     },
-
+    {
+      title: {
+        en: "Zero length",
+        fa: "طول صفر",
+      },
+      description: {
+        en: "A zero length returns an empty string when truncation is required.",
+        fa: "اگر طول صفر باشد و رشته نیاز به کوتاه شدن داشته باشد، نتیجه یک رشته خالی خواهد بود.",
+      },
+      language: "ts",
+      code: `truncate("Hello", 0);
+// ""`,
+    },
     {
       title: {
         en: "Unicode characters",
-        fa: "کاراکترهای یونیکد",
+        fa: "کاراکترهای Unicode",
       },
-
       description: {
-        en: "The input and omission strings are converted with Array.from before slicing, allowing truncation to operate on Unicode code points rather than UTF-16 code units.",
-        fa: "رشته ورودی و رشته حذف‌کننده قبل از برش با Array.from به آرایه تبدیل می‌شوند؛ بنابراین عملیات کوتاه‌سازی بر اساس code pointهای یونیکد انجام می‌شود، نه code unitهای UTF-16.",
+        en: "Truncation counts Unicode code points using Array.from.",
+        fa: "کوتاه‌سازی با استفاده از Array.from، code pointهای Unicode را می‌شمارد.",
       },
-
       language: "ts",
-
-      code: `truncate("سلام دنیا", 6);
-
-// "سلام..."`,
+      code: `truncate("Hello 😀 World", 8);
+// "Hello 😀..."`,
+    },
+    {
+      title: {
+        en: "Empty value",
+        fa: "مقدار خالی",
+      },
+      description: {
+        en: "An empty input always returns an empty string.",
+        fa: "ورودی خالی همیشه یک رشته خالی برمی‌گرداند.",
+      },
+      language: "ts",
+      code: `truncate("", 5);
+// ""`,
     },
   ],
-
   sections: [
     {
       id: "validation",
-
       title: {
         en: "Length validation",
-        fa: "اعتبارسنجی طول",
+        fa: "اعتبارسنجی length",
       },
-
       content: {
-        en: "The length argument must be an integer greater than or equal to zero. Otherwise, the function throws a RangeError.",
-        fa: "پارامتر length باید یک عدد صحیح بزرگ‌تر یا مساوی صفر باشد. در غیر این صورت تابع یک RangeError ایجاد می‌کند.",
+        en: 'The length parameter must be a non-negative integer. Otherwise, truncate throws a RangeError with the message: "truncate: length must be a non-negative integer".',
+        fa: 'پارامتر length باید یک عدد صحیح نامنفی باشد. در غیر این صورت truncate یک RangeError با پیام "truncate: length must be a non-negative integer" ایجاد می‌کند.',
       },
     },
-
-    {
-      id: "empty-input",
-
-      title: {
-        en: "Empty input",
-        fa: "ورودی خالی",
-      },
-
-      content: {
-        en: "If the input string is empty, the function immediately returns an empty string.",
-        fa: "اگر رشته ورودی خالی باشد، تابع بلافاصله یک رشته خالی برمی‌گرداند.",
-      },
-    },
-
-    {
-      id: "length-check",
-
-      title: {
-        en: "Length check",
-        fa: "بررسی طول",
-      },
-
-      content: {
-        en: "The input is converted with Array.from and its character count is compared with the requested length. If it fits within the limit, the original value is returned unchanged.",
-        fa: "رشته ورودی با Array.from به آرایه تبدیل می‌شود و تعداد کاراکترهای آن با length مقایسه می‌شود. اگر رشته در محدوده مجاز باشد، مقدار اصلی بدون تغییر برگردانده می‌شود.",
-      },
-    },
-
-    {
-      id: "omission",
-
-      title: {
-        en: "Omission handling",
-        fa: "مدیریت رشته حذف‌کننده",
-      },
-
-      content: {
-        en: "The omission string defaults to three dots. If its length is greater than or equal to the requested length, only its first length characters are returned.",
-        fa: "رشته حذف‌کننده به‌صورت پیش‌فرض سه نقطه است. اگر طول آن بزرگ‌تر یا مساوی length باشد، فقط اولین length کاراکتر آن برگردانده می‌شود.",
-      },
-    },
-
-    {
-      id: "truncation",
-
-      title: {
-        en: "Truncation",
-        fa: "کوتاه‌سازی",
-      },
-
-      content: {
-        en: "When truncation is required and the omission fits within the requested length, the function reserves enough space for the omission, takes the remaining characters from the input, and appends the omission.",
-        fa: "وقتی کوتاه‌سازی لازم باشد و رشته حذف‌کننده در طول تعیین‌شده جا شود، تابع به اندازه لازم برای آن فضا رزرو می‌کند، بخش باقی‌مانده را از ابتدای ورودی برمی‌دارد و در پایان رشته حذف‌کننده را اضافه می‌کند.",
-      },
-    },
-
     {
       id: "unicode",
-
       title: {
-        en: "Unicode handling",
-        fa: "مدیریت یونیکد",
+        en: "Unicode-aware length",
+        fa: "محاسبه طول با پشتیبانی از Unicode",
       },
-
       content: {
-        en: "Both the input and omission strings are converted with Array.from before slicing. This means slicing operates on the elements produced by Array.from rather than directly on UTF-16 string indices.",
-        fa: "هم رشته ورودی و هم رشته حذف‌کننده قبل از slice با Array.from به آرایه تبدیل می‌شوند. بنابراین برش روی عناصری انجام می‌شود که Array.from تولید کرده است، نه مستقیماً روی اندیس‌های UTF-16 رشته.",
+        en: "The input and omission are converted with Array.from before their lengths are evaluated or characters are sliced. This means Unicode code points such as surrogate-pair emoji are treated as single characters.",
+        fa: "رشته ورودی و omission با Array.from به آرایه تبدیل می‌شوند و سپس طول یا بخش موردنیاز آن‌ها محاسبه می‌شود. بنابراین code pointهای Unicode مانند emojiهایی که از surrogate pair تشکیل شده‌اند به‌عنوان یک کاراکتر در نظر گرفته می‌شوند.",
+      },
+    },
+    {
+      id: "omission",
+      title: {
+        en: "Omission behavior",
+        fa: "رفتار omission",
+      },
+      content: {
+        en: 'The default omission is "...". If the omission length is greater than or equal to the requested length, only the first length code points of the omission are returned. Otherwise, the original string is shortened enough to leave room for the complete omission.',
+        fa: 'مقدار پیش‌فرض omission برابر با "..." است. اگر طول omission برابر یا بیشتر از length باشد، فقط length code point اول omission برگردانده می‌شود. در غیر این صورت، متن اصلی به اندازه‌ای کوتاه می‌شود که فضای کافی برای کل omission باقی بماند.',
+      },
+    },
+    {
+      id: "return-value",
+      title: {
+        en: "Return behavior",
+        fa: "رفتار مقدار بازگشتی",
+      },
+      content: {
+        en: "If the input already fits within the requested length, the original value is returned. If truncation is required, the returned string consists of the retained portion followed by the omission.",
+        fa: "اگر مقدار ورودی از length بیشتر نباشد، همان مقدار اصلی برگردانده می‌شود. در صورت نیاز به کوتاه‌سازی، بخش باقی‌مانده از متن به همراه omission برگردانده می‌شود.",
       },
     },
   ],
+  since: "1.38.0",
 };
