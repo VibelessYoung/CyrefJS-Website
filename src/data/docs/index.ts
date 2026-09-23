@@ -69,6 +69,7 @@ import { kebabCaseDoc } from "./utilities/string/kebabCase";
 import { normalizeWhitespaceDoc } from "./utilities/string/normalizeWhitespace";
 import { padDoc } from "./utilities/string/pad";
 import { pascalCaseDoc } from "./utilities/string/pascalCase";
+import { removeWhitespaceDoc } from "./utilities/string/removeWhitespace";
 
 export const docs: DocPage[] = [
   introductionDoc,
@@ -140,6 +141,7 @@ export const docs: DocPage[] = [
   normalizeWhitespaceDoc,
   padDoc,
   pascalCaseDoc,
+  removeWhitespaceDoc,
 ];
 
 export function getDocBySlug(slug: string): DocPage | undefined {
