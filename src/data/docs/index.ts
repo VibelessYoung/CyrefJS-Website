@@ -41,6 +41,7 @@ import { noopDoc } from "./utilities/function/noop";
 import { onceDoc } from "./utilities/function/once";
 import { pipeDoc } from "./utilities/function/pipe";
 import { throttleDoc } from "./utilities/function/throttle";
+import { ceilToDoc } from "./utilities/number/ceilTo";
 
 export const docs: DocPage[] = [
   introductionDoc,
@@ -84,6 +85,7 @@ export const docs: DocPage[] = [
   onceDoc,
   pipeDoc,
   throttleDoc,
+  ceilToDoc,
 ];
 
 export function getDocBySlug(slug: string): DocPage | undefined {
