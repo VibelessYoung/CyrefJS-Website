@@ -71,6 +71,7 @@ import { padDoc } from "./utilities/string/pad";
 import { pascalCaseDoc } from "./utilities/string/pascalCase";
 import { removeWhitespaceDoc } from "./utilities/string/removeWhitespace";
 import { reverseDoc } from "./utilities/string/reverse";
+import { slugifyDoc } from "./utilities/string/slugify";
 
 export const docs: DocPage[] = [
   introductionDoc,
@@ -144,6 +145,7 @@ export const docs: DocPage[] = [
   pascalCaseDoc,
   removeWhitespaceDoc,
   reverseDoc,
+  slugifyDoc,
 ];
 
 export function getDocBySlug(slug: string): DocPage | undefined {
