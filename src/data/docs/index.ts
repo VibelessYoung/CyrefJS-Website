@@ -23,6 +23,8 @@ import { takeRightDoc } from "./utilities/array/takeRight";
 import { unionDoc } from "./utilities/array/union";
 import { uniqueDoc } from "./utilities/array/unique";
 import { unzipDoc } from "./utilities/array/unzip";
+import { zipDoc } from "./utilities/array/zip";
+import { addDaysDoc } from "./utilities/date/addDays";
 
 export const docs: DocPage[] = [
   introductionDoc,
@@ -48,6 +50,8 @@ export const docs: DocPage[] = [
   unionDoc,
   uniqueDoc,
   unzipDoc,
+  zipDoc,
+  addDaysDoc,
 ];
 
 export function getDocBySlug(slug: string): DocPage | undefined {
