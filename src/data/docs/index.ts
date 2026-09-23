@@ -74,6 +74,7 @@ import { reverseDoc } from "./utilities/string/reverse";
 import { slugifyDoc } from "./utilities/string/slugify";
 import { snakeCaseDoc } from "./utilities/string/snakeCase";
 import { truncateDoc } from "./utilities/string/truncate";
+import { tokenizeDoc } from "./utilities/string/tokenize";
 
 export const docs: DocPage[] = [
   introductionDoc,
@@ -149,6 +150,7 @@ export const docs: DocPage[] = [
   reverseDoc,
   slugifyDoc,
   snakeCaseDoc,
+  tokenizeDoc,
   truncateDoc,
 ];
 
