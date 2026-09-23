@@ -91,6 +91,8 @@ import { buildQueryDoc } from "./utilities/url/buildQuery";
 import { getQueryParamDoc } from "./utilities/url/getQueryParam";
 import { parseQueryDoc } from "./utilities/url/parseQuery";
 import { removeQueryParamDoc } from "./utilities/url/removeQueryParam";
+import { setQueryParamDoc } from "./utilities/url/setQueryParam";
+import { isEmailDoc } from "./utilities/validation/isEmail";
 
 export const docs: DocPage[] = [
   introductionDoc,
@@ -184,6 +186,8 @@ export const docs: DocPage[] = [
   getQueryParamDoc,
   parseQueryDoc,
   removeQueryParamDoc,
+  setQueryParamDoc,
+  isEmailDoc,
 ];
 
 export function getDocBySlug(slug: string): DocPage | undefined {
