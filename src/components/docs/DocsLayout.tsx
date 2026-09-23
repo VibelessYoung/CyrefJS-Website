@@ -1077,55 +1077,6 @@ function SidebarContent({ locale, sections, onNavigate }: SidebarContentProps) {
       </div>
 
       {/* ==================================================
-          External / Contact
-      ================================================== */}
-      <div className="mt-10">
-        <a
-          href={GITHUB_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="
-            group
-            flex items-center gap-3
-            rounded-lg
-            px-3 py-2.5
-            text-sm
-            text-zinc-500
-            transition-colors
-            hover:bg-black/[0.04]
-            hover:text-zinc-900
-            dark:text-zinc-400
-            dark:hover:bg-white/[0.05]
-            dark:hover:text-white
-          "
-        >
-          <ArrowUpRight size={16} />
-          <span>GitHub</span>
-        </a>
-
-        <Link
-          href={`/${locale}#contact`}
-          onClick={onNavigate}
-          className="
-            mt-0.5
-            flex items-center gap-3
-            rounded-lg
-            px-3 py-2.5
-            text-sm
-            text-zinc-500
-            hover:bg-black/[0.04]
-            hover:text-zinc-900
-            dark:text-zinc-400
-            dark:hover:bg-white/[0.05]
-            dark:hover:text-white
-          "
-        >
-          <UserRound size={16} />
-          <span>{isFa ? "تماس" : "Contact"}</span>
-        </Link>
-      </div>
-
-      {/* ==================================================
           Version
       ================================================== */}
       <div
