@@ -44,6 +44,8 @@ import { throttleDoc } from "./utilities/function/throttle";
 import { ceilToDoc } from "./utilities/number/ceilTo";
 import { clampDoc } from "./utilities/number/clamp";
 import { floorToDoc } from "./utilities/number/floorTo";
+import { lerpDoc } from "./utilities/number/lerp";
+import { percentageDoc } from "./utilities/number/percentage";
 
 export const docs: DocPage[] = [
   introductionDoc,
@@ -90,6 +92,8 @@ export const docs: DocPage[] = [
   ceilToDoc,
   clampDoc,
   floorToDoc,
+  lerpDoc,
+  percentageDoc,
 ];
 
 export function getDocBySlug(slug: string): DocPage | undefined {
