@@ -70,6 +70,7 @@ import { normalizeWhitespaceDoc } from "./utilities/string/normalizeWhitespace";
 import { padDoc } from "./utilities/string/pad";
 import { pascalCaseDoc } from "./utilities/string/pascalCase";
 import { removeWhitespaceDoc } from "./utilities/string/removeWhitespace";
+import { reverseDoc } from "./utilities/string/reverse";
 
 export const docs: DocPage[] = [
   introductionDoc,
@@ -142,6 +143,7 @@ export const docs: DocPage[] = [
   padDoc,
   pascalCaseDoc,
   removeWhitespaceDoc,
+  reverseDoc,
 ];
 
 export function getDocBySlug(slug: string): DocPage | undefined {
