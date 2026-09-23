@@ -48,6 +48,7 @@ import { lerpDoc } from "./utilities/number/lerp";
 import { percentageDoc } from "./utilities/number/percentage";
 import { randomIntDoc } from "./utilities/number/randomInt";
 import { roundToDoc } from "./utilities/number/roundTo";
+import { deepCloneDoc } from "./utilities/object/deepClone";
 
 export const docs: DocPage[] = [
   introductionDoc,
@@ -98,6 +99,7 @@ export const docs: DocPage[] = [
   percentageDoc,
   randomIntDoc,
   roundToDoc,
+  deepCloneDoc,
 ];
 
 export function getDocBySlug(slug: string): DocPage | undefined {
