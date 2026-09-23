@@ -28,6 +28,7 @@ import { addDaysDoc } from "./utilities/date/addDays";
 import { differenceInDaysDoc } from "./utilities/date/differenceInDays";
 import { endOfDayDoc } from "./utilities/date/endOfDay";
 import { isAfterDoc } from "./utilities/date/isAfter";
+import { isBeforeDoc } from "./utilities/date/isBefore";
 
 export const docs: DocPage[] = [
   introductionDoc,
@@ -58,6 +59,7 @@ export const docs: DocPage[] = [
   differenceInDaysDoc,
   endOfDayDoc,
   isAfterDoc,
+  isBeforeDoc,
 ];
 
 export function getDocBySlug(slug: string): DocPage | undefined {
