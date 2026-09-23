@@ -50,6 +50,7 @@ import { randomIntDoc } from "./utilities/number/randomInt";
 import { roundToDoc } from "./utilities/number/roundTo";
 import { deepCloneDoc } from "./utilities/object/deepClone";
 import { defaultsDoc } from "./utilities/object/defaults";
+import { filterObjectDoc } from "./utilities/object/filterObject";
 
 export const docs: DocPage[] = [
   introductionDoc,
@@ -102,6 +103,7 @@ export const docs: DocPage[] = [
   roundToDoc,
   deepCloneDoc,
   defaultsDoc,
+  filterObjectDoc,
 ];
 
 export function getDocBySlug(slug: string): DocPage | undefined {
