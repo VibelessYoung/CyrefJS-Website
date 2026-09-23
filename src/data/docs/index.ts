@@ -40,6 +40,7 @@ import { negateDoc } from "./utilities/function/negate";
 import { noopDoc } from "./utilities/function/noop";
 import { onceDoc } from "./utilities/function/once";
 import { pipeDoc } from "./utilities/function/pipe";
+import { throttleDoc } from "./utilities/function/throttle";
 
 export const docs: DocPage[] = [
   introductionDoc,
@@ -82,6 +83,7 @@ export const docs: DocPage[] = [
   noopDoc,
   onceDoc,
   pipeDoc,
+  throttleDoc,
 ];
 
 export function getDocBySlug(slug: string): DocPage | undefined {
