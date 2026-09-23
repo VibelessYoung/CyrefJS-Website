@@ -45,9 +45,8 @@ export default function Hero() {
       "
     >
       {/* ==================================================
-    Hero Background
+    Background
 ================================================== */}
-
       <div
         aria-hidden="true"
         className="
@@ -56,37 +55,96 @@ export default function Hero() {
     inset-0
     -z-10
     overflow-hidden
-    bg-[#060913]
   "
       >
-        {/* Main Astro Background */}
+        {/* Main full-height gradient */}
         <div
           className="
       absolute
       inset-0
-      bg-[url('/HeroBackground.png')]
-      bg-center
-      bg-cover
-      bg-no-repeat
-    "
-        />
+      bg-[linear-gradient(180deg,
+        rgba(59,130,246,0.34)_0%,
+        rgba(79,70,229,0.31)_22%,
+        rgba(124,58,237,0.28)_45%,
+        rgba(139,92,246,0.21)_65%,
+        rgba(124,58,237,0.13)_82%,
+        rgba(255,255,255,0.025)_100%
+      )]
 
-        {/* Subtle edge vignette */}
-        <div
-          className="
-      absolute
-      inset-0
-      bg-[radial-gradient(
-        ellipse_at_center,
-        transparent_0%,
-        transparent_55%,
-        rgba(6,9,19,0.10)_75%,
-        rgba(6,9,19,0.35)_100%
+      dark:bg-[linear-gradient(180deg,
+        rgba(29,78,216,0.48)_0%,
+        rgba(67,56,202,0.42)_22%,
+        rgba(109,40,217,0.38)_45%,
+        rgba(126,34,206,0.29)_65%,
+        rgba(107,33,168,0.18)_82%,
+        rgba(5,5,5,0.02)_100%
       )]
     "
         />
 
-        {/* Bottom fade */}
+        {/* Blue glow — left */}
+        <div
+          className="
+      absolute
+      left-[-18%]
+      top-[0%]
+      h-[78%]
+      w-[72%]
+      rounded-full
+      bg-blue-500/30
+      blur-[155px]
+      dark:bg-blue-600/38
+    "
+        />
+
+        {/* Purple glow — right */}
+        <div
+          className="
+      absolute
+      right-[-18%]
+      top-[0%]
+      h-[78%]
+      w-[72%]
+      rounded-full
+      bg-purple-500/30
+      blur-[155px]
+      dark:bg-purple-600/38
+    "
+        />
+
+        {/* Center purple / indigo atmosphere */}
+        <div
+          className="
+      absolute
+      left-1/2
+      top-[5%]
+      h-[65%]
+      w-[78%]
+      -translate-x-1/2
+      rounded-full
+      bg-violet-500/19
+      blur-[135px]
+      dark:bg-violet-600/25
+    "
+        />
+
+        {/* Soft center light */}
+        <div
+          className="
+      absolute
+      left-1/2
+      top-[8%]
+      h-[55%]
+      w-[45%]
+      -translate-x-1/2
+      rounded-full
+      bg-indigo-400/14
+      blur-[125px]
+      dark:bg-indigo-500/18
+    "
+        />
+
+        {/* Bottom fade — late and subtle */}
         <div
           className="
       absolute
@@ -94,11 +152,11 @@ export default function Hero() {
       bottom-0
       h-[20%]
       bg-gradient-to-t
-      from-white
-      via-white/70
+      from-white/95
+      via-white/40
       to-transparent
-      dark:from-[#050505]
-      dark:via-[#050505]/70
+      dark:from-[#050505]/95
+      dark:via-[#050505]/40
       dark:to-transparent
     "
         />
