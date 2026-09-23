@@ -58,6 +58,7 @@ import { isEmptyObjectDoc } from "./utilities/object/isEmptyObject";
 import { mapKeysDoc } from "./utilities/object/mapKeys";
 import { mapValuesDoc } from "./utilities/object/mapValues";
 import { mergeDoc } from "./utilities/object/merge";
+import { omitDoc } from "./utilities/object/omit";
 
 export const docs: DocPage[] = [
   introductionDoc,
@@ -118,6 +119,7 @@ export const docs: DocPage[] = [
   mapKeysDoc,
   mapValuesDoc,
   mergeDoc,
+  omitDoc,
 ];
 
 export function getDocBySlug(slug: string): DocPage | undefined {
