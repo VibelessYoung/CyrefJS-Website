@@ -53,6 +53,7 @@ import { defaultsDoc } from "./utilities/object/defaults";
 import { filterObjectDoc } from "./utilities/object/filterObject";
 import { getDoc } from "./utilities/object/get";
 import { hasDoc } from "./utilities/object/has";
+import { invertDoc } from "./utilities/object/invert";
 
 export const docs: DocPage[] = [
   introductionDoc,
@@ -108,6 +109,7 @@ export const docs: DocPage[] = [
   filterObjectDoc,
   getDoc,
   hasDoc,
+  invertDoc,
 ];
 
 export function getDocBySlug(slug: string): DocPage | undefined {
