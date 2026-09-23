@@ -34,6 +34,8 @@ import { startOfDayDoc } from "./utilities/date/startOfDay";
 import { composeDoc } from "./utilities/function/compose";
 import { curryDoc } from "./utilities/function/curry";
 import { debounceDoc } from "./utilities/function/debounce";
+import { identityDoc } from "./utilities/function/identity";
+import { memoizeDoc } from "./utilities/function/memoize";
 
 export const docs: DocPage[] = [
   introductionDoc,
@@ -70,6 +72,8 @@ export const docs: DocPage[] = [
   composeDoc,
   curryDoc,
   debounceDoc,
+  identityDoc,
+  memoizeDoc,
 ];
 
 export function getDocBySlug(slug: string): DocPage | undefined {
