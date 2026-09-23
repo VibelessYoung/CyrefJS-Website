@@ -93,6 +93,7 @@ import { parseQueryDoc } from "./utilities/url/parseQuery";
 import { removeQueryParamDoc } from "./utilities/url/removeQueryParam";
 import { setQueryParamDoc } from "./utilities/url/setQueryParam";
 import { isEmailDoc } from "./utilities/validation/isEmail";
+import { isIntegerDoc } from "./utilities/validation/isInteger";
 
 export const docs: DocPage[] = [
   introductionDoc,
@@ -188,6 +189,7 @@ export const docs: DocPage[] = [
   removeQueryParamDoc,
   setQueryParamDoc,
   isEmailDoc,
+  isIntegerDoc,
 ];
 
 export function getDocBySlug(slug: string): DocPage | undefined {
