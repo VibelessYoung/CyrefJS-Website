@@ -25,6 +25,7 @@ import { uniqueDoc } from "./utilities/array/unique";
 import { unzipDoc } from "./utilities/array/unzip";
 import { zipDoc } from "./utilities/array/zip";
 import { addDaysDoc } from "./utilities/date/addDays";
+import { differenceInDaysDoc } from "./utilities/date/differenceInDays";
 
 export const docs: DocPage[] = [
   introductionDoc,
@@ -52,6 +53,7 @@ export const docs: DocPage[] = [
   unzipDoc,
   zipDoc,
   addDaysDoc,
+  differenceInDaysDoc,
 ];
 
 export function getDocBySlug(slug: string): DocPage | undefined {
