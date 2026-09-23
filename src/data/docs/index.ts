@@ -95,6 +95,7 @@ import { setQueryParamDoc } from "./utilities/url/setQueryParam";
 import { isEmailDoc } from "./utilities/validation/isEmail";
 import { isIntegerDoc } from "./utilities/validation/isInteger";
 import { isPositiveDoc } from "./utilities/validation/isPositive";
+import { isStrongPasswordDoc } from "./utilities/validation/isStrongPassword";
 
 export const docs: DocPage[] = [
   introductionDoc,
@@ -192,6 +193,7 @@ export const docs: DocPage[] = [
   isEmailDoc,
   isIntegerDoc,
   isPositiveDoc,
+  isStrongPasswordDoc,
 ];
 
 export function getDocBySlug(slug: string): DocPage | undefined {
