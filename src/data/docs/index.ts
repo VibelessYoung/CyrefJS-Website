@@ -82,6 +82,7 @@ import { isFunctionDoc } from "./utilities/type/isFunction";
 import { isNilDoc } from "./utilities/type/isNil";
 import { isNullDoc } from "./utilities/type/isNull";
 import { isNumberDoc } from "./utilities/type/isNumber";
+import { isObjectDoc } from "./utilities/type/isObject";
 
 export const docs: DocPage[] = [
   introductionDoc,
@@ -166,6 +167,7 @@ export const docs: DocPage[] = [
   isNilDoc,
   isNullDoc,
   isNumberDoc,
+  isObjectDoc,
 ];
 
 export function getDocBySlug(slug: string): DocPage | undefined {
