@@ -86,10 +86,12 @@ export default function DocsTableOfContents({
 
         <nav>
           <ul
-            className={[
-              "space-y-1 border-zinc-200 dark:border-white/10",
-              isFa ? "border-s" : "border-s",
-            ].join(" ")}
+            className="
+    space-y-1
+    border-s
+    border-zinc-200
+    dark:border-white/10
+  "
           >
             {sections.map((section) => {
               const isActive = activeSection === section.id;
@@ -102,7 +104,7 @@ export default function DocsTableOfContents({
                     aria-current={isActive ? "location" : undefined}
                     className={[
                       "block border-s py-1.5 text-sm transition-all duration-200",
-                      isFa ? "pe-4" : "ps-4",
+                      "ps-4",
                       isActive
                         ? "-ms-px border-zinc-950 font-medium text-zinc-950 dark:border-white dark:text-white"
                         : "-ms-px border-transparent text-zinc-500 hover:border-zinc-400 hover:text-zinc-950 dark:text-zinc-500 dark:hover:border-zinc-600 dark:hover:text-white",
