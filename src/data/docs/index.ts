@@ -61,6 +61,7 @@ import { mergeDoc } from "./utilities/object/merge";
 import { omitDoc } from "./utilities/object/omit";
 import { pickDoc } from "./utilities/object/pick";
 import { setDoc } from "./utilities/object/set";
+import { camelCaseDoc } from "./utilities/string/camelCase";
 
 export const docs: DocPage[] = [
   introductionDoc,
@@ -124,6 +125,7 @@ export const docs: DocPage[] = [
   omitDoc,
   pickDoc,
   setDoc,
+  camelCaseDoc,
 ];
 
 export function getDocBySlug(slug: string): DocPage | undefined {
