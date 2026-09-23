@@ -46,6 +46,7 @@ import { clampDoc } from "./utilities/number/clamp";
 import { floorToDoc } from "./utilities/number/floorTo";
 import { lerpDoc } from "./utilities/number/lerp";
 import { percentageDoc } from "./utilities/number/percentage";
+import { randomIntDoc } from "./utilities/number/randomInt";
 
 export const docs: DocPage[] = [
   introductionDoc,
@@ -94,6 +95,7 @@ export const docs: DocPage[] = [
   floorToDoc,
   lerpDoc,
   percentageDoc,
+  randomIntDoc,
 ];
 
 export function getDocBySlug(slug: string): DocPage | undefined {
