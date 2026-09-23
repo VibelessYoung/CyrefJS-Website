@@ -73,6 +73,7 @@ import { removeWhitespaceDoc } from "./utilities/string/removeWhitespace";
 import { reverseDoc } from "./utilities/string/reverse";
 import { slugifyDoc } from "./utilities/string/slugify";
 import { snakeCaseDoc } from "./utilities/string/snakeCase";
+import { truncateDoc } from "./utilities/string/truncate";
 
 export const docs: DocPage[] = [
   introductionDoc,
@@ -148,6 +149,7 @@ export const docs: DocPage[] = [
   reverseDoc,
   slugifyDoc,
   snakeCaseDoc,
+  truncateDoc,
 ];
 
 export function getDocBySlug(slug: string): DocPage | undefined {
