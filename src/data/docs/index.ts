@@ -36,6 +36,7 @@ import { curryDoc } from "./utilities/function/curry";
 import { debounceDoc } from "./utilities/function/debounce";
 import { identityDoc } from "./utilities/function/identity";
 import { memoizeDoc } from "./utilities/function/memoize";
+import { negateDoc } from "./utilities/function/negate";
 
 export const docs: DocPage[] = [
   introductionDoc,
@@ -74,6 +75,7 @@ export const docs: DocPage[] = [
   debounceDoc,
   identityDoc,
   memoizeDoc,
+  negateDoc,
 ];
 
 export function getDocBySlug(slug: string): DocPage | undefined {
