@@ -51,6 +51,7 @@ import { roundToDoc } from "./utilities/number/roundTo";
 import { deepCloneDoc } from "./utilities/object/deepClone";
 import { defaultsDoc } from "./utilities/object/defaults";
 import { filterObjectDoc } from "./utilities/object/filterObject";
+import { getDoc } from "./utilities/object/get";
 
 export const docs: DocPage[] = [
   introductionDoc,
@@ -104,6 +105,7 @@ export const docs: DocPage[] = [
   deepCloneDoc,
   defaultsDoc,
   filterObjectDoc,
+  getDoc,
 ];
 
 export function getDocBySlug(slug: string): DocPage | undefined {
