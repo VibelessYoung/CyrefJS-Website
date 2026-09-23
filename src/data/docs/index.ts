@@ -54,6 +54,7 @@ import { filterObjectDoc } from "./utilities/object/filterObject";
 import { getDoc } from "./utilities/object/get";
 import { hasDoc } from "./utilities/object/has";
 import { invertDoc } from "./utilities/object/invert";
+import { isEmptyObjectDoc } from "./utilities/object/isEmptyObject";
 
 export const docs: DocPage[] = [
   introductionDoc,
@@ -110,6 +111,7 @@ export const docs: DocPage[] = [
   getDoc,
   hasDoc,
   invertDoc,
+  isEmptyObjectDoc,
 ];
 
 export function getDocBySlug(slug: string): DocPage | undefined {
