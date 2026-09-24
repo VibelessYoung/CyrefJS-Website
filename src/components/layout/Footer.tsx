@@ -27,7 +27,7 @@ interface FooterProps {
   version: string;
 }
 
-export default function Footer({ locale, version }) {
+export default function Footer({ locale, version }: FooterProps) {
   const { theme } = useTheme();
   const t = getTranslations(locale);
 
