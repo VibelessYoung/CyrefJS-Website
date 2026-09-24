@@ -4,11 +4,12 @@ import CTA from "../home/CTA";
 import Hero from "../home/Hero";
 import QuickStart from "../home/QuickStart";
 import Utilities from "../home/Utilities";
+import cyrefPackage from "@cyref/js/package.json";
 
 function Main() {
   return (
     <>
-      <Hero />
+      <Hero version={cyrefPackage.version} />
       <About />
       <CodeComparison />
       <Utilities />

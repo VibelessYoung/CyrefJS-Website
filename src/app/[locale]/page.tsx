@@ -1,5 +1,6 @@
 import Footer from "@/components/layout/Footer";
 import Main from "@/components/main/Main";
+import cyrefPackage from "@cyref/js/package.json";
 
 import { isLocale } from "@/i18n/config";
 import type { Locale } from "@/types/i18n";
@@ -22,7 +23,7 @@ export default async function HomePage({ params }: HomePageProps) {
   return (
     <>
       <Main />
-      <Footer locale={locale} />
+      <Footer version={cyrefPackage.version} locale={locale} />
     </>
   );
 }

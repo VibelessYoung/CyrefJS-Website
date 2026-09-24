@@ -3,7 +3,6 @@
 import {
   Braces,
   CalendarDays,
-  CheckCircle2,
   Clock3,
   Code2,
   Hash,
@@ -65,7 +64,12 @@ const utilities = [
     key: "url",
     icon: Link2,
     gradient: "from-cyan-500 to-blue-500",
-    utilities: ["parseQuery()", "buildQuery()", "getQueryParam()", "setQueryParam()"],
+    utilities: [
+      "parseQuery()",
+      "buildQuery()",
+      "getQueryParam()",
+      "setQueryParam()",
+    ],
   },
   {
     key: "validation",
@@ -376,8 +380,6 @@ export default function Utilities() {
           <Clock3 size={14} />
 
           <span>{t.utilities.bottomNote}</span>
-
-          <CheckCircle2 size={14} />
         </div>
       </div>
     </section>

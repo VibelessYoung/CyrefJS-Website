@@ -3,14 +3,15 @@
 import { Check, Copy, ArrowDown } from "lucide-react";
 import { useParams } from "next/navigation";
 import { useState } from "react";
-
 import { translations } from "@/i18n";
 import type { Locale } from "@/types/i18n";
 
 const INSTALL_COMMAND = "npm install @cyref/js";
-const VERSION = "1.38.0";
+type HeroProps = {
+  version: string;
+};
 
-export default function Hero() {
+export default function Hero({ version }: HeroProps) {
   const params = useParams();
 
   const locale = params.locale as Locale;
@@ -239,7 +240,7 @@ export default function Hero() {
               dark:text-white/45
             "
           >
-            v{VERSION}
+            v{version}
           </span>
         </div>
 
@@ -293,14 +294,13 @@ export default function Hero() {
         ====================================================== */}
 
         <div
-        dir="ltr"
+          dir="ltr"
           className="
             group
             relative
             mt-7
           "
         >
-
           {/* Command container */}
 
           <div

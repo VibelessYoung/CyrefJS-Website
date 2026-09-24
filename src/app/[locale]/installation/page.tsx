@@ -12,7 +12,7 @@ import {
   Terminal,
 } from "lucide-react";
 import { useState } from "react";
-
+import cyrefPackage from "@cyref/js/package.json";
 type PackageManager = "npm" | "pnpm" | "yarn" | "bun";
 
 const commands: Record<PackageManager, string> = {
@@ -251,7 +251,10 @@ export default function InstallationPage() {
               </div>
 
               <div className="mt-6 overflow-hidden rounded-2xl border border-slate-200 bg-slate-950 dark:border-white/10">
-                <pre className="overflow-x-auto p-5 text-left text-sm leading-7 text-white/80">
+                <pre
+                  dir="ltr"
+                  className="overflow-x-auto p-5 text-left text-sm leading-7 text-white/80"
+                >
                   <code>{`import { isEmail } from "@cyref/js";`}</code>
                 </pre>
               </div>
@@ -276,7 +279,7 @@ export default function InstallationPage() {
               </div>
 
               <div className="mt-6 overflow-hidden rounded-2xl border border-slate-200 bg-slate-950 dark:border-white/10">
-                <pre className="overflow-x-auto p-5 text-left text-sm leading-7 text-white/80">
+                <pre dir="ltr" className="overflow-x-auto p-5 text-left text-sm leading-7 text-white/80">
                   <code>{`const valid = isEmail(
   "hello@example.com"
 );
@@ -298,7 +301,9 @@ console.log(valid);
               </p>
 
               <div className="mt-3 flex items-center gap-3">
-                <span className="font-mono text-lg font-semibold">1.38.0</span>
+                <span className="font-mono text-lg font-semibold">
+                  {cyrefPackage.version}
+                </span>
 
                 <span className="rounded-full border border-emerald-500/20 bg-emerald-500/5 px-2 py-1 text-[10px] font-medium text-emerald-600 dark:text-emerald-400">
                   stable

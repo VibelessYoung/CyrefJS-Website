@@ -3,13 +3,10 @@
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
-
 import { useTheme } from "@/components/providers/ThemeProvider";
 import type { Locale } from "@/types/i18n";
 import { getTranslations } from "@/lib/i18n";
-
 const GITHUB_URL = "https://github.com/VibelessYoung/CyrefJS";
-
 const navigation = [
   {
     key: "install",
@@ -27,9 +24,10 @@ const navigation = [
 
 interface FooterProps {
   locale: Locale;
+  version: string;
 }
 
-export default function Footer({ locale }: FooterProps) {
+export default function Footer({ locale, version }) {
   const { theme } = useTheme();
   const t = getTranslations(locale);
 
@@ -222,7 +220,7 @@ export default function Footer({ locale }: FooterProps) {
                   dark:text-zinc-500
                 "
               >
-                {t.footer.version}
+                v{version}
               </p>
             </div>
           </div>
