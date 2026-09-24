@@ -4,7 +4,6 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 
 import {
-  ArrowUpRight,
   BookOpen,
   Box,
   CalendarDays,
@@ -16,7 +15,6 @@ import {
   Rocket,
   Search,
   Type,
-  UserRound,
   Workflow,
   X,
 } from "lucide-react";
@@ -32,6 +30,7 @@ import type { Locale } from "@/types/i18n";
 interface DocsLayoutProps {
   children: React.ReactNode;
   locale: Locale;
+  version: string;
 }
 
 const GITHUB_URL = "https://github.com/VibelessYoung/CyrefJS";
@@ -139,7 +138,11 @@ function HighlightMatch({ text, query }: { text: string; query: string }) {
   );
 }
 
-export default function DocsLayout({ children, locale }: DocsLayoutProps) {
+export default function DocsLayout({
+  children,
+  locale,
+  version,
+}: DocsLayoutProps) {
   const t = getTranslations(locale);
   const router = useRouter();
   const searchInputRef = useRef<HTMLInputElement>(null);
@@ -520,6 +523,7 @@ export default function DocsLayout({ children, locale }: DocsLayoutProps) {
             <SidebarContent
               locale={locale}
               sections={sections}
+              version={version}
               onNavigate={() => setMobileOpen(false)}
             />
           </aside>
@@ -536,7 +540,11 @@ export default function DocsLayout({ children, locale }: DocsLayoutProps) {
               : "border-r border-black/[0.07] dark:border-white/[0.07]",
           ].join(" ")}
         >
-          <SidebarContent locale={locale} sections={sections} />
+          <SidebarContent
+            locale={locale}
+            sections={sections}
+            version={version}
+          />
         </aside>
 
         <main className="min-w-0 flex-1">{children}</main>
@@ -859,16 +867,16 @@ export default function DocsLayout({ children, locale }: DocsLayoutProps) {
 interface SidebarContentProps {
   locale: Locale;
   sections: ReturnType<typeof getCategorySections>;
+  version: string;
   onNavigate?: () => void;
 }
 
-interface SidebarContentProps {
-  locale: Locale;
-  sections: ReturnType<typeof getCategorySections>;
-  onNavigate?: () => void;
-}
-
-function SidebarContent({ locale, sections, onNavigate }: SidebarContentProps) {
+function SidebarContent({
+  locale,
+  sections,
+  version,
+  onNavigate,
+}: SidebarContentProps) {
   const pathname = usePathname();
   const isFa = locale === "fa";
 
@@ -1095,7 +1103,7 @@ function SidebarContent({ locale, sections, onNavigate }: SidebarContentProps) {
             dark:text-zinc-500
           "
         >
-          CyrefJS v1.38.0
+          CyrefJS v{version}
         </span>
       </div>
     </nav>

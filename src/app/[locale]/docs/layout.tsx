@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-
+import cyrefPackage from "@cyref/js/package.json";
 import DocsLayout from "@/components/docs/DocsLayout";
 import { isLocale } from "@/i18n/config";
 
@@ -20,5 +20,9 @@ export default async function DocsRootLayout({
     notFound();
   }
 
-  return <DocsLayout locale={locale}>{children}</DocsLayout>;
+  return (
+    <DocsLayout version={cyrefPackage.version} locale={locale}>
+      {children}
+    </DocsLayout>
+  );
 }

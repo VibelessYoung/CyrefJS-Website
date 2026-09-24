@@ -1,5 +1,4 @@
 import { notFound } from "next/navigation";
-
 import DocsPage from "@/components/docs/DocsPage";
 import { docs, getDocBySlug } from "@/data/docs/index";
 import { isLocale } from "@/i18n/config";
