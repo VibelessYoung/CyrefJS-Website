@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-
 import "../globals.css";
-
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
 import { isLocale, locales } from "@/i18n/config";
 import { localeDirections } from "@/types/i18n";
