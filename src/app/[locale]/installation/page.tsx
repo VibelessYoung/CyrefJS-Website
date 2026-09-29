@@ -154,7 +154,7 @@ export default function InstallationPage() {
                       setActiveManager(manager);
                       setCopied(false);
                     }}
-                    className={`relative h-12 text-xs font-medium transition-colors ${
+                    className={`relative h-12 text-xs font-medium transition-colors cursor-pointer ${
                       active
                         ? "text-slate-950 dark:text-white"
                         : "text-slate-400 hover:text-slate-700 dark:text-white/30 dark:hover:text-white/60"
@@ -172,7 +172,7 @@ export default function InstallationPage() {
 
             {/* Command */}
             <div className="p-4 sm:p-5">
-              <div className="flex min-h-14 items-center gap-3 rounded-2xl border border-slate-200 bg-slate-50 px-4 font-mono text-sm dark:border-white/10 dark:bg-black/20">
+              <div dir="ltr" className="flex min-h-14 items-center gap-3 rounded-2xl border border-slate-200 bg-slate-50 px-4 font-mono text-sm dark:border-white/10 dark:bg-black/20">
                 <Terminal
                   size={16}
                   strokeWidth={1.7}
@@ -192,7 +192,7 @@ export default function InstallationPage() {
                   aria-label={
                     isFa ? "کپی دستور نصب" : "Copy installation command"
                   }
-                  className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg text-slate-400 transition-colors hover:bg-white hover:text-slate-900 dark:hover:bg-white/10 dark:hover:text-white"
+                  className="flex cursor-pointer h-8 w-8 shrink-0 items-center justify-center rounded-lg text-slate-400 transition-colors hover:bg-white hover:text-slate-900 dark:hover:bg-white/10 dark:hover:text-white"
                 >
                   {copied ? (
                     <Check
