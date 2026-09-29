@@ -20,7 +20,7 @@ const fa = {
 
   hero: {
     eyebrow: "ابزارهای مدرن JavaScript و TypeScript",
-    title: "CyrefJS",
+    title: "سایرف جی اس",
     description:
       "یک کتابخانه مدرن و سبک از ابزارهای کاربردی برای JavaScript و TypeScript.",
     installLabel: "نصب",
