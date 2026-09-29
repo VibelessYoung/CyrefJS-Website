@@ -3,10 +3,12 @@
 import { Check, Copy, ArrowDown } from "lucide-react";
 import { useParams } from "next/navigation";
 import { useState } from "react";
+
 import { translations } from "@/i18n";
 import type { Locale } from "@/types/i18n";
 
 const INSTALL_COMMAND = "npm install @cyref/js";
+
 type HeroProps = {
   version: string;
 };
@@ -39,13 +41,10 @@ export default function Hero({ version }: HeroProps) {
       className="
         relative
         isolate
-        flex
         min-h-screen
         overflow-hidden
-        bg-white
-        text-black
-        dark:bg-[#030305]
-        dark:text-white
+        bg-[#11105b]
+        text-white
       "
     >
       {/* =========================================================
@@ -62,69 +61,59 @@ export default function Hero({ version }: HeroProps) {
           overflow-hidden
         "
       >
-        {/* Main atmospheric gradient */}
+        {/* Main gradient */}
+
+        <div
+          className="
+            absolute
+            inset-0
+            bg-[linear-gradient(110deg,#12135c_0%,#20177b_35%,#4a1690_68%,#30105b_100%)]
+          "
+        />
+
+        {/* Left blue atmosphere */}
+
+        <div
+          className="
+            absolute
+            left-[-18%]
+            top-[-10%]
+            h-[650px]
+            w-[650px]
+            rounded-full
+            bg-blue-500/20
+            blur-[150px]
+          "
+        />
+
+        {/* Center purple atmosphere */}
 
         <div
           className="
             absolute
             left-1/2
-            top-[-20%]
+            top-[18%]
+            h-[600px]
+            w-[800px]
+            -translate-x-1/2
+            rounded-full
+            bg-violet-500/20
+            blur-[150px]
+          "
+        />
+
+        {/* Right purple atmosphere */}
+
+        <div
+          className="
+            absolute
+            right-[-12%]
+            top-[5%]
             h-[700px]
-            w-[900px]
-            -translate-x-1/2
+            w-[700px]
             rounded-full
-            bg-violet-500/[0.08]
-            blur-[140px]
-            dark:bg-violet-600/[0.16]
-          "
-        />
-
-        {/* Blue glow */}
-
-        <div
-          className="
-            absolute
-            left-[-15%]
-            top-[8%]
-            h-[500px]
-            w-[500px]
-            rounded-full
-            bg-blue-500/[0.07]
-            blur-[130px]
-            dark:bg-blue-600/[0.12]
-          "
-        />
-
-        {/* Purple glow */}
-
-        <div
-          className="
-            absolute
-            right-[-15%]
-            top-[15%]
-            h-[500px]
-            w-[500px]
-            rounded-full
-            bg-purple-500/[0.06]
-            blur-[130px]
-            dark:bg-purple-600/[0.13]
-          "
-        />
-
-        {/* Center glow behind title */}
-
-        <div
-          className="
-            absolute
-            left-1/2
-            top-[34%]
-            h-[360px]
-            w-[620px]
-            -translate-x-1/2
-            rounded-full
-            bg-violet-500/[0.05]
-            blur-[110px]
-            dark:bg-violet-500/[0.10]
+            bg-fuchsia-500/15
+            blur-[160px]
           "
         />
 
@@ -136,22 +125,33 @@ export default function Hero({ version }: HeroProps) {
           className="
             absolute
             inset-0
-            opacity-[0.35]
-            dark:opacity-[0.22]
-            [background-image:linear-gradient(rgba(0,0,0,0.035)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.035)_1px,transparent_1px)]
+            opacity-[0.28]
+            [background-image:linear-gradient(rgba(255,255,255,0.045)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.045)_1px,transparent_1px)]
             [background-size:64px_64px]
-            dark:[background-image:linear-gradient(rgba(255,255,255,0.035)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.035)_1px,transparent_1px)]
           "
         />
 
-        {/* Grid fade */}
+        {/* Grid vignette */}
 
         <div
           className="
             absolute
             inset-0
-            bg-[radial-gradient(circle_at_center,transparent_0%,rgba(255,255,255,0.5)_75%,rgba(255,255,255,0.9)_100%)]
-            dark:bg-[radial-gradient(circle_at_center,transparent_0%,rgba(3,3,5,0.1)_55%,rgba(3,3,5,0.95)_100%)]
+            bg-[radial-gradient(circle_at_center,transparent_20%,rgba(17,16,91,0.12)_55%,rgba(9,7,34,0.68)_100%)]
+          "
+        />
+
+        {/* Top atmospheric fade */}
+
+        <div
+          className="
+            absolute
+            inset-x-0
+            top-0
+            h-40
+            bg-gradient-to-b
+            from-[#09082a]/30
+            to-transparent
           "
         />
 
@@ -162,14 +162,11 @@ export default function Hero({ version }: HeroProps) {
             absolute
             inset-x-0
             bottom-0
-            h-56
+            h-48
             bg-gradient-to-t
-            from-white
-            via-white/70
+            from-[#0a082a]/70
+            via-[#0a082a]/20
             to-transparent
-            dark:from-[#030305]
-            dark:via-[#030305]/80
-            dark:to-transparent
           "
         />
       </div>
@@ -185,48 +182,45 @@ export default function Hero({ version }: HeroProps) {
           flex
           min-h-screen
           w-full
-          max-w-7xl
+          max-w-[1200px]
           flex-col
           items-center
           justify-center
           px-5
-          pb-28
+          pb-24
           pt-28
           text-center
           sm:px-8
-          lg:pb-32
         "
       >
         {/* =====================================================
-            Version badge
+            Version
         ====================================================== */}
 
         <div
           className="
-            mb-7
+            mb-8
             inline-flex
             items-center
-            gap-2
             rounded-full
             border
-            border-black/[0.08]
-            bg-black/[0.025]
-            px-3
-            py-1.5
-            shadow-sm
+            border-white/10
+            bg-white/[0.04]
+            px-4
+            py-2
+            shadow-[0_10px_40px_rgba(0,0,0,0.18)]
             backdrop-blur-xl
-            dark:border-white/[0.09]
-            dark:bg-white/[0.035]
-            dark:shadow-none
           "
         >
           <span
+            aria-hidden="true"
             className="
+              mr-2
               h-1.5
               w-1.5
               rounded-full
-              bg-violet-500
-              shadow-[0_0_12px_rgba(139,92,246,0.8)]
+              bg-violet-400
+              shadow-[0_0_12px_rgba(167,139,250,0.95)]
             "
           />
 
@@ -234,10 +228,9 @@ export default function Hero({ version }: HeroProps) {
             dir="ltr"
             className="
               font-mono
-              text-[10px]
+              text-[11px]
               tracking-[0.08em]
-              text-black/45
-              dark:text-white/45
+              text-white/65
             "
           >
             v{version}
@@ -250,21 +243,19 @@ export default function Hero({ version }: HeroProps) {
 
         <h1
           className="
-          p-3
-            max-w-6xl
+            max-w-[1000px]
+            text-balance
             bg-gradient-to-b
-            from-black
-            via-black
-            to-black/60
+            from-white
+            via-white
+            to-white/55
             bg-clip-text
-            text-[clamp(4.5rem,14vw,10.5rem)]
+            px-3
+            text-[clamp(3.6rem,8vw,7.2rem)]
             font-semibold
-            leading-[0.78]
-            tracking-[-0.09em]
+            leading-[0.9]
+            tracking-[-0.075em]
             text-transparent
-            dark:from-white
-            dark:via-white
-            dark:to-white/45
           "
         >
           {t.hero.title}
@@ -276,14 +267,14 @@ export default function Hero({ version }: HeroProps) {
 
         <p
           className="
-            mt-8
-            max-w-xl
+            mt-7
+            max-w-[620px]
             text-pretty
             text-[13px]
             leading-7
-            text-black/45
-            dark:text-white/55
+            text-white/55
             sm:text-[15px]
+            sm:leading-8
           "
         >
           {t.hero.description}
@@ -296,29 +287,25 @@ export default function Hero({ version }: HeroProps) {
         <div
           dir="ltr"
           className="
-            group
-            relative
-            mt-7
+            mt-8
+            w-full
+            max-w-fit
           "
         >
-          {/* Command container */}
-
           <div
             className="
               relative
               flex
+              min-h-11
               max-w-full
               items-center
               rounded-xl
               border
-              border-black/[0.08]
-              bg-white/80
-              p-1.5
-              shadow-[0_12px_40px_rgba(0,0,0,0.06)]
-              backdrop-blur-2xl
-              dark:border-white/[0.09]
-              dark:bg-white/[0.045]
-              dark:shadow-[0_16px_50px_rgba(0,0,0,0.35)]
+              border-white/[0.08]
+              bg-[#160f3d]/85
+              px-1.5
+              shadow-[0_18px_50px_rgba(0,0,0,0.24)]
+              backdrop-blur-xl
             "
           >
             {/* Top highlight */}
@@ -328,18 +315,17 @@ export default function Hero({ version }: HeroProps) {
               className="
                 pointer-events-none
                 absolute
-                inset-x-3
+                inset-x-4
                 top-0
                 h-px
                 bg-gradient-to-r
                 from-transparent
-                via-white/70
+                via-white/15
                 to-transparent
-                dark:via-white/10
               "
             />
 
-            {/* Terminal prompt */}
+            {/* Prompt */}
 
             <span
               aria-hidden="true"
@@ -347,8 +333,7 @@ export default function Hero({ version }: HeroProps) {
                 pl-3
                 font-mono
                 text-[12px]
-                text-violet-500
-                dark:text-violet-400
+                text-white/40
               "
             >
               $
@@ -361,12 +346,11 @@ export default function Hero({ version }: HeroProps) {
               className="
                 min-w-0
                 px-2.5
-                py-2
+                py-2.5
                 font-mono
                 text-[11px]
-                tracking-[-0.01em]
-                text-black/65
-                dark:text-white/65
+                tracking-[-0.02em]
+                text-white/70
                 sm:px-3
                 sm:text-[12px]
               "
@@ -374,7 +358,7 @@ export default function Hero({ version }: HeroProps) {
               {INSTALL_COMMAND}
             </code>
 
-            {/* Copy button */}
+            {/* Copy */}
 
             <button
               type="button"
@@ -390,22 +374,19 @@ export default function Hero({ version }: HeroProps) {
                 items-center
                 justify-center
                 rounded-lg
-                text-black/35
+                text-white/35
                 transition-all
                 duration-200
-                hover:bg-black/[0.05]
-                hover:text-black/70
+                hover:bg-white/[0.06]
+                hover:text-white/75
                 active:scale-95
-                dark:text-white/35
-                dark:hover:bg-white/[0.07]
-                dark:hover:text-white/75
               "
             >
               {copied ? (
                 <Check
                   size={14}
                   strokeWidth={1.8}
-                  className="text-emerald-500"
+                  className="text-emerald-400"
                 />
               ) : (
                 <Copy size={14} strokeWidth={1.8} />
@@ -421,7 +402,7 @@ export default function Hero({ version }: HeroProps) {
         <div
           className="
             absolute
-            bottom-9
+            bottom-8
             left-1/2
             flex
             -translate-x-1/2
@@ -434,22 +415,14 @@ export default function Hero({ version }: HeroProps) {
             className="
               font-mono
               text-[9px]
-              tracking-[0.22em]
-              text-black/25
-              dark:text-white/25
+              tracking-[0.24em]
+              text-white/25
             "
           >
             SCROLL
           </span>
 
-          <ArrowDown
-            size={13}
-            strokeWidth={1.5}
-            className="
-              text-black/30
-              dark:text-white/30
-            "
-          />
+          <ArrowDown size={13} strokeWidth={1.5} className="text-white/30" />
         </div>
       </div>
     </section>
