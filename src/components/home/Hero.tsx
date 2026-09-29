@@ -198,6 +198,7 @@ export default function Hero({ version }: HeroProps) {
         ====================================================== */}
 
         <div
+        dir="ltr"
           className="
             mb-8
             inline-flex
@@ -250,7 +251,7 @@ export default function Hero({ version }: HeroProps) {
             via-white
             to-white/55
             bg-clip-text
-            px-3
+            p-3
             text-[clamp(3.6rem,8vw,7.2rem)]
             font-semibold
             leading-[0.9]

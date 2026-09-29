@@ -4,6 +4,7 @@ import { ArrowRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useParams } from "next/navigation";
+
 import { useTheme } from "@/components/providers/ThemeProvider";
 import { translations } from "@/i18n";
 import type { Locale } from "@/types/i18n";
@@ -24,168 +25,347 @@ export default function CTA() {
         relative
         overflow-hidden
         bg-white
-        py-24
-        dark:bg-[#050505]
-        sm:py-32
+        dark:bg-[#05070d]
+        py-20
+        sm:py-24
+        lg:py-28
       "
     >
-      {/* Background */}
+      {/* =========================================================
+          Section atmosphere
+      ========================================================== */}
+
       <div
         aria-hidden="true"
         className="
           pointer-events-none
           absolute
           inset-0
-          -z-10
           overflow-hidden
         "
       >
-        {/* Main gradient */}
+        {/* Top fade */}
+
         <div
           className="
+          hidden
+          dark:visible
+            absolute
+            inset-x-0
+            top-0
+            h-40
+            bg-gradient-to-b
+            from-black/50
+            to-transparent
+          "
+        />
+
+        {/* Bottom fade */}
+
+        <div
+          className="
+          hidden
+          dark:visible
             absolute
             inset-x-0
             bottom-0
-            h-[80%]
-            bg-[radial-gradient(circle_at_50%_100%,rgba(99,102,241,0.12),transparent_65%)]
-            dark:bg-[radial-gradient(circle_at_50%_100%,rgba(124,58,237,0.18),transparent_65%)]
+            h-40
+            bg-gradient-to-t
+            from-black/70
+            to-transparent
           "
         />
 
-        {/* Blue glow */}
+        {/* Ambient blue glow */}
+
         <div
           className="
             absolute
-            bottom-[-30%]
             left-[10%]
-            h-[360px]
-            w-[360px]
+            top-1/2
+            h-[450px]
+            w-[450px]
+            -translate-y-1/2
             rounded-full
-            bg-blue-500/[0.06]
-            blur-[130px]
-            dark:bg-blue-500/[0.10]
+            bg-cyan-500/[0.035]
+            blur-[150px]
           "
         />
 
-        {/* Purple glow */}
+        {/* Ambient violet glow */}
+
         <div
           className="
             absolute
-            bottom-[-30%]
-            right-[10%]
-            h-[360px]
-            w-[360px]
+            right-[5%]
+            top-1/2
+            h-[450px]
+            w-[450px]
+            -translate-y-1/2
             rounded-full
-            bg-violet-500/[0.06]
-            blur-[130px]
-            dark:bg-violet-500/[0.10]
+            bg-blue-500/[0.04]
+            blur-[160px]
           "
         />
       </div>
 
-      <div className="mx-auto w-full max-w-5xl px-5 sm:px-8">
+      {/* =========================================================
+          Container
+      ========================================================== */}
+
+      <div
+        className="
+          relative
+          mx-auto
+          w-full
+          max-w-[1180px]
+          px-5
+          sm:px-8
+          lg:px-0
+        "
+      >
+        {/* =======================================================
+            Main CTA card
+        ======================================================== */}
+
         <div
           className="
             relative
+            min-h-[590px]
             overflow-hidden
-            rounded-[2rem]
+            rounded-[1.15rem]
             border
-            border-black/[0.08]
-            bg-gradient-to-br
-            from-blue-500/[0.06]
-            via-violet-500/[0.05]
-            to-fuchsia-500/[0.06]
-            px-6
-            py-16
-            text-center
-            shadow-2xl
-            shadow-black/[0.04]
-            dark:border-white/[0.08]
-            dark:from-blue-500/[0.10]
-            dark:via-violet-500/[0.08]
-            dark:to-fuchsia-500/[0.08]
-            dark:shadow-black/20
-            sm:px-10
-            sm:py-20
+            border-white/[0.10]
+            bg-[#102340]
+            shadow-[0_30px_100px_rgba(0,0,0,0.45)]
+            sm:min-h-[620px]
+            lg:min-h-[680px]
           "
         >
-          {/* Decorative glow */}
+          {/* =====================================================
+              Card background
+          ====================================================== */}
+
           <div
             aria-hidden="true"
             className="
               pointer-events-none
               absolute
-              left-1/2
-              top-0
-              h-40
-              w-80
-              -translate-x-1/2
-              -translate-y-1/2
-              rounded-full
-              bg-violet-500/10
-              blur-[90px]
-              dark:bg-violet-500/20
+              inset-0
+              overflow-hidden
+            "
+          >
+            {/* Base gradient */}
+
+            <div
+              className="
+                absolute
+                inset-0
+                bg-[linear-gradient(108deg,#193d52_0%,#173654_30%,#18345a_54%,#1d4a7d_78%,#173761_100%)]
+              "
+            />
+
+            {/* Cyan light - left */}
+
+            <div
+              className="
+                absolute
+                left-[-10%]
+                top-[-18%]
+                h-[560px]
+                w-[560px]
+                rounded-full
+                bg-cyan-400/[0.22]
+                blur-[120px]
+              "
+            />
+
+            {/* Blue light - right */}
+
+            <div
+              className="
+                absolute
+                right-[-8%]
+                top-[12%]
+                h-[560px]
+                w-[560px]
+                rounded-full
+                bg-blue-500/[0.20]
+                blur-[125px]
+              "
+            />
+
+            {/* Center atmospheric light */}
+
+            <div
+              className="
+                absolute
+                left-1/2
+                top-1/2
+                h-[420px]
+                w-[650px]
+                -translate-x-1/2
+                -translate-y-1/2
+                rounded-full
+                bg-sky-400/[0.06]
+                blur-[120px]
+              "
+            />
+
+            {/* Dark vignette */}
+
+            <div
+              className="
+                absolute
+                inset-0
+                bg-[radial-gradient(circle_at_center,transparent_18%,rgba(4,12,25,0.10)_52%,rgba(3,8,18,0.42)_100%)]
+              "
+            />
+
+            {/* =================================================
+                Stars / particles
+            ================================================== */}
+
+            <div
+              className="
+                absolute
+                inset-0
+                opacity-70
+                [background-image:radial-gradient(circle,rgba(255,255,255,0.40)_0.65px,transparent_0.9px)]
+                [background-size:72px_72px]
+                [background-position:12px_18px]
+              "
+            />
+
+            <div
+              className="
+                absolute
+                inset-0
+                opacity-40
+                [background-image:radial-gradient(circle,rgba(255,255,255,0.30)_0.55px,transparent_0.85px)]
+                [background-size:113px_113px]
+                [background-position:44px_62px]
+              "
+            />
+
+            {/* Edge darkening */}
+
+            <div
+              className="
+                absolute
+                inset-0
+                bg-[linear-gradient(to_bottom,rgba(0,0,0,0.14),transparent_18%,transparent_82%,rgba(0,0,0,0.22))]
+              "
+            />
+          </div>
+
+          {/* =====================================================
+              Card border highlight
+          ====================================================== */}
+
+          <div
+            aria-hidden="true"
+            className="
+              pointer-events-none
+              absolute
+              inset-0
+              rounded-[1.15rem]
+              ring-1
+              ring-inset
+              ring-white/[0.045]
             "
           />
 
-          {/* Content */}
-          <div className="relative">
+          {/* =====================================================
+              Content
+          ====================================================== */}
+
+          <div
+            className="
+              relative
+              flex
+              min-h-[590px]
+              flex-col
+              items-center
+              justify-center
+              px-6
+              py-20
+              text-center
+              sm:min-h-[620px]
+              sm:px-10
+              lg:min-h-[680px]
+              lg:px-16
+            "
+          >
+            {/* =================================================
+                Eyebrow
+            ================================================== */}
+
             <span
               className="
                 inline-flex
                 items-center
                 rounded-full
                 border
-                border-black/10
-                bg-white/60
+                border-white/[0.10]
+                bg-white/[0.055]
                 px-3.5
                 py-1.5
-                text-xs
+                text-[11px]
                 font-medium
                 tracking-wide
-                text-black/60
-                backdrop-blur-sm
-                dark:border-white/10
-                dark:bg-white/[0.06]
-                dark:text-white/60
+                text-white/65
+                shadow-[0_8px_30px_rgba(0,0,0,0.10)]
+                backdrop-blur-md
               "
             >
               {t.cta.eyebrow}
             </span>
 
+            {/* =================================================
+                Title
+            ================================================== */}
+
             <h2
               className="
                 mx-auto
-                mt-6
-                max-w-3xl
-                text-4xl
+                mt-7
+                max-w-[850px]
+                text-balance
+                text-[clamp(2.5rem,5.8vw,5rem)]
                 font-semibold
-                tracking-tight
-                text-black
-                sm:text-5xl
-                lg:text-6xl
-                dark:text-white
+                leading-[0.94]
+                tracking-[-0.065em]
+                text-white
               "
             >
               {t.cta.title}
             </h2>
 
+            {/* =================================================
+                Description
+            ================================================== */}
+
             <p
               className="
                 mx-auto
-                mt-6
-                max-w-2xl
-                text-base
+                mt-7
+                max-w-[620px]
+                text-pretty
+                text-[13px]
                 leading-7
-                text-black/55
-                dark:text-white/55
-                sm:text-lg
+                text-white/55
+                sm:text-[15px]
+                sm:leading-8
               "
             >
               {t.cta.description}
             </p>
 
-            {/* Actions */}
+            {/* =================================================
+                Actions
+            ================================================== */}
+
             <div
               className="
                 mt-9
@@ -197,36 +377,36 @@ export default function CTA() {
                 sm:flex-row
               "
             >
+              {/* Get Started */}
+
               <Link
                 href={`/${locale}#quick-start`}
                 className="
                   group
                   inline-flex
-                  h-12
+                  h-11
                   items-center
                   justify-center
                   gap-2
-                  rounded-xl
-                  bg-black
-                  px-6
+                  rounded-full
+                  bg-white
+                  px-7
                   text-sm
                   font-medium
-                  text-white
-                  shadow-lg
-                  shadow-black/10
+                  text-indigo-600
+                  shadow-[0_10px_30px_rgba(0,0,0,0.18)]
                   transition-all
                   duration-300
                   hover:-translate-y-0.5
-                  hover:shadow-xl
-                  dark:bg-white
-                  dark:text-black
-                  dark:shadow-white/5
+                  hover:shadow-[0_14px_40px_rgba(0,0,0,0.24)]
+                  active:translate-y-0
                 "
               >
                 {t.cta.getStarted}
 
                 <ArrowRight
-                  size={16}
+                  size={15}
+                  strokeWidth={1.8}
                   className="
                     transition-transform
                     duration-300
@@ -235,37 +415,35 @@ export default function CTA() {
                 />
               </Link>
 
+              {/* GitHub */}
+
               <a
                 href={GITHUB_URL}
                 target="_blank"
                 rel="noreferrer"
                 className="
                   inline-flex
-                  h-12
+                  h-11
                   items-center
                   justify-center
                   gap-2
-                  rounded-xl
+                  rounded-full
                   border
-                  border-black/10
-                  bg-white/70
+                  border-white/[0.10]
+                  bg-white/[0.045]
                   px-6
                   text-sm
                   font-medium
-                  text-black/70
-                  backdrop-blur-sm
+                  text-white/70
+                  shadow-[0_10px_30px_rgba(0,0,0,0.10)]
+                  backdrop-blur-md
                   transition-all
                   duration-300
                   hover:-translate-y-0.5
-                  hover:border-black/20
-                  hover:bg-white
-                  hover:text-black
-                  dark:border-white/10
-                  dark:bg-white/[0.04]
-                  dark:text-white/70
-                  dark:hover:border-white/20
-                  dark:hover:bg-white/[0.08]
-                  dark:hover:text-white
+                  hover:border-white/[0.18]
+                  hover:bg-white/[0.08]
+                  hover:text-white
+                  active:translate-y-0
                 "
               >
                 <Image
@@ -275,8 +453,8 @@ export default function CTA() {
                       : "/Icons/GitHub.svg"
                   }
                   alt=""
-                  width={25}
-                  height={25}
+                  width={20}
+                  height={20}
                   aria-hidden="true"
                 />
 
