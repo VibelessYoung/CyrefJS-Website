@@ -1103,7 +1103,7 @@ function SidebarContent({
             dark:text-zinc-500
           "
         >
-          CyrefJS v{version}
+          v{version}
         </span>
       </div>
     </nav>
