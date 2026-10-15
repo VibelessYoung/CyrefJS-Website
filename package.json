@@ -9,7 +9,7 @@
     "lint": "eslint"
   },
   "dependencies": {
-    "@cyref/js": "^1.38.0",
+    "@cyref/js": "^1.38.1",
     "@fontsource/vazirmatn": "^5.3.0",
     "lucide-react": "^1.47.0",
     "next": "16.3.5",
