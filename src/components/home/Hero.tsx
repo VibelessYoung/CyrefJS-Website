@@ -7,7 +7,7 @@ import { useState } from "react";
 import { translations } from "@/i18n";
 import type { Locale } from "@/types/i18n";
 
-const INSTALL_COMMAND = "npm install @cyref/js";
+const INSTALL_COMMAND = "npx @cyref/js";
 
 type HeroProps = {
   version: string;
